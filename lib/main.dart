@@ -80,3 +80,16 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+
+// TODO
+
+/*
+ボトムバー作って
+
+マップを実装して
+
+Place API 実装して場所をマップに表示できるようにする
+
+
+ */
