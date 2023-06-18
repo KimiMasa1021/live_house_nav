@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:live_house_nav/pages/articles_list/articles_list_page.dart';
-import 'package:live_house_nav/pages/live_house_map/live_house_map_page.dart';
-import 'package:live_house_nav/pages/notification/notification_page.dart';
-import 'package:live_house_nav/pages/setting/setting_page.dart';
-import '../../pages/page_root.dart';
+import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
+import 'package:live_house_nav/presentation/pages/map/live_house_map_page.dart';
+import 'package:live_house_nav/presentation/pages/notification/notification_page.dart';
+import 'package:live_house_nav/presentation/pages/setting/setting_page.dart';
+import '../../presentation/pages/page_root.dart';
 import 'routes/global_navigator_keys.dart';
 import 'routes/routes.dart';
 
