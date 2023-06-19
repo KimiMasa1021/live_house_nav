@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:live_house_nav/domain/live_house/live_house_list.dart';
-import 'package:live_house_nav/domain/live_house/live_house_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import '../../../domain/live_house_list/live_house_list.dart';
+import '../../../domain/live_house_list/live_house_service.dart';
 import '../../pages/map/status/live_house_map.dart';
 import '../my_location/my_location_provider.dart';
 part 'live_house_notifier.g.dart';

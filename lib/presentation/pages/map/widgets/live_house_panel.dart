@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:live_house_nav/domain/live_house/value/live_house.dart';
+import '../../../../domain/live_house_list/value/live_house/live_house.dart';
 
 class LiveHousePanel extends StatelessWidget {
   const LiveHousePanel({

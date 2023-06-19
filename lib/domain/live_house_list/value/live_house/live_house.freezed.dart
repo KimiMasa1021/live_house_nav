@@ -23,6 +23,8 @@ mixin _$LiveHouse {
   String get placeId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get vicinity => throw _privateConstructorUsedError;
+  String get reference => throw _privateConstructorUsedError;
+  Geometry get geometry => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,7 +37,14 @@ abstract class $LiveHouseCopyWith<$Res> {
   factory $LiveHouseCopyWith(LiveHouse value, $Res Function(LiveHouse) then) =
       _$LiveHouseCopyWithImpl<$Res, LiveHouse>;
   @useResult
-  $Res call({String placeId, String name, String vicinity});
+  $Res call(
+      {String placeId,
+      String name,
+      String vicinity,
+      String reference,
+      Geometry geometry});
+
+  $GeometryCopyWith<$Res> get geometry;
 }
 
 /// @nodoc
@@ -54,6 +63,8 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
     Object? placeId = null,
     Object? name = null,
     Object? vicinity = null,
+    Object? reference = null,
+    Object? geometry = null,
   }) {
     return _then(_value.copyWith(
       placeId: null == placeId
@@ -68,7 +79,23 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
           ? _value.vicinity
           : vicinity // ignore: cast_nullable_to_non_nullable
               as String,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String,
+      geometry: null == geometry
+          ? _value.geometry
+          : geometry // ignore: cast_nullable_to_non_nullable
+              as Geometry,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $GeometryCopyWith<$Res> get geometry {
+    return $GeometryCopyWith<$Res>(_value.geometry, (value) {
+      return _then(_value.copyWith(geometry: value) as $Val);
+    });
   }
 }
 
@@ -79,7 +106,15 @@ abstract class _$$_LiveHouseCopyWith<$Res> implements $LiveHouseCopyWith<$Res> {
       __$$_LiveHouseCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String placeId, String name, String vicinity});
+  $Res call(
+      {String placeId,
+      String name,
+      String vicinity,
+      String reference,
+      Geometry geometry});
+
+  @override
+  $GeometryCopyWith<$Res> get geometry;
 }
 
 /// @nodoc
@@ -96,6 +131,8 @@ class __$$_LiveHouseCopyWithImpl<$Res>
     Object? placeId = null,
     Object? name = null,
     Object? vicinity = null,
+    Object? reference = null,
+    Object? geometry = null,
   }) {
     return _then(_$_LiveHouse(
       placeId: null == placeId
@@ -110,6 +147,14 @@ class __$$_LiveHouseCopyWithImpl<$Res>
           ? _value.vicinity
           : vicinity // ignore: cast_nullable_to_non_nullable
               as String,
+      reference: null == reference
+          ? _value.reference
+          : reference // ignore: cast_nullable_to_non_nullable
+              as String,
+      geometry: null == geometry
+          ? _value.geometry
+          : geometry // ignore: cast_nullable_to_non_nullable
+              as Geometry,
     ));
   }
 }
@@ -119,7 +164,11 @@ class __$$_LiveHouseCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_LiveHouse implements _LiveHouse {
   _$_LiveHouse(
-      {required this.placeId, required this.name, required this.vicinity});
+      {required this.placeId,
+      required this.name,
+      required this.vicinity,
+      required this.reference,
+      required this.geometry});
 
   factory _$_LiveHouse.fromJson(Map<String, dynamic> json) =>
       _$$_LiveHouseFromJson(json);
@@ -130,10 +179,14 @@ class _$_LiveHouse implements _LiveHouse {
   final String name;
   @override
   final String vicinity;
+  @override
+  final String reference;
+  @override
+  final Geometry geometry;
 
   @override
   String toString() {
-    return 'LiveHouse(placeId: $placeId, name: $name, vicinity: $vicinity)';
+    return 'LiveHouse(placeId: $placeId, name: $name, vicinity: $vicinity, reference: $reference, geometry: $geometry)';
   }
 
   @override
@@ -144,12 +197,17 @@ class _$_LiveHouse implements _LiveHouse {
             (identical(other.placeId, placeId) || other.placeId == placeId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.vicinity, vicinity) ||
-                other.vicinity == vicinity));
+                other.vicinity == vicinity) &&
+            (identical(other.reference, reference) ||
+                other.reference == reference) &&
+            (identical(other.geometry, geometry) ||
+                other.geometry == geometry));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, placeId, name, vicinity);
+  int get hashCode =>
+      Object.hash(runtimeType, placeId, name, vicinity, reference, geometry);
 
   @JsonKey(ignore: true)
   @override
@@ -169,7 +227,9 @@ abstract class _LiveHouse implements LiveHouse {
   factory _LiveHouse(
       {required final String placeId,
       required final String name,
-      required final String vicinity}) = _$_LiveHouse;
+      required final String vicinity,
+      required final String reference,
+      required final Geometry geometry}) = _$_LiveHouse;
 
   factory _LiveHouse.fromJson(Map<String, dynamic> json) =
       _$_LiveHouse.fromJson;
@@ -180,6 +240,10 @@ abstract class _LiveHouse implements LiveHouse {
   String get name;
   @override
   String get vicinity;
+  @override
+  String get reference;
+  @override
+  Geometry get geometry;
   @override
   @JsonKey(ignore: true)
   _$$_LiveHouseCopyWith<_$_LiveHouse> get copyWith =>

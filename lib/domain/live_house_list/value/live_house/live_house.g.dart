@@ -10,6 +10,8 @@ _$_LiveHouse _$$_LiveHouseFromJson(Map<String, dynamic> json) => _$_LiveHouse(
       placeId: json['place_id'] as String,
       name: json['name'] as String,
       vicinity: json['vicinity'] as String,
+      reference: json['reference'] as String,
+      geometry: Geometry.fromJson(json['geometry'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_LiveHouseToJson(_$_LiveHouse instance) =>
@@ -17,4 +19,6 @@ Map<String, dynamic> _$$_LiveHouseToJson(_$_LiveHouse instance) =>
       'place_id': instance.placeId,
       'name': instance.name,
       'vicinity': instance.vicinity,
+      'reference': instance.reference,
+      'geometry': instance.geometry,
     };

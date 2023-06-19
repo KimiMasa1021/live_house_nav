@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'value/live_house.dart';
-
+import 'value/live_house/live_house.dart';
 part 'live_house_list.freezed.dart';
 part 'live_house_list.g.dart';
 
