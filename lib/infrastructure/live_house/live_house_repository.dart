@@ -20,7 +20,6 @@ class LiveHouseRepository implements LiveHouseRepositoryBase {
       } else {
         final jsonResult = jsonDecode(response.body) as Map<String, dynamic>;
         final model = LiveHouseList.fromJson(jsonResult);
-        // model.results.map((e) => )
         return Result.value(model);
       }
     } catch (_) {

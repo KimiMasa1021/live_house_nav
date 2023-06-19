@@ -23,8 +23,10 @@ mixin _$LiveHouse {
   String get placeId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get vicinity => throw _privateConstructorUsedError;
+  String get imageUrl => throw _privateConstructorUsedError;
   String get reference => throw _privateConstructorUsedError;
   Geometry get geometry => throw _privateConstructorUsedError;
+  List<Photo> get photos => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -41,8 +43,10 @@ abstract class $LiveHouseCopyWith<$Res> {
       {String placeId,
       String name,
       String vicinity,
+      String imageUrl,
       String reference,
-      Geometry geometry});
+      Geometry geometry,
+      List<Photo> photos});
 
   $GeometryCopyWith<$Res> get geometry;
 }
@@ -63,8 +67,10 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
     Object? placeId = null,
     Object? name = null,
     Object? vicinity = null,
+    Object? imageUrl = null,
     Object? reference = null,
     Object? geometry = null,
+    Object? photos = null,
   }) {
     return _then(_value.copyWith(
       placeId: null == placeId
@@ -79,6 +85,10 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
           ? _value.vicinity
           : vicinity // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       reference: null == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -87,6 +97,10 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
           ? _value.geometry
           : geometry // ignore: cast_nullable_to_non_nullable
               as Geometry,
+      photos: null == photos
+          ? _value.photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<Photo>,
     ) as $Val);
   }
 
@@ -110,8 +124,10 @@ abstract class _$$_LiveHouseCopyWith<$Res> implements $LiveHouseCopyWith<$Res> {
       {String placeId,
       String name,
       String vicinity,
+      String imageUrl,
       String reference,
-      Geometry geometry});
+      Geometry geometry,
+      List<Photo> photos});
 
   @override
   $GeometryCopyWith<$Res> get geometry;
@@ -131,8 +147,10 @@ class __$$_LiveHouseCopyWithImpl<$Res>
     Object? placeId = null,
     Object? name = null,
     Object? vicinity = null,
+    Object? imageUrl = null,
     Object? reference = null,
     Object? geometry = null,
+    Object? photos = null,
   }) {
     return _then(_$_LiveHouse(
       placeId: null == placeId
@@ -147,6 +165,10 @@ class __$$_LiveHouseCopyWithImpl<$Res>
           ? _value.vicinity
           : vicinity // ignore: cast_nullable_to_non_nullable
               as String,
+      imageUrl: null == imageUrl
+          ? _value.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       reference: null == reference
           ? _value.reference
           : reference // ignore: cast_nullable_to_non_nullable
@@ -155,6 +177,10 @@ class __$$_LiveHouseCopyWithImpl<$Res>
           ? _value.geometry
           : geometry // ignore: cast_nullable_to_non_nullable
               as Geometry,
+      photos: null == photos
+          ? _value._photos
+          : photos // ignore: cast_nullable_to_non_nullable
+              as List<Photo>,
     ));
   }
 }
@@ -167,8 +193,11 @@ class _$_LiveHouse implements _LiveHouse {
       {required this.placeId,
       required this.name,
       required this.vicinity,
+      this.imageUrl = "",
       required this.reference,
-      required this.geometry});
+      required this.geometry,
+      required final List<Photo> photos})
+      : _photos = photos;
 
   factory _$_LiveHouse.fromJson(Map<String, dynamic> json) =>
       _$$_LiveHouseFromJson(json);
@@ -180,13 +209,23 @@ class _$_LiveHouse implements _LiveHouse {
   @override
   final String vicinity;
   @override
+  @JsonKey()
+  final String imageUrl;
+  @override
   final String reference;
   @override
   final Geometry geometry;
+  final List<Photo> _photos;
+  @override
+  List<Photo> get photos {
+    if (_photos is EqualUnmodifiableListView) return _photos;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_photos);
+  }
 
   @override
   String toString() {
-    return 'LiveHouse(placeId: $placeId, name: $name, vicinity: $vicinity, reference: $reference, geometry: $geometry)';
+    return 'LiveHouse(placeId: $placeId, name: $name, vicinity: $vicinity, imageUrl: $imageUrl, reference: $reference, geometry: $geometry, photos: $photos)';
   }
 
   @override
@@ -198,16 +237,26 @@ class _$_LiveHouse implements _LiveHouse {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.vicinity, vicinity) ||
                 other.vicinity == vicinity) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
             (identical(other.reference, reference) ||
                 other.reference == reference) &&
             (identical(other.geometry, geometry) ||
-                other.geometry == geometry));
+                other.geometry == geometry) &&
+            const DeepCollectionEquality().equals(other._photos, _photos));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, placeId, name, vicinity, reference, geometry);
+  int get hashCode => Object.hash(
+      runtimeType,
+      placeId,
+      name,
+      vicinity,
+      imageUrl,
+      reference,
+      geometry,
+      const DeepCollectionEquality().hash(_photos));
 
   @JsonKey(ignore: true)
   @override
@@ -228,8 +277,10 @@ abstract class _LiveHouse implements LiveHouse {
       {required final String placeId,
       required final String name,
       required final String vicinity,
+      final String imageUrl,
       required final String reference,
-      required final Geometry geometry}) = _$_LiveHouse;
+      required final Geometry geometry,
+      required final List<Photo> photos}) = _$_LiveHouse;
 
   factory _LiveHouse.fromJson(Map<String, dynamic> json) =
       _$_LiveHouse.fromJson;
@@ -241,9 +292,13 @@ abstract class _LiveHouse implements LiveHouse {
   @override
   String get vicinity;
   @override
+  String get imageUrl;
+  @override
   String get reference;
   @override
   Geometry get geometry;
+  @override
+  List<Photo> get photos;
   @override
   @JsonKey(ignore: true)
   _$$_LiveHouseCopyWith<_$_LiveHouse> get copyWith =>

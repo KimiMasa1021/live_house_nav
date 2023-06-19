@@ -34,8 +34,10 @@ class LiveHousePanel extends StatelessWidget {
                   Container(
                     width: double.infinity,
                     height: 100,
-                    decoration: const BoxDecoration(
-                      color: Colors.red,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(liveHouse.imageUrl),
+                      ),
                     ),
                   ),
                 ],

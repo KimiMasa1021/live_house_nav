@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:live_house_nav/domain/live_house_list/value/geometry/geometry.dart';
+import 'package:live_house_nav/domain/live_house_list/value/photo/photo.dart';
 
 part 'live_house.freezed.dart';
 part 'live_house.g.dart';
@@ -12,8 +13,10 @@ class LiveHouse with _$LiveHouse {
     required String placeId,
     required String name,
     required String vicinity,
+    @Default("") String imageUrl,
     required String reference,
     required Geometry geometry,
+    required List<Photo> photos,
   }) = _LiveHouse;
 
   factory LiveHouse.fromJson(Map<String, dynamic> json) =>
