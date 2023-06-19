@@ -12,6 +12,9 @@ class LiveHouseMapPage extends HookConsumerWidget {
     final liveHouseNotifier = ref.watch(liveHouseNotifierProvider);
     final myLocation = ref.watch(featchMyLocationProvider);
     final size = MediaQuery.of(context).size;
+    final pageController = PageController(
+      viewportFraction: 0.9,
+    );
     return Scaffold(
       body: myLocation.when(
         data: (location) {
@@ -29,27 +32,82 @@ class LiveHouseMapPage extends HookConsumerWidget {
                 ),
                 onMapCreated: (GoogleMapController controller) {},
               ),
-              liveHouseNotifier.when(data: (liveHoue) {
-                return Align(
-                  alignment: const Alignment(0, 1),
-                  child: Container(
-                    width: size.width,
-                    height: 140,
-                    margin: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
+              liveHouseNotifier.when(
+                data: (liveHoue) {
+                  return Align(
+                    alignment: const Alignment(0, 1),
+                    child: Container(
+                      width: size.width,
+                      height: 140,
+                      margin: EdgeInsets.only(bottom: 15),
+                      child: PageView(
+                        controller: pageController,
+                        children: liveHoue.results.results.map(
+                          (house) {
+                            return Container(
+                              width: size.width,
+                              height: 140,
+                              margin: EdgeInsets.symmetric(
+                                horizontal: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(15),
+                                border: Border.all(),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            width: double.infinity,
+                                            height: 100,
+                                            decoration: const BoxDecoration(
+                                              color: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            house.name,
+                                            style: const TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ).toList(),
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                  ),
-                );
-              }, error: (e, s) {
-                return SizedBox();
-              }, loading: () {
-                return SizedBox();
-              }),
+                  );
+                },
+                error: (e, s) {
+                  return const SizedBox();
+                },
+                loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
             ],
           );
         },
