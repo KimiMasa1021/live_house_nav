@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:live_house_nav/domain/live_house/live_house_list.dart';
+import 'package:live_house_nav/domain/live_house/live_house_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/live_house/value/live_house.dart';
-import '../../../infrastructure/live_house/live_house_repository.dart';
+import '../../pages/map/status/live_house_map.dart';
 import '../my_location/my_location_provider.dart';
 part 'live_house_notifier.g.dart';
 
-@Riverpod(dependencies: [featchMyLocation])
+@riverpod
 class LiveHouseNotifier extends _$LiveHouseNotifier {
+  final baseUrl =
+      "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+  final apiKey = "AIzaSyDzB3j0TAQolKL9K-C_jqFQD6i3I_CHs9M";
+
   @override
-  Future<List<LiveHouse>> build() async {
+  Future<LiveHouseMap> build() async {
     final myLocation = ref.watch(featchMyLocationProvider).requireValue;
-    final test = ref.watch(LiveHouseRepositoryProvider);
+    final _liveHouseService = ref.watch(liveHouseService);
 
-    final response = await test.featchLiveHouse(Uri.parse(
-        "https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyDzB3j0TAQolKL9K-C_jqFQD6i3I_CHs9M&location=35.661556852267985, 139.66687737153256&radius=1000&language=ja&keyword=ライブハウス"));
+    final Uri placeApiUri = Uri.parse(
+        "$baseUrl?key=$apiKey&location=${myLocation.latitude},${myLocation.longitude}&radius=1000&language=ja&keyword=ライブハウス");
 
-    return [];
+    LiveHouseList liveHouseList =
+        await _liveHouseService.featchLiveHouseList(placeApiUri);
+    return LiveHouseMap(
+      results: liveHouseList,
+      controller: null,
+    );
   }
 }

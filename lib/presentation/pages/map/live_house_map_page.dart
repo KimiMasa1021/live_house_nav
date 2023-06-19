@@ -9,7 +9,7 @@ class LiveHouseMapPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final test = ref.watch(liveHouseNotifierProvider);
+    final liveHouseNotifier = ref.watch(liveHouseNotifierProvider);
     final myLocation = ref.watch(featchMyLocationProvider);
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -29,20 +29,27 @@ class LiveHouseMapPage extends HookConsumerWidget {
                 ),
                 onMapCreated: (GoogleMapController controller) {},
               ),
-              Align(
-                alignment: const Alignment(0, 1),
-                child: Container(
-                  width: size.width,
-                  height: 140,
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+              liveHouseNotifier.when(data: (liveHoue) {
+                return Align(
+                  alignment: const Alignment(0, 1),
+                  child: Container(
+                    width: size.width,
+                    height: 140,
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 20,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                   ),
-                  decoration: const BoxDecoration(
-                    color: Colors.red,
-                  ),
-                ),
-              )
+                );
+              }, error: (e, s) {
+                return SizedBox();
+              }, loading: () {
+                return SizedBox();
+              }),
             ],
           );
         },

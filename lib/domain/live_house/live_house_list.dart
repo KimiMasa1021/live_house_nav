@@ -1,8 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'value/live_house.dart';
 
-part 'live_house_map.freezed.dart';
-part 'live_house_map.g.dart';
+part 'live_house_list.freezed.dart';
+part 'live_house_list.g.dart';
 
 // flutter pub run build_runner build --delete-conflicting-outputs
 @freezed

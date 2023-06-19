@@ -7,9 +7,9 @@ import 'package:live_house_nav/domain/live_house/live_house_repository_base.dart
 import 'package:http/http.dart' as http;
 import 'package:live_house_nav/presentation/pages/map/live_house_map_page.dart';
 
-import '../../domain/live_house/live_house_map.dart';
+import '../../domain/live_house/live_house_list.dart';
 
-final LiveHouseRepositoryProvider = Provider((ref) => LiveHouseRepository());
+final lveHouseRepository = Provider((ref) => LiveHouseRepository());
 
 class LiveHouseRepository implements LiveHouseRepositoryBase {
   final headers = {'content-type': 'application/json'};

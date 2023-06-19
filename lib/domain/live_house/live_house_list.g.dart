@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'live_house_map.dart';
+part of 'live_house_list.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
