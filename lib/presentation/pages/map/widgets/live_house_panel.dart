@@ -31,12 +31,16 @@ class LiveHousePanel extends StatelessWidget {
               flex: 1,
               child: Column(
                 children: [
-                  Container(
-                    width: double.infinity,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(liveHouse.imageUrl),
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(liveHouse.imageUrl),
+                        ),
                       ),
                     ),
                   ),

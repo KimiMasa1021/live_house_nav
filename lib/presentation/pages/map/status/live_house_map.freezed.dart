@@ -16,7 +16,6 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LiveHouseMap {
-  LiveHouseList get results => throw _privateConstructorUsedError;
   GoogleMapController? get controller => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -30,9 +29,7 @@ abstract class $LiveHouseMapCopyWith<$Res> {
           LiveHouseMap value, $Res Function(LiveHouseMap) then) =
       _$LiveHouseMapCopyWithImpl<$Res, LiveHouseMap>;
   @useResult
-  $Res call({LiveHouseList results, GoogleMapController? controller});
-
-  $LiveHouseListCopyWith<$Res> get results;
+  $Res call({GoogleMapController? controller});
 }
 
 /// @nodoc
@@ -48,27 +45,14 @@ class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? results = null,
     Object? controller = freezed,
   }) {
     return _then(_value.copyWith(
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as LiveHouseList,
       controller: freezed == controller
           ? _value.controller
           : controller // ignore: cast_nullable_to_non_nullable
               as GoogleMapController?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $LiveHouseListCopyWith<$Res> get results {
-    return $LiveHouseListCopyWith<$Res>(_value.results, (value) {
-      return _then(_value.copyWith(results: value) as $Val);
-    });
   }
 }
 
@@ -80,10 +64,7 @@ abstract class _$$_LiveHouseMapCopyWith<$Res>
       __$$_LiveHouseMapCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({LiveHouseList results, GoogleMapController? controller});
-
-  @override
-  $LiveHouseListCopyWith<$Res> get results;
+  $Res call({GoogleMapController? controller});
 }
 
 /// @nodoc
@@ -97,14 +78,9 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? results = null,
     Object? controller = freezed,
   }) {
     return _then(_$_LiveHouseMap(
-      results: null == results
-          ? _value.results
-          : results // ignore: cast_nullable_to_non_nullable
-              as LiveHouseList,
       controller: freezed == controller
           ? _value.controller
           : controller // ignore: cast_nullable_to_non_nullable
@@ -116,17 +92,15 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LiveHouseMap implements _LiveHouseMap {
-  _$_LiveHouseMap({required this.results, this.controller = null});
+  _$_LiveHouseMap({this.controller = null});
 
-  @override
-  final LiveHouseList results;
   @override
   @JsonKey()
   final GoogleMapController? controller;
 
   @override
   String toString() {
-    return 'LiveHouseMap(results: $results, controller: $controller)';
+    return 'LiveHouseMap(controller: $controller)';
   }
 
   @override
@@ -134,13 +108,12 @@ class _$_LiveHouseMap implements _LiveHouseMap {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LiveHouseMap &&
-            (identical(other.results, results) || other.results == results) &&
             (identical(other.controller, controller) ||
                 other.controller == controller));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, results, controller);
+  int get hashCode => Object.hash(runtimeType, controller);
 
   @JsonKey(ignore: true)
   @override
@@ -150,12 +123,9 @@ class _$_LiveHouseMap implements _LiveHouseMap {
 }
 
 abstract class _LiveHouseMap implements LiveHouseMap {
-  factory _LiveHouseMap(
-      {required final LiveHouseList results,
-      final GoogleMapController? controller}) = _$_LiveHouseMap;
+  factory _LiveHouseMap({final GoogleMapController? controller}) =
+      _$_LiveHouseMap;
 
-  @override
-  LiveHouseList get results;
   @override
   GoogleMapController? get controller;
   @override

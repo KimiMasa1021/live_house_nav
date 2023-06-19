@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:live_house_nav/presentation/notifier/map/map_notifier.dart';
 import 'package:live_house_nav/presentation/notifier/my_location/my_location_provider.dart';
 
+import '../../notifier/live_house/live_house_notifier.dart';
 import 'widgets/live_house_list_view.dart';
 
 class LiveHouseMapPage extends HookConsumerWidget {
@@ -14,6 +16,9 @@ class LiveHouseMapPage extends HookConsumerWidget {
     final pageController = PageController(
       viewportFraction: 0.9,
     );
+    final liveHouse = ref.watch(liveHouseNotifierProvider);
+    final mapNotifierCTL = ref.watch(mapNotifierProvider.notifier);
+
     return Scaffold(
       body: myLocation.when(
         data: (location) {
@@ -29,7 +34,23 @@ class LiveHouseMapPage extends HookConsumerWidget {
                   ),
                   zoom: 19,
                 ),
-                onMapCreated: (GoogleMapController controller) {},
+                markers: liveHouse.when(
+                  data: (data) => data.results
+                      .map(
+                        (e) => Marker(
+                          markerId: MarkerId(e.placeId),
+                          position: LatLng(
+                            e.geometry.location.lat,
+                            e.geometry.location.lng,
+                          ),
+                        ),
+                      )
+                      .toSet(),
+                  error: (e, s) => {},
+                  loading: () => {},
+                ),
+                onMapCreated: (controller) =>
+                    mapNotifierCTL.onMapCreated(controller),
               ),
               LiveHouseListView(
                 pageController: pageController,

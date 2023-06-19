@@ -25,7 +25,7 @@ class LiveHouseListView extends HookConsumerWidget {
             margin: const EdgeInsets.only(bottom: 15),
             child: PageView(
               controller: pageController,
-              children: liveHoue.results.results.map(
+              children: liveHoue.results.map(
                 (house) {
                   return LiveHousePanel(
                     liveHouse: house,
