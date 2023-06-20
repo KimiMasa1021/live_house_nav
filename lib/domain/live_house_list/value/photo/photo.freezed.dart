@@ -114,19 +114,19 @@ class __$$_PhotoCopyWithImpl<$Res> extends _$PhotoCopyWithImpl<$Res, _$_Photo>
 
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_Photo implements _Photo {
-  _$_Photo(
-      {required this.height,
-      required this.width,
-      required this.photoReference});
+  _$_Photo({this.height = 0, this.width = 0, this.photoReference = ""});
 
   factory _$_Photo.fromJson(Map<String, dynamic> json) =>
       _$$_PhotoFromJson(json);
 
   @override
+  @JsonKey()
   final int height;
   @override
+  @JsonKey()
   final int width;
   @override
+  @JsonKey()
   final String photoReference;
 
   @override
@@ -165,9 +165,9 @@ class _$_Photo implements _Photo {
 
 abstract class _Photo implements Photo {
   factory _Photo(
-      {required final int height,
-      required final int width,
-      required final String photoReference}) = _$_Photo;
+      {final int height,
+      final int width,
+      final String photoReference}) = _$_Photo;
 
   factory _Photo.fromJson(Map<String, dynamic> json) = _$_Photo.fromJson;
 

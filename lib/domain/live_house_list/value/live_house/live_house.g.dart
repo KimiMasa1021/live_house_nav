@@ -13,9 +13,10 @@ _$_LiveHouse _$$_LiveHouseFromJson(Map<String, dynamic> json) => _$_LiveHouse(
       imageUrl: json['image_url'] as String? ?? "",
       reference: json['reference'] as String,
       geometry: Geometry.fromJson(json['geometry'] as Map<String, dynamic>),
-      photos: (json['photos'] as List<dynamic>)
-          .map((e) => Photo.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      photos: (json['photos'] as List<dynamic>?)
+              ?.map((e) => Photo.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$_LiveHouseToJson(_$_LiveHouse instance) =>

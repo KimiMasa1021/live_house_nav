@@ -16,7 +16,7 @@ class LiveHouse with _$LiveHouse {
     @Default("") String imageUrl,
     required String reference,
     required Geometry geometry,
-    required List<Photo> photos,
+    @Default([]) List<Photo> photos,
   }) = _LiveHouse;
 
   factory LiveHouse.fromJson(Map<String, dynamic> json) =>

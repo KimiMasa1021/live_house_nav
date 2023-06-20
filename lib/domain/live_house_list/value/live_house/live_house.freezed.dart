@@ -196,7 +196,7 @@ class _$_LiveHouse implements _LiveHouse {
       this.imageUrl = "",
       required this.reference,
       required this.geometry,
-      required final List<Photo> photos})
+      final List<Photo> photos = const []})
       : _photos = photos;
 
   factory _$_LiveHouse.fromJson(Map<String, dynamic> json) =>
@@ -217,6 +217,7 @@ class _$_LiveHouse implements _LiveHouse {
   final Geometry geometry;
   final List<Photo> _photos;
   @override
+  @JsonKey()
   List<Photo> get photos {
     if (_photos is EqualUnmodifiableListView) return _photos;
     // ignore: implicit_dynamic_type
@@ -280,7 +281,7 @@ abstract class _LiveHouse implements LiveHouse {
       final String imageUrl,
       required final String reference,
       required final Geometry geometry,
-      required final List<Photo> photos}) = _$_LiveHouse;
+      final List<Photo> photos}) = _$_LiveHouse;
 
   factory _LiveHouse.fromJson(Map<String, dynamic> json) =
       _$_LiveHouse.fromJson;

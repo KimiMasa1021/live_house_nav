@@ -20,15 +20,18 @@ class LiveHouseNotifier extends _$LiveHouseNotifier {
     final _liveHouseService = ref.watch(liveHouseService);
 
     final Uri placeApiUri = Uri.parse(
-        "$basePlaceApiUrl?key=$apiKey&location=${myLocation.latitude},${myLocation.longitude}&radius=1000&language=ja&keyword=ライブハウス");
+        "$basePlaceApiUrl?key=$apiKey&location=${myLocation.latitude},${myLocation.longitude}&language=ja&keyword=ライブハウス&rankby=distance");
 
     LiveHouseList liveHouseList =
         await _liveHouseService.featchLiveHouseList(placeApiUri);
 
     final testList = liveHouseList.results.map((e) {
-      var photoReference = e.photos[0].photoReference;
-      final imageApiUri =
-          "${baseImageRefApiUrl}photo_reference=$photoReference&key=$apiKey";
+      String imageApiUri = "";
+      if (e.photos.isNotEmpty) {
+        var photoReference = e.photos[0].photoReference;
+        imageApiUri =
+            "${baseImageRefApiUrl}photo_reference=$photoReference&key=$apiKey";
+      }
 
       return e.copyWith(imageUrl: imageApiUri);
     }).toList();
