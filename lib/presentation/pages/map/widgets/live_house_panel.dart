@@ -19,7 +19,7 @@ class LiveHousePanel extends StatelessWidget {
         horizontal: 3,
       ),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black,
         borderRadius: BorderRadius.circular(15),
         border: Border.all(),
       ),
@@ -53,10 +53,11 @@ class LiveHousePanel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    liveHouse.name,
+                    liveHouse.vicinity,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      color: Colors.red,
                     ),
                   )
                 ],

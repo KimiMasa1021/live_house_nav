@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$LiveHouseMap {
   GoogleMapController? get controller => throw _privateConstructorUsedError;
+  bool get isCameraMoved => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LiveHouseMapCopyWith<LiveHouseMap> get copyWith =>
@@ -29,7 +30,7 @@ abstract class $LiveHouseMapCopyWith<$Res> {
           LiveHouseMap value, $Res Function(LiveHouseMap) then) =
       _$LiveHouseMapCopyWithImpl<$Res, LiveHouseMap>;
   @useResult
-  $Res call({GoogleMapController? controller});
+  $Res call({GoogleMapController? controller, bool isCameraMoved});
 }
 
 /// @nodoc
@@ -46,12 +47,17 @@ class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
   @override
   $Res call({
     Object? controller = freezed,
+    Object? isCameraMoved = null,
   }) {
     return _then(_value.copyWith(
       controller: freezed == controller
           ? _value.controller
           : controller // ignore: cast_nullable_to_non_nullable
               as GoogleMapController?,
+      isCameraMoved: null == isCameraMoved
+          ? _value.isCameraMoved
+          : isCameraMoved // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -64,7 +70,7 @@ abstract class _$$_LiveHouseMapCopyWith<$Res>
       __$$_LiveHouseMapCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({GoogleMapController? controller});
+  $Res call({GoogleMapController? controller, bool isCameraMoved});
 }
 
 /// @nodoc
@@ -79,12 +85,17 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
   @override
   $Res call({
     Object? controller = freezed,
+    Object? isCameraMoved = null,
   }) {
     return _then(_$_LiveHouseMap(
       controller: freezed == controller
           ? _value.controller
           : controller // ignore: cast_nullable_to_non_nullable
               as GoogleMapController?,
+      isCameraMoved: null == isCameraMoved
+          ? _value.isCameraMoved
+          : isCameraMoved // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -92,15 +103,18 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LiveHouseMap implements _LiveHouseMap {
-  _$_LiveHouseMap({this.controller = null});
+  _$_LiveHouseMap({this.controller = null, this.isCameraMoved = false});
 
   @override
   @JsonKey()
   final GoogleMapController? controller;
+  @override
+  @JsonKey()
+  final bool isCameraMoved;
 
   @override
   String toString() {
-    return 'LiveHouseMap(controller: $controller)';
+    return 'LiveHouseMap(controller: $controller, isCameraMoved: $isCameraMoved)';
   }
 
   @override
@@ -109,11 +123,13 @@ class _$_LiveHouseMap implements _LiveHouseMap {
         (other.runtimeType == runtimeType &&
             other is _$_LiveHouseMap &&
             (identical(other.controller, controller) ||
-                other.controller == controller));
+                other.controller == controller) &&
+            (identical(other.isCameraMoved, isCameraMoved) ||
+                other.isCameraMoved == isCameraMoved));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, controller);
+  int get hashCode => Object.hash(runtimeType, controller, isCameraMoved);
 
   @JsonKey(ignore: true)
   @override
@@ -123,11 +139,14 @@ class _$_LiveHouseMap implements _LiveHouseMap {
 }
 
 abstract class _LiveHouseMap implements LiveHouseMap {
-  factory _LiveHouseMap({final GoogleMapController? controller}) =
-      _$_LiveHouseMap;
+  factory _LiveHouseMap(
+      {final GoogleMapController? controller,
+      final bool isCameraMoved}) = _$_LiveHouseMap;
 
   @override
   GoogleMapController? get controller;
+  @override
+  bool get isCameraMoved;
   @override
   @JsonKey(ignore: true)
   _$$_LiveHouseMapCopyWith<_$_LiveHouseMap> get copyWith =>

@@ -6,5 +6,6 @@ part 'live_house_map.freezed.dart';
 class LiveHouseMap with _$LiveHouseMap {
   factory LiveHouseMap({
     @Default(null) GoogleMapController? controller,
+    @Default(false) bool isCameraMoved,
   }) = _LiveHouseMap;
 }

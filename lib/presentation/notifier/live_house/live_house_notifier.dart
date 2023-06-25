@@ -1,7 +1,7 @@
+import 'package:live_house_nav/presentation/notifier/map/map_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/live_house_list/live_house_list.dart';
 import '../../../domain/live_house_list/live_house_service.dart';
-import '../../pages/map/status/live_house_map.dart';
 import '../my_location/my_location_provider.dart';
 part 'live_house_notifier.g.dart';
 
@@ -18,6 +18,7 @@ class LiveHouseNotifier extends _$LiveHouseNotifier {
   Future<LiveHouseList> build() async {
     final myLocation = ref.watch(featchMyLocationProvider).requireValue;
     final _liveHouseService = ref.watch(liveHouseService);
+    final mapCTL = ref.watch(mapNotifierProvider.notifier);
 
     final Uri placeApiUri = Uri.parse(
         "$basePlaceApiUrl?key=$apiKey&location=${myLocation.latitude},${myLocation.longitude}&language=ja&keyword=ライブハウス&rankby=distance");
@@ -37,14 +38,7 @@ class LiveHouseNotifier extends _$LiveHouseNotifier {
     }).toList();
 
     liveHouseList = liveHouseList.copyWith(results: testList);
+    await mapCTL.setCamera(testList);
     return liveHouseList;
   }
-
-  // Future<void> onMapCreated(GoogleMapController mapController) async {
-  //   state = AsyncValue.data(
-  //     state.value?.copyWith(
-  //       controller: mapController,
-  //     ),
-  //   );
-  // }
 }

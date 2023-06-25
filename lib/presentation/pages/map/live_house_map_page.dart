@@ -17,6 +17,7 @@ class LiveHouseMapPage extends HookConsumerWidget {
       viewportFraction: 0.9,
     );
     final liveHouse = ref.watch(liveHouseNotifierProvider);
+    final liveHouseMap = ref.watch(mapNotifierProvider);
     final mapNotifierCTL = ref.watch(mapNotifierProvider.notifier);
 
     return Scaffold(
@@ -34,6 +35,7 @@ class LiveHouseMapPage extends HookConsumerWidget {
                   ),
                   zoom: 19,
                 ),
+                onCameraMoveStarted: () => mapNotifierCTL.onCameraMove(),
                 markers: liveHouse.when(
                   data: (data) => data.results
                       .map(
@@ -49,8 +51,16 @@ class LiveHouseMapPage extends HookConsumerWidget {
                   error: (e, s) => {},
                   loading: () => {},
                 ),
-                onMapCreated: (controller) =>
-                    mapNotifierCTL.onMapCreated(controller),
+                onMapCreated: (controller) async =>
+                    await mapNotifierCTL.onMapCreated(controller),
+              ),
+              Align(
+                alignment: const Alignment(0, -1),
+                child: SafeArea(
+                  child: liveHouseMap.isCameraMoved
+                      ? const Text("このエリアで再検索")
+                      : const SizedBox(),
+                ),
               ),
               LiveHouseListView(
                 pageController: pageController,
