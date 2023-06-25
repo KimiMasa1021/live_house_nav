@@ -21,7 +21,7 @@ class LiveHouseListView extends HookConsumerWidget {
           alignment: const Alignment(0, 1),
           child: Container(
             width: size.width,
-            height: 140,
+            height: 170,
             margin: const EdgeInsets.only(bottom: 15),
             child: PageView(
               controller: pageController,

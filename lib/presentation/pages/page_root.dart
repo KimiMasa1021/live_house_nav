@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:live_house_nav/common/hex_color.dart';
 import '../../common/go_router_provider/routes/routes.dart';
+import 'widgets/custom_bottom_bar.dart';
 
 class PageRoot extends HookConsumerWidget {
   final Widget child;
@@ -17,11 +19,32 @@ class PageRoot extends HookConsumerWidget {
 
     return Scaffold(
       body: child,
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: CustomBottomBar(
+        backgroundColor: HexColor("111111"),
         currentIndex: currentIndex.value,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.black,
-        onTap: (index) {
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list_outlined),
+            activeIcon: Icon(Icons.list),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_box_outlined),
+            activeIcon: Icon(Icons.add_box),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications_outlined),
+            activeIcon: Icon(Icons.notifications),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings_outlined),
+            activeIcon: Icon(Icons.settings),
+          ),
+        ],
+        onTap: (int index) {
           switch (index) {
             case 0:
               context.go(Routes.liveHouseMap);
@@ -41,25 +64,18 @@ class PageRoot extends HookConsumerWidget {
               break;
           }
         },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list_outlined),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            label: "",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            label: "",
-          ),
-        ],
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   currentIndex: currentIndex.value,
+      //   type: BottomNavigationBarType.fixed,
+      //   selectedItemColor: Colors.black,
+      //   onTap: (index) {
+
+      //   },
+      //   items: const [
+
+      //   ],
+      // ),
     );
   }
 }

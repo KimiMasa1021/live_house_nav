@@ -13,7 +13,8 @@ class MyApp extends ConsumerWidget {
           ref.watch(routerProvider).routeInformationProvider,
       routeInformationParser: ref.watch(routerProvider).routeInformationParser,
       routerDelegate: ref.watch(routerProvider).routerDelegate,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
+      darkTheme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
     );
   }

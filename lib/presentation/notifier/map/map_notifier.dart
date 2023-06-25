@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:live_house_nav/presentation/notifier/live_house/live_house_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/live_house_list/value/live_house/live_house.dart';
 import '../../pages/map/status/live_house_map.dart';
@@ -36,7 +35,7 @@ class MapNotifier extends _$MapNotifier {
           southwest: LatLng(south, west),
           northeast: LatLng(north, east),
         ),
-        50,
+        60,
       ),
     );
     state = state.copyWith(isCameraMoved: false);
