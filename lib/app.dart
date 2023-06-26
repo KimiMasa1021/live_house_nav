@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'common/go_router_provider/go_router_provider.dart';
+import 'common/hex_color.dart';
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -13,8 +14,18 @@ class MyApp extends ConsumerWidget {
           ref.watch(routerProvider).routeInformationProvider,
       routeInformationParser: ref.watch(routerProvider).routeInformationParser,
       routerDelegate: ref.watch(routerProvider).routerDelegate,
-      themeMode: ThemeMode.dark,
-      darkTheme: ThemeData.dark(),
+      theme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: HexColor("111111"),
+        primaryColor: Colors.lightBlue[800],
+        colorScheme: ColorScheme.fromSwatch(
+          brightness: Brightness.dark,
+        ).copyWith(
+          background: Colors.red,
+          onBackground: HexColor("#F0F1F1"),
+        ),
+        textTheme: const TextTheme(),
+      ),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,3 +1,4 @@
+import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -8,10 +9,28 @@ import 'widgets/custom_bottom_bar.dart';
 
 class PageRoot extends HookConsumerWidget {
   final Widget child;
+
   const PageRoot({
     super.key,
     required this.child,
   });
+
+  DecoratedIcon getDecaratedIcon(
+    IconData icon, {
+    bool isDisableEffect = false,
+  }) {
+    return DecoratedIcon(
+      icon,
+      shadows: isDisableEffect
+          ? []
+          : [
+              BoxShadow(
+                color: HexColor("FFFFFF"),
+                blurRadius: 5,
+              ),
+            ],
+    );
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -24,24 +43,25 @@ class PageRoot extends HookConsumerWidget {
         currentIndex: currentIndex.value,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
+            icon: getDecaratedIcon(Icons.home_outlined),
+            activeIcon: getDecaratedIcon(Icons.home, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list_outlined),
-            activeIcon: Icon(Icons.list),
+            icon: getDecaratedIcon(Icons.list_outlined),
+            activeIcon: getDecaratedIcon(Icons.list, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_box_outlined),
-            activeIcon: Icon(Icons.add_box),
+            icon: getDecaratedIcon(Icons.add_box_outlined),
+            activeIcon: getDecaratedIcon(Icons.add_box, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications_outlined),
-            activeIcon: Icon(Icons.notifications),
+            icon: getDecaratedIcon(Icons.notifications_outlined),
+            activeIcon:
+                getDecaratedIcon(Icons.notifications, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings_outlined),
-            activeIcon: Icon(Icons.settings),
+            icon: getDecaratedIcon(Icons.settings_outlined),
+            activeIcon: getDecaratedIcon(Icons.settings, isDisableEffect: true),
           ),
         ],
         onTap: (int index) {
@@ -65,17 +85,6 @@ class PageRoot extends HookConsumerWidget {
           }
         },
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: currentIndex.value,
-      //   type: BottomNavigationBarType.fixed,
-      //   selectedItemColor: Colors.black,
-      //   onTap: (index) {
-
-      //   },
-      //   items: const [
-
-      //   ],
-      // ),
     );
   }
 }

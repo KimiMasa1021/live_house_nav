@@ -14,6 +14,7 @@ class CustomBottomBar extends StatelessWidget {
   final List<BottomNavigationBarItem> items;
   final int currentIndex;
   final Function(int index) onTap;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -32,10 +33,6 @@ class CustomBottomBar extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(10),
                 margin: const EdgeInsets.symmetric(vertical: 7),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: currentIndex == index ? HexColor("292929") : null,
-                ),
                 child: currentIndex == index
                     ? items[index].activeIcon
                     : items[index].icon,

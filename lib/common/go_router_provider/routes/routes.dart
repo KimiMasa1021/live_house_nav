@@ -5,4 +5,6 @@ class Routes {
   static const String articlesList = "/articles_list";
   static const String setting = "/setting";
   static const String notification = "/notification";
+
+  static const String liveHouseDetail = "live_house_detail";
 }
