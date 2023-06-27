@@ -19,7 +19,10 @@ class LiveHousePanel extends ConsumerWidget {
     final textTheme = ref.watch(myTextThemeProvider);
     return InkWell(
       onTap: () {
-        context.go("${Routes.liveHouseMap}/${Routes.liveHouseDetail}");
+        context.go(
+          "${Routes.liveHouseMap}/${Routes.liveHouseDetail}",
+          extra: liveHouse,
+        );
       },
       child: Container(
         width: size.width,

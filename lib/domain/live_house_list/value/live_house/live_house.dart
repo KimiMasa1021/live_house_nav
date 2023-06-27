@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:live_house_nav/domain/live_house_list/value/geometry/geometry.dart';
+import 'package:live_house_nav/domain/live_house_list/value/live_house_detail/live_house_detail.dart';
 import 'package:live_house_nav/domain/live_house_list/value/photo/photo.dart';
 
 part 'live_house.freezed.dart';

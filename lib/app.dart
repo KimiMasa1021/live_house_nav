@@ -16,7 +16,11 @@ class MyApp extends ConsumerWidget {
       routerDelegate: ref.watch(routerProvider).routerDelegate,
       theme: ThemeData(
         brightness: Brightness.dark,
+        useMaterial3: true,
         scaffoldBackgroundColor: HexColor("111111"),
+        appBarTheme: AppBarTheme(
+          backgroundColor: HexColor("1E1E1E"),
+        ),
         primaryColor: Colors.lightBlue[800],
         colorScheme: ColorScheme.fromSwatch(
           brightness: Brightness.dark,

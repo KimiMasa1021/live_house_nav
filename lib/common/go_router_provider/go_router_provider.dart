@@ -1,7 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:live_house_nav/domain/live_house_list/value/live_house/live_house.dart';
 import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
-import 'package:live_house_nav/presentation/pages/live_house_detail/live_house_detail.dart';
+import 'package:live_house_nav/presentation/pages/live_house_detail/live_house_detail_page.dart';
 import 'package:live_house_nav/presentation/pages/notification/notification_page.dart';
 import 'package:live_house_nav/presentation/pages/setting/setting_page.dart';
 import '../../presentation/pages/live_house_map/live_house_map_page.dart';
@@ -35,9 +36,11 @@ final routerProvider = Provider(
                 path: Routes.liveHouseDetail,
                 parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
                 pageBuilder: (context, state) {
+                  final liveHoue = state.extra as LiveHouse;
                   return NoTransitionPage(
-                    child: LiveHouseDetail(
+                    child: LiveHouseDetailPage(
                       key: state.pageKey,
+                      liveHouse: liveHoue,
                     ),
                   );
                 },
