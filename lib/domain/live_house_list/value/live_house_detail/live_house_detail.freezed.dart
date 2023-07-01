@@ -20,9 +20,12 @@ LiveHouseDetail _$LiveHouseDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LiveHouseDetail {
+  String get formattedPhoneNumber => throw _privateConstructorUsedError;
+  String get internationalPhoneNumber => throw _privateConstructorUsedError;
   String get website => throw _privateConstructorUsedError;
   List<Photo> get photos => throw _privateConstructorUsedError;
   List<String> get imageList => throw _privateConstructorUsedError;
+  OpeingHours get openingHours => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +39,15 @@ abstract class $LiveHouseDetailCopyWith<$Res> {
           LiveHouseDetail value, $Res Function(LiveHouseDetail) then) =
       _$LiveHouseDetailCopyWithImpl<$Res, LiveHouseDetail>;
   @useResult
-  $Res call({String website, List<Photo> photos, List<String> imageList});
+  $Res call(
+      {String formattedPhoneNumber,
+      String internationalPhoneNumber,
+      String website,
+      List<Photo> photos,
+      List<String> imageList,
+      OpeingHours openingHours});
+
+  $OpeingHoursCopyWith<$Res> get openingHours;
 }
 
 /// @nodoc
@@ -52,11 +63,22 @@ class _$LiveHouseDetailCopyWithImpl<$Res, $Val extends LiveHouseDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? formattedPhoneNumber = null,
+    Object? internationalPhoneNumber = null,
     Object? website = null,
     Object? photos = null,
     Object? imageList = null,
+    Object? openingHours = null,
   }) {
     return _then(_value.copyWith(
+      formattedPhoneNumber: null == formattedPhoneNumber
+          ? _value.formattedPhoneNumber
+          : formattedPhoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      internationalPhoneNumber: null == internationalPhoneNumber
+          ? _value.internationalPhoneNumber
+          : internationalPhoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       website: null == website
           ? _value.website
           : website // ignore: cast_nullable_to_non_nullable
@@ -69,7 +91,19 @@ class _$LiveHouseDetailCopyWithImpl<$Res, $Val extends LiveHouseDetail>
           ? _value.imageList
           : imageList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      openingHours: null == openingHours
+          ? _value.openingHours
+          : openingHours // ignore: cast_nullable_to_non_nullable
+              as OpeingHours,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OpeingHoursCopyWith<$Res> get openingHours {
+    return $OpeingHoursCopyWith<$Res>(_value.openingHours, (value) {
+      return _then(_value.copyWith(openingHours: value) as $Val);
+    });
   }
 }
 
@@ -81,7 +115,16 @@ abstract class _$$_LiveHouseDetailCopyWith<$Res>
       __$$_LiveHouseDetailCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String website, List<Photo> photos, List<String> imageList});
+  $Res call(
+      {String formattedPhoneNumber,
+      String internationalPhoneNumber,
+      String website,
+      List<Photo> photos,
+      List<String> imageList,
+      OpeingHours openingHours});
+
+  @override
+  $OpeingHoursCopyWith<$Res> get openingHours;
 }
 
 /// @nodoc
@@ -95,11 +138,22 @@ class __$$_LiveHouseDetailCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? formattedPhoneNumber = null,
+    Object? internationalPhoneNumber = null,
     Object? website = null,
     Object? photos = null,
     Object? imageList = null,
+    Object? openingHours = null,
   }) {
     return _then(_$_LiveHouseDetail(
+      formattedPhoneNumber: null == formattedPhoneNumber
+          ? _value.formattedPhoneNumber
+          : formattedPhoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      internationalPhoneNumber: null == internationalPhoneNumber
+          ? _value.internationalPhoneNumber
+          : internationalPhoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
       website: null == website
           ? _value.website
           : website // ignore: cast_nullable_to_non_nullable
@@ -112,23 +166,37 @@ class __$$_LiveHouseDetailCopyWithImpl<$Res>
           ? _value._imageList
           : imageList // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      openingHours: null == openingHours
+          ? _value.openingHours
+          : openingHours // ignore: cast_nullable_to_non_nullable
+              as OpeingHours,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_LiveHouseDetail implements _LiveHouseDetail {
   _$_LiveHouseDetail(
-      {this.website = "",
+      {this.formattedPhoneNumber = "",
+      this.internationalPhoneNumber = "",
+      this.website = "",
       final List<Photo> photos = const [],
-      final List<String> imageList = const []})
+      final List<String> imageList = const [],
+      required this.openingHours})
       : _photos = photos,
         _imageList = imageList;
 
   factory _$_LiveHouseDetail.fromJson(Map<String, dynamic> json) =>
       _$$_LiveHouseDetailFromJson(json);
 
+  @override
+  @JsonKey()
+  final String formattedPhoneNumber;
+  @override
+  @JsonKey()
+  final String internationalPhoneNumber;
   @override
   @JsonKey()
   final String website;
@@ -151,8 +219,11 @@ class _$_LiveHouseDetail implements _LiveHouseDetail {
   }
 
   @override
+  final OpeingHours openingHours;
+
+  @override
   String toString() {
-    return 'LiveHouseDetail(website: $website, photos: $photos, imageList: $imageList)';
+    return 'LiveHouseDetail(formattedPhoneNumber: $formattedPhoneNumber, internationalPhoneNumber: $internationalPhoneNumber, website: $website, photos: $photos, imageList: $imageList, openingHours: $openingHours)';
   }
 
   @override
@@ -160,19 +231,29 @@ class _$_LiveHouseDetail implements _LiveHouseDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_LiveHouseDetail &&
+            (identical(other.formattedPhoneNumber, formattedPhoneNumber) ||
+                other.formattedPhoneNumber == formattedPhoneNumber) &&
+            (identical(
+                    other.internationalPhoneNumber, internationalPhoneNumber) ||
+                other.internationalPhoneNumber == internationalPhoneNumber) &&
             (identical(other.website, website) || other.website == website) &&
             const DeepCollectionEquality().equals(other._photos, _photos) &&
             const DeepCollectionEquality()
-                .equals(other._imageList, _imageList));
+                .equals(other._imageList, _imageList) &&
+            (identical(other.openingHours, openingHours) ||
+                other.openingHours == openingHours));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      formattedPhoneNumber,
+      internationalPhoneNumber,
       website,
       const DeepCollectionEquality().hash(_photos),
-      const DeepCollectionEquality().hash(_imageList));
+      const DeepCollectionEquality().hash(_imageList),
+      openingHours);
 
   @JsonKey(ignore: true)
   @override
@@ -190,19 +271,28 @@ class _$_LiveHouseDetail implements _LiveHouseDetail {
 
 abstract class _LiveHouseDetail implements LiveHouseDetail {
   factory _LiveHouseDetail(
-      {final String website,
+      {final String formattedPhoneNumber,
+      final String internationalPhoneNumber,
+      final String website,
       final List<Photo> photos,
-      final List<String> imageList}) = _$_LiveHouseDetail;
+      final List<String> imageList,
+      required final OpeingHours openingHours}) = _$_LiveHouseDetail;
 
   factory _LiveHouseDetail.fromJson(Map<String, dynamic> json) =
       _$_LiveHouseDetail.fromJson;
 
+  @override
+  String get formattedPhoneNumber;
+  @override
+  String get internationalPhoneNumber;
   @override
   String get website;
   @override
   List<Photo> get photos;
   @override
   List<String> get imageList;
+  @override
+  OpeingHours get openingHours;
   @override
   @JsonKey(ignore: true)
   _$$_LiveHouseDetailCopyWith<_$_LiveHouseDetail> get copyWith =>

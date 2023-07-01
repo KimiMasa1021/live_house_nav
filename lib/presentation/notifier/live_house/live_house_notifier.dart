@@ -21,7 +21,7 @@ class LiveHouseNotifier extends _$LiveHouseNotifier {
     final mapCTL = ref.watch(mapNotifierProvider.notifier);
 
     final Uri placeApiUri = Uri.parse(
-        "$basePlaceApiUrl?key=$apiKey&location=${myLocation.latitude},${myLocation.longitude}&language=ja&keyword=ライブハウス&rankby=distance");
+        "$basePlaceApiUrl?key=$apiKey&location=${myLocation.latitude},${myLocation.longitude}&language=ja&keyword=ライブハウス,livehouse&rankby=distance");
 
     LiveHouseList liveHouseList =
         await _liveHouseService.featchLiveHouseList(placeApiUri);

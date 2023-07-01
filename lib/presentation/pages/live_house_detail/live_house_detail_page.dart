@@ -3,8 +3,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/domain/live_house_list/value/live_house/live_house.dart';
 import 'package:live_house_nav/presentation/notifier/live_house_detail/live_houe_detail_notifier.dart';
+import 'package:live_house_nav/presentation/pages/live_house_detail/widgets/openning_hours_panel.dart';
 import '../../../common/hex_color.dart';
 import '../../../common/text_theme/text_theme.dart';
+import 'widgets/facility_info_link.dart';
 import 'widgets/sticky_tab_bar_delegate.dart';
 
 class LiveHouseDetailPage extends ConsumerWidget {
@@ -28,6 +30,7 @@ class LiveHouseDetailPage extends ConsumerWidget {
         body: SafeArea(
           child: liveHoueDetail.when(
             data: (data) {
+              debugPrint(data.openingHours.periods.toString());
               return NestedScrollView(
                 physics: const BouncingScrollPhysics(),
                 headerSliverBuilder:
@@ -189,8 +192,30 @@ class LiveHouseDetailPage extends ConsumerWidget {
                   builder: (context) {
                     return TabBarView(
                       children: [
-                        Container(
-                          child: Text("AA" + data.website),
+                        SingleChildScrollView(
+                          physics: const BouncingScrollPhysics(),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 15,
+                              vertical: 10,
+                            ),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                FacilityInfoLink(
+                                  icon: Icons.language_outlined,
+                                  title: data.website,
+                                ),
+                                FacilityInfoLink(
+                                  icon: Icons.call_outlined,
+                                  title: data.formattedPhoneNumber,
+                                ),
+                                OpenningHoursPanel(
+                                  opeingHours: data.openingHours,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                         Container(),
                         Container(),
@@ -201,12 +226,12 @@ class LiveHouseDetailPage extends ConsumerWidget {
               );
             },
             error: (Object error, StackTrace stackTrace) {
-              return Center(
+              return const Center(
                 child: Text("エラー"),
               );
             },
             loading: () {
-              return Center(
+              return const Center(
                 child: Text("Loading..."),
               );
             },

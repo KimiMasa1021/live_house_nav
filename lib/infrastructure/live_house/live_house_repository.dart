@@ -38,6 +38,8 @@ class LiveHouseRepository implements LiveHouseRepositoryBase {
       } else {
         final jsonResult = jsonDecode(response.body) as Map<String, dynamic>;
         final model = LiveHouseDetail.fromJson(jsonResult["result"]);
+        debugPrint(model.openingHours.periods.toString());
+
         return Result.value(model);
       }
     } catch (_) {

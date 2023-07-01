@@ -15,20 +15,20 @@ class PageRoot extends HookConsumerWidget {
     required this.child,
   });
 
-  DecoratedIcon getDecaratedIcon(
+  Icon getDecaratedIcon(
     IconData icon, {
-    bool isDisableEffect = false,
+    bool isDisableEffect = true,
   }) {
-    return DecoratedIcon(
+    return Icon(
       icon,
-      shadows: isDisableEffect
-          ? []
-          : [
-              BoxShadow(
-                color: HexColor("FFFFFF"),
-                blurRadius: 5,
-              ),
-            ],
+      shadows: <Shadow>[
+        Shadow(
+          color: HexColor("00FFE0"),
+          blurRadius: 15.0,
+        )
+      ],
+      size: 25,
+      color: HexColor("D3FFFA"),
     );
   }
 

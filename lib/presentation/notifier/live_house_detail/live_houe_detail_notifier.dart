@@ -16,7 +16,7 @@ Future<LiveHouseDetail> featchLiveHouseDetail(
   const apiKey = "AIzaSyDzB3j0TAQolKL9K-C_jqFQD6i3I_CHs9M";
 
   final Uri detailApiUri = Uri.parse(
-      "${basePlaceApiUrl}place_id=$priceId&fields=photo,website&key=$apiKey");
+      "${basePlaceApiUrl}place_id=$priceId&fields=photo,website,international_phone_number,formatted_phone_number,opening_hours&key=$apiKey");
   final _liveHouseService = ref.watch(liveHouseService);
   final result = await _liveHouseService.featchLiveHouseDetail(detailApiUri);
   List<String> imageList = result.photos.map((e) {

@@ -7,7 +7,7 @@ part of 'live_houe_detail_notifier.dart';
 // **************************************************************************
 
 String _$featchLiveHouseDetailHash() =>
-    r'49fc7489120f86dea1e0d3c6162a44efcd936469';
+    r'2655d5167e921d696b25b326470f9734b5fef50c';
 
 /// Copied from Dart SDK
 class _SystemHash {
