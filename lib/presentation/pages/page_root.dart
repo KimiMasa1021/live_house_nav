@@ -1,4 +1,3 @@
-import 'package:decorated_icon/decorated_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
@@ -47,8 +46,9 @@ class PageRoot extends HookConsumerWidget {
             activeIcon: getDecaratedIcon(Icons.home, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: getDecaratedIcon(Icons.list_outlined),
-            activeIcon: getDecaratedIcon(Icons.list, isDisableEffect: true),
+            icon: getDecaratedIcon(Icons.library_books_outlined),
+            activeIcon:
+                getDecaratedIcon(Icons.library_books, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
             icon: getDecaratedIcon(Icons.add_box_outlined),
@@ -75,10 +75,14 @@ class PageRoot extends HookConsumerWidget {
               currentIndex.value = index;
               break;
             case 2:
-              context.go(Routes.notification);
+              context.go(Routes.addArticles);
               currentIndex.value = index;
               break;
             case 3:
+              context.go(Routes.notification);
+              currentIndex.value = index;
+              break;
+            case 4:
               context.go(Routes.setting);
               currentIndex.value = index;
               break;

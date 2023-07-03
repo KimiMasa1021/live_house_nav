@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LiveHouseMap {
   GoogleMapController? get controller => throw _privateConstructorUsedError;
   bool get isCameraMoved => throw _privateConstructorUsedError;
+  LatLng? get latLng => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LiveHouseMapCopyWith<LiveHouseMap> get copyWith =>
@@ -30,7 +31,8 @@ abstract class $LiveHouseMapCopyWith<$Res> {
           LiveHouseMap value, $Res Function(LiveHouseMap) then) =
       _$LiveHouseMapCopyWithImpl<$Res, LiveHouseMap>;
   @useResult
-  $Res call({GoogleMapController? controller, bool isCameraMoved});
+  $Res call(
+      {GoogleMapController? controller, bool isCameraMoved, LatLng? latLng});
 }
 
 /// @nodoc
@@ -48,6 +50,7 @@ class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
   $Res call({
     Object? controller = freezed,
     Object? isCameraMoved = null,
+    Object? latLng = freezed,
   }) {
     return _then(_value.copyWith(
       controller: freezed == controller
@@ -58,6 +61,10 @@ class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
           ? _value.isCameraMoved
           : isCameraMoved // ignore: cast_nullable_to_non_nullable
               as bool,
+      latLng: freezed == latLng
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
     ) as $Val);
   }
 }
@@ -70,7 +77,8 @@ abstract class _$$_LiveHouseMapCopyWith<$Res>
       __$$_LiveHouseMapCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({GoogleMapController? controller, bool isCameraMoved});
+  $Res call(
+      {GoogleMapController? controller, bool isCameraMoved, LatLng? latLng});
 }
 
 /// @nodoc
@@ -86,6 +94,7 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
   $Res call({
     Object? controller = freezed,
     Object? isCameraMoved = null,
+    Object? latLng = freezed,
   }) {
     return _then(_$_LiveHouseMap(
       controller: freezed == controller
@@ -96,6 +105,10 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
           ? _value.isCameraMoved
           : isCameraMoved // ignore: cast_nullable_to_non_nullable
               as bool,
+      latLng: freezed == latLng
+          ? _value.latLng
+          : latLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
     ));
   }
 }
@@ -103,7 +116,8 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_LiveHouseMap implements _LiveHouseMap {
-  _$_LiveHouseMap({this.controller = null, this.isCameraMoved = false});
+  _$_LiveHouseMap(
+      {this.controller = null, this.isCameraMoved = false, this.latLng = null});
 
   @override
   @JsonKey()
@@ -111,10 +125,13 @@ class _$_LiveHouseMap implements _LiveHouseMap {
   @override
   @JsonKey()
   final bool isCameraMoved;
+  @override
+  @JsonKey()
+  final LatLng? latLng;
 
   @override
   String toString() {
-    return 'LiveHouseMap(controller: $controller, isCameraMoved: $isCameraMoved)';
+    return 'LiveHouseMap(controller: $controller, isCameraMoved: $isCameraMoved, latLng: $latLng)';
   }
 
   @override
@@ -125,11 +142,13 @@ class _$_LiveHouseMap implements _LiveHouseMap {
             (identical(other.controller, controller) ||
                 other.controller == controller) &&
             (identical(other.isCameraMoved, isCameraMoved) ||
-                other.isCameraMoved == isCameraMoved));
+                other.isCameraMoved == isCameraMoved) &&
+            (identical(other.latLng, latLng) || other.latLng == latLng));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, controller, isCameraMoved);
+  int get hashCode =>
+      Object.hash(runtimeType, controller, isCameraMoved, latLng);
 
   @JsonKey(ignore: true)
   @override
@@ -141,12 +160,15 @@ class _$_LiveHouseMap implements _LiveHouseMap {
 abstract class _LiveHouseMap implements LiveHouseMap {
   factory _LiveHouseMap(
       {final GoogleMapController? controller,
-      final bool isCameraMoved}) = _$_LiveHouseMap;
+      final bool isCameraMoved,
+      final LatLng? latLng}) = _$_LiveHouseMap;
 
   @override
   GoogleMapController? get controller;
   @override
   bool get isCameraMoved;
+  @override
+  LatLng? get latLng;
   @override
   @JsonKey(ignore: true)
   _$$_LiveHouseMapCopyWith<_$_LiveHouseMap> get copyWith =>

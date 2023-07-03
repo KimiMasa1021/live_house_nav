@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:live_house_nav/domain/live_house_list/value/live_house_detail/live_house_detail.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/live_house_list/live_house_service.dart';

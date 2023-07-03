@@ -81,6 +81,7 @@ class LiveHousePanel extends ConsumerWidget {
                     children: [
                       Text(
                         liveHouse.name,
+                        maxLines: 1,
                         style: textTheme.fs16.copyWith(
                           fontWeight: FontWeight.bold,
                           color: HexColor("EFEFEF"),

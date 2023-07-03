@@ -18,8 +18,8 @@ class OpenningHoursPanel extends ConsumerWidget {
     final font = ref.watch(myTextThemeProvider);
 
     final List<StoreHours> test = List.from(opeingHours.periods);
-    final aaa = test.removeAt(0);
-    test.add(aaa);
+    final aaa = test.isNotEmpty ? test.removeAt(0) : null;
+    if (aaa != null) test.add(aaa);
 
     var days = {
       0: "日",
@@ -52,31 +52,58 @@ class OpenningHoursPanel extends ConsumerWidget {
               style: font.fs16,
             ),
           ),
-          ...List.generate(
-            test.length,
-            (index) => Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 4,
-              ),
-              decoration: BoxDecoration(
-                color: HexColor("111111"),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    days[test[index].open.day].toString(),
-                    style: font.fs16,
+          test.isNotEmpty
+              ? Column(
+                  children: List.generate(
+                    test.length,
+                    (index) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        color: HexColor("111111"),
+                        borderRadius: test.length - 1 == index
+                            ? const BorderRadius.vertical(
+                                bottom: Radius.circular(15),
+                              )
+                            : null,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            days[test[index].open.day].toString(),
+                            style: font.fs16,
+                          ),
+                          Text(
+                            "${test[index].open.time} ~ ${test[index].close.time}",
+                            style: font.fs16,
+                          )
+                        ],
+                      ),
+                    ),
                   ),
-                  Text(
-                    "${test[index].open.time} ~ ${test[index].close.time}",
-                    style: font.fs16,
-                  )
-                ],
-              ),
-            ),
-          ),
+                )
+              : Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                    color: HexColor("111111"),
+                    borderRadius: const BorderRadius.vertical(
+                      bottom: Radius.circular(15),
+                    ),
+                  ),
+                  child: Center(
+                    child: Text(
+                      "情報が取得できませんでした。",
+                      style: font.fs14,
+                    ),
+                  ),
+                ),
         ],
       ),
     );

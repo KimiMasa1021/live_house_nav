@@ -40,7 +40,11 @@ class MapNotifier extends _$MapNotifier {
     state = state.copyWith(isCameraMoved: false);
   }
 
-  void onCameraMove() {
+  void onCameraMoveStarted() {
     state = state.copyWith(isCameraMoved: true);
+  }
+
+  void onCameraMove(LatLng latLng) {
+    state = state.copyWith(latLng: latLng);
   }
 }

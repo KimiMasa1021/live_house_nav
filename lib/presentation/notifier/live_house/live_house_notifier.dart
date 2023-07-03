@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:live_house_nav/presentation/notifier/map/map_notifier.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/live_house_list/live_house_list.dart';
@@ -40,5 +41,31 @@ class LiveHouseNotifier extends _$LiveHouseNotifier {
     liveHouseList = liveHouseList.copyWith(results: testList);
     await mapCTL.setCamera(testList);
     return liveHouseList;
+  }
+
+  Future<void> featchLiveHouse(LatLng latLng) async {
+    final _liveHouseService = ref.watch(liveHouseService);
+    final mapCTL = ref.watch(mapNotifierProvider.notifier);
+
+    final Uri placeApiUri = Uri.parse(
+        "$basePlaceApiUrl?key=$apiKey&location=${latLng.latitude},${latLng.longitude}&language=ja&keyword=ライブハウス,livehouse&rankby=distance");
+
+    LiveHouseList liveHouseList =
+        await _liveHouseService.featchLiveHouseList(placeApiUri);
+
+    final testList = liveHouseList.results.map((e) {
+      String imageApiUri = "";
+      if (e.photos.isNotEmpty) {
+        var photoReference = e.photos[0].photoReference;
+        imageApiUri =
+            "${baseImageRefApiUrl}photo_reference=$photoReference&key=$apiKey";
+      }
+
+      return e.copyWith(imageUrl: imageApiUri);
+    }).toList();
+
+    liveHouseList = liveHouseList.copyWith(results: testList);
+    await mapCTL.setCamera(testList);
+    state = AsyncValue.data(liveHouseList);
   }
 }

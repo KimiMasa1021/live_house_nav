@@ -30,7 +30,6 @@ class LiveHouseDetailPage extends ConsumerWidget {
         body: SafeArea(
           child: liveHoueDetail.when(
             data: (data) {
-              debugPrint(data.openingHours.periods.toString());
               return NestedScrollView(
                 physics: const BouncingScrollPhysics(),
                 headerSliverBuilder:
@@ -50,73 +49,82 @@ class LiveHouseDetailPage extends ConsumerWidget {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          liveHouse.name,
-                                          style: font.fs16.copyWith(
-                                            fontWeight: FontWeight.bold,
-                                            color: HexColor("EFEFEF"),
-                                          ),
-                                        ),
-                                        Text(
-                                          liveHouse.vicinity,
-                                          maxLines: 1,
-                                          style: font.fs13.copyWith(
-                                            color: HexColor("9E9E9E"),
-                                          ),
-                                        ),
-                                      ],
+                                    Text(
+                                      liveHouse.name,
+                                      style: font.fs16.copyWith(
+                                        fontWeight: FontWeight.bold,
+                                        color: HexColor("EFEFEF"),
+                                      ),
+                                    ),
+                                    Text(
+                                      liveHouse.vicinity,
+                                      maxLines: 1,
+                                      style: font.fs13.copyWith(
+                                        color: HexColor("9E9E9E"),
+                                      ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(height: 10),
                                 Expanded(
-                                  child: GridView.builder(
-                                    itemCount: data.imageList.length,
-                                    scrollDirection: Axis.horizontal,
-                                    gridDelegate: SliverQuiltedGridDelegate(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 5,
-                                      crossAxisSpacing: 5,
-                                      repeatPattern:
-                                          QuiltedGridRepeatPattern.inverted,
-                                      pattern: [
-                                        const QuiltedGridTile(2, 2),
-                                        const QuiltedGridTile(1, 1),
-                                        const QuiltedGridTile(1, 1),
-                                        const QuiltedGridTile(2, 2),
-                                        const QuiltedGridTile(1, 1),
-                                        const QuiltedGridTile(1, 1),
-                                        const QuiltedGridTile(2, 2),
-                                        const QuiltedGridTile(1, 1),
-                                        const QuiltedGridTile(1, 1),
-                                        const QuiltedGridTile(2, 2),
-                                        const QuiltedGridTile(1, 1),
-                                        const QuiltedGridTile(1, 1),
-                                      ],
-                                    ),
-                                    itemBuilder: (context, index) {
-                                      return Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: NetworkImage(
-                                              data.imageList[index],
+                                  child: data.imageList.isNotEmpty
+                                      ? GridView.builder(
+                                          itemCount: data.imageList.length,
+                                          scrollDirection: Axis.horizontal,
+                                          gridDelegate:
+                                              SliverQuiltedGridDelegate(
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 5,
+                                            crossAxisSpacing: 5,
+                                            repeatPattern:
+                                                QuiltedGridRepeatPattern
+                                                    .inverted,
+                                            pattern: [
+                                              const QuiltedGridTile(2, 2),
+                                              const QuiltedGridTile(1, 1),
+                                              const QuiltedGridTile(1, 1),
+                                              const QuiltedGridTile(2, 2),
+                                              const QuiltedGridTile(1, 1),
+                                              const QuiltedGridTile(1, 1),
+                                              const QuiltedGridTile(2, 2),
+                                              const QuiltedGridTile(1, 1),
+                                              const QuiltedGridTile(1, 1),
+                                              const QuiltedGridTile(2, 2),
+                                              const QuiltedGridTile(1, 1),
+                                              const QuiltedGridTile(1, 1),
+                                            ],
+                                          ),
+                                          itemBuilder: (context, index) {
+                                            return Container(
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: NetworkImage(
+                                                    data.imageList[index],
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                liveHouse.imageUrl,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      );
-                                    },
-                                  ),
                                 ),
                                 Row(
                                   children: [

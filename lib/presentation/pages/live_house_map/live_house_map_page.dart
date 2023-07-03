@@ -19,6 +19,8 @@ class LiveHouseMapPage extends HookConsumerWidget {
       viewportFraction: 0.9,
     );
     final liveHouse = ref.watch(liveHouseNotifierProvider);
+    final liveHouseCTL = ref.watch(liveHouseNotifierProvider.notifier);
+
     final liveHouseMap = ref.watch(mapNotifierProvider);
     final mapNotifierCTL = ref.watch(mapNotifierProvider.notifier);
     final textTheme = ref.watch(myTextThemeProvider);
@@ -41,7 +43,9 @@ class LiveHouseMapPage extends HookConsumerWidget {
                   ),
                   zoom: 21,
                 ),
-                onCameraMoveStarted: () => mapNotifierCTL.onCameraMove(),
+                onCameraMove: (position) =>
+                    mapNotifierCTL.onCameraMove(position.target),
+                onCameraMoveStarted: () => mapNotifierCTL.onCameraMoveStarted(),
                 markers: liveHouse.when(
                   data: (data) => data.results
                       .map(
@@ -65,14 +69,14 @@ class LiveHouseMapPage extends HookConsumerWidget {
                 child: SafeArea(
                   child: Container(
                     width: double.infinity,
-                    height: 45,
+                    height: 50,
                     margin: const EdgeInsets.symmetric(
                       horizontal: 15,
                       vertical: 10,
                     ),
                     decoration: BoxDecoration(
                       color: HexColor("131313"),
-                      borderRadius: BorderRadius.circular(45),
+                      borderRadius: BorderRadius.circular(50),
                       border: Border.all(
                         color: HexColor("4B4B4B"),
                       ),
@@ -90,8 +94,8 @@ class LiveHouseMapPage extends HookConsumerWidget {
                           ),
                         ),
                         Container(
-                          width: 50,
-                          height: 45,
+                          width: 60,
+                          height: 50,
                           decoration: BoxDecoration(
                             color: HexColor("242424"),
                             borderRadius: const BorderRadius.only(
@@ -104,7 +108,7 @@ class LiveHouseMapPage extends HookConsumerWidget {
                           ),
                           child: Icon(
                             Icons.search,
-                            size: 30,
+                            size: 25,
                             color: HexColor("EFEFEF"),
                           ),
                         ),
@@ -113,6 +117,45 @@ class LiveHouseMapPage extends HookConsumerWidget {
                   ),
                 ),
               ),
+              liveHouseMap.isCameraMoved
+                  ? Align(
+                      alignment: const Alignment(-1, 1),
+                      child: InkWell(
+                        onTap: () async {
+                          debugPrint(liveHouseMap.latLng.toString());
+                          await liveHouseCTL
+                              .featchLiveHouse(liveHouseMap.latLng!);
+                        },
+                        child: Container(
+                          height: 50,
+                          margin: const EdgeInsets.only(bottom: 190, left: 15),
+                          decoration: BoxDecoration(
+                            color: HexColor("131313"),
+                            borderRadius: BorderRadius.circular(45),
+                            border: Border.all(
+                              color: HexColor("4B4B4B"),
+                            ),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: Text(
+                                  "このエリアで再検索",
+                                  style: textTheme.fs15.copyWith(
+                                    color: HexColor("FFFFFF"),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
               LiveHouseListView(
                 pageController: pageController,
               ),

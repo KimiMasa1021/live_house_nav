@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/domain/live_house_list/value/live_house/live_house.dart';
+import 'package:live_house_nav/presentation/pages/add_article/add_article_page.dart';
 import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
 import 'package:live_house_nav/presentation/pages/live_house_detail/live_house_detail_page.dart';
 import 'package:live_house_nav/presentation/pages/notification/notification_page.dart';
@@ -52,6 +53,16 @@ final routerProvider = Provider(
             pageBuilder: (context, state) {
               return NoTransitionPage(
                 child: ArticlesListPage(
+                  key: state.pageKey,
+                ),
+              );
+            },
+          ),
+          GoRoute(
+            path: Routes.addArticles,
+            pageBuilder: (context, state) {
+              return NoTransitionPage(
+                child: AddArticlePage(
                   key: state.pageKey,
                 ),
               );

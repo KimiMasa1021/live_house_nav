@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:live_house_nav/common/hex_color.dart';
 
 import '../../../../common/text_theme/text_theme.dart';
 
@@ -22,10 +23,15 @@ class FacilityInfoLink extends ConsumerWidget {
         children: [
           Icon(icon),
           const SizedBox(width: 10),
-          Text(
-            title,
-            style: font.fs14.copyWith(color: Colors.blue),
-          )
+          title != ""
+              ? Text(
+                  title,
+                  style: font.fs14.copyWith(color: Colors.blue),
+                )
+              : Text(
+                  "情報なし",
+                  style: font.fs14.copyWith(color: HexColor("FFFFFF")),
+                ),
         ],
       ),
     );
