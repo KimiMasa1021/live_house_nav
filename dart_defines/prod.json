@@ -1,0 +1,8 @@
+{
+    "flavor": "prod",
+    "appId": "com.kmass.LiveHouseNav",
+    "appIdSuffix": "",
+    "appName": "Music App",
+    "bundleIdentifier": "com.kmass.LiveHouseNav"
+}
+

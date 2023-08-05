@@ -1,4 +1,4 @@
-package com.example.live_house_nav
+package com.kmass.LiveHouseNav
 
 import io.flutter.embedding.android.FlutterActivity
 

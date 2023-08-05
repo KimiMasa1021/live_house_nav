@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "413329539661",
+    "project_id": "live-house-nav",
+    "storage_bucket": "live-house-nav.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:413329539661:android:a2e89fb69528c8c54a9204",
+        "android_client_info": {
+          "package_name": "com.kmass.LiveHouseNav"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "413329539661-1go1j0c06gnk3ecj1f1funbjpdnsrvm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhlRqe7HhBCffqIR-k79T75eP4uy0_FGk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "413329539661-1go1j0c06gnk3ecj1f1funbjpdnsrvm6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "413329539661-mi91ttlue92bnhoh8lmtojsk5i0bth0d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kmass.LiveHouseNav.dev"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

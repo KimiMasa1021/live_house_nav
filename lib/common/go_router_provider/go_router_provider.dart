@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:live_house_nav/domain/live_house_list/value/live_house/live_house.dart';
 import 'package:live_house_nav/presentation/pages/add_article/add_article_page.dart';
 import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
+import 'package:live_house_nav/presentation/pages/image_preview/image_preview_page.dart';
 import 'package:live_house_nav/presentation/pages/live_house_detail/live_house_detail_page.dart';
-import 'package:live_house_nav/presentation/pages/notification/notification_page.dart';
+import 'package:live_house_nav/presentation/pages/search/search_page.dart';
 import 'package:live_house_nav/presentation/pages/setting/setting_page.dart';
 import '../../presentation/pages/live_house_map/live_house_map_page.dart';
 import '../../presentation/pages/page_root.dart';
@@ -13,7 +13,7 @@ import 'routes/routes.dart';
 
 final routerProvider = Provider(
   (ref) => GoRouter(
-    initialLocation: Routes.liveHouseMap,
+    initialLocation: Routes.path().liveHouseMap,
     navigatorKey: GlobalNavigatorKeys.rootNavigator,
     routes: [
       ShellRoute(
@@ -24,7 +24,8 @@ final routerProvider = Provider(
         ),
         routes: [
           GoRoute(
-            path: Routes.liveHouseMap,
+            path: Routes.path().liveHouseMap,
+            name: Routes.name().liveHouseMap,
             pageBuilder: (context, state) {
               return NoTransitionPage(
                 child: LiveHouseMapPage(
@@ -34,10 +35,11 @@ final routerProvider = Provider(
             },
             routes: [
               GoRoute(
-                path: Routes.liveHouseDetail,
+                path: Routes.path().liveHouseDetail,
+                name: Routes.name().liveHouseDetail,
                 parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
                 pageBuilder: (context, state) {
-                  final liveHoue = state.extra as LiveHouse;
+                  final liveHoue = state.extra.toString();
                   return NoTransitionPage(
                     child: LiveHouseDetailPage(
                       key: state.pageKey,
@@ -45,11 +47,29 @@ final routerProvider = Provider(
                     ),
                   );
                 },
+                routes: [
+                  GoRoute(
+                    path: Routes.path().imagePreview,
+                    name: Routes.name().imagePreview,
+                    parentNavigatorKey: GlobalNavigatorKeys.rootNavigator,
+                    pageBuilder: (context, state) {
+                      final imageInfo = state.extra as Map<String, dynamic>;
+                      return NoTransitionPage(
+                        child: ImagePreviewPage(
+                          key: state.pageKey,
+                          imageList: imageInfo["images"],
+                          initialIndex: imageInfo["initialIndex"],
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
           GoRoute(
-            path: Routes.articlesList,
+            path: Routes.path().articlesList,
+            name: Routes.name().articlesList,
             pageBuilder: (context, state) {
               return NoTransitionPage(
                 child: ArticlesListPage(
@@ -59,7 +79,8 @@ final routerProvider = Provider(
             },
           ),
           GoRoute(
-            path: Routes.addArticles,
+            path: Routes.path().addArticles,
+            name: Routes.name().addArticles,
             pageBuilder: (context, state) {
               return NoTransitionPage(
                 child: AddArticlePage(
@@ -69,17 +90,19 @@ final routerProvider = Provider(
             },
           ),
           GoRoute(
-            path: Routes.notification,
+            path: Routes.path().searchPage,
+            name: Routes.name().searchPage,
             pageBuilder: (context, state) {
               return NoTransitionPage(
-                child: NotificationPage(
+                child: SearchPage(
                   key: state.pageKey,
                 ),
               );
             },
           ),
           GoRoute(
-            path: Routes.setting,
+            path: Routes.path().setting,
+            name: Routes.name().setting,
             pageBuilder: (context, state) {
               return NoTransitionPage(
                 child: SettingPage(

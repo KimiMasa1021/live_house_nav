@@ -1,11 +1,43 @@
 class Routes {
-  const Routes._();
+  final String liveHouseMap;
+  final String addArticles;
+  final String setting;
+  final String liveHouseDetail;
+  final String imagePreview;
+  final String searchPage;
+  final String articlesList;
 
-  static const String liveHouseMap = "/live_house_map";
-  static const String articlesList = "/articles_list";
-  static const String addArticles = "/add_articles";
-  static const String notification = "/notification";
-  static const String setting = "/setting";
+  Routes({
+    required this.liveHouseMap,
+    required this.addArticles,
+    required this.setting,
+    required this.liveHouseDetail,
+    required this.imagePreview,
+    required this.searchPage,
+    required this.articlesList,
+  });
 
-  static const String liveHouseDetail = "live_house_detail";
+  factory Routes.path() {
+    return Routes(
+      liveHouseMap: "/live_house_map",
+      addArticles: "/add_articles",
+      setting: "/setting",
+      liveHouseDetail: "live_house_detail",
+      imagePreview: "image_preview",
+      searchPage: "/search_page",
+      articlesList: "/articles_list",
+    );
+  }
+
+  factory Routes.name() {
+    return Routes(
+      liveHouseMap: "liveHouseMap",
+      addArticles: "addArticles",
+      setting: "setting",
+      liveHouseDetail: "liveHouseDetail",
+      imagePreview: "imagePreview",
+      searchPage: "searchPage",
+      articlesList: "articlesList",
+    );
+  }
 }

@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:live_house_nav/domain/live_house_list/value/opening_hours/opening_hours.dart';
 
 import '../../../../common/hex_color.dart';
 import '../../../../common/text_theme/text_theme.dart';
-import '../../../../domain/live_house_list/value/store_hours/store_hours.dart';
+import '../../../../domain/live_house_detail/values/opening_hours/opening_hours.dart';
+import '../../../../domain/live_house_detail/values/store_hours/store_hours.dart';
 
 class OpenningHoursPanel extends ConsumerWidget {
   const OpenningHoursPanel({
     super.key,
     required this.opeingHours,
   });
-  final OpeingHours opeingHours;
+  final OpeingHours? opeingHours;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextThemeProvider);
 
-    final List<StoreHours> test = List.from(opeingHours.periods);
+    final List<StoreHours> test =
+        opeingHours != null ? List.from(opeingHours!.periods) : [];
     final aaa = test.isNotEmpty ? test.removeAt(0) : null;
     if (aaa != null) test.add(aaa);
 

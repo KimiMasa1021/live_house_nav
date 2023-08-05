@@ -1,71 +1,61 @@
+import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:live_house_nav/presentation/notifier/map/map_notifier.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/live_house_list/live_house_list.dart';
-import '../../../domain/live_house_list/live_house_service.dart';
-import '../my_location/my_location_provider.dart';
-part 'live_house_notifier.g.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:live_house_nav/domain/live_house/value/live_house/live_house.dart';
 
-@riverpod
-class LiveHouseNotifier extends _$LiveHouseNotifier {
-  final basePlaceApiUrl =
-      "https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+final _stream = StreamController<List<LiveHouse>>();
+final _db = FirebaseFirestore.instance;
 
-  final baseImageRefApiUrl =
-      "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&";
-  final apiKey = "AIzaSyDzB3j0TAQolKL9K-C_jqFQD6i3I_CHs9M";
+class GeoQueryCondition {
+  GeoQueryCondition({
+    required this.radiusInKm,
+    required this.cameraPosition,
+  });
 
-  @override
-  Future<LiveHouseList> build() async {
-    final myLocation = ref.watch(featchMyLocationProvider).requireValue;
-    final _liveHouseService = ref.watch(liveHouseService);
-    final mapCTL = ref.watch(mapNotifierProvider.notifier);
+  final double radiusInKm;
+  final CameraPosition cameraPosition;
+}
 
-    final Uri placeApiUri = Uri.parse(
-        "$basePlaceApiUrl?key=$apiKey&location=${myLocation.latitude},${myLocation.longitude}&language=ja&keyword=ライブハウス,livehouse&rankby=distance");
+final livehouseNotifierProvider = StateNotifierProvider.family<
+    LiveHouseNotifier, AsyncValue<List<LiveHouse>>, LatLng>(
+  (ref, LatLng latLng) => LiveHouseNotifier(
+    ref,
+    initialPosition: latLng,
+  ),
+);
 
-    LiveHouseList liveHouseList =
-        await _liveHouseService.featchLiveHouseList(placeApiUri);
+class LiveHouseNotifier extends StateNotifier<AsyncValue<List<LiveHouse>>> {
+  Ref ref;
+  final LatLng initialPosition;
 
-    final testList = liveHouseList.results.map((e) {
-      String imageApiUri = "";
-      if (e.photos.isNotEmpty) {
-        var photoReference = e.photos[0].photoReference;
-        imageApiUri =
-            "${baseImageRefApiUrl}photo_reference=$photoReference&key=$apiKey";
-      }
-
-      return e.copyWith(imageUrl: imageApiUri);
-    }).toList();
-
-    liveHouseList = liveHouseList.copyWith(results: testList);
-    await mapCTL.setCamera(testList);
-    return liveHouseList;
+  LiveHouseNotifier(this.ref, {required this.initialPosition})
+      : super(const AsyncLoading()) {
+    Future(() async {
+      final result = await featchLiveHouseList(
+          GeoPoint(initialPosition.latitude, initialPosition.longitude));
+      state = AsyncData(result);
+    });
   }
 
-  Future<void> featchLiveHouse(LatLng latLng) async {
-    final _liveHouseService = ref.watch(liveHouseService);
-    final mapCTL = ref.watch(mapNotifierProvider.notifier);
+  final CollectionReference<LiveHouse> collectionReference = _db
+      .collection('liveHouses')
+      .withConverter<LiveHouse>(
+        fromFirestore: (snapshot, _) => LiveHouse.fromJson(snapshot.data()!),
+        toFirestore: (data, _) => data.toJson(),
+      );
 
-    final Uri placeApiUri = Uri.parse(
-        "$basePlaceApiUrl?key=$apiKey&location=${latLng.latitude},${latLng.longitude}&language=ja&keyword=ライブハウス,livehouse&rankby=distance");
-
-    LiveHouseList liveHouseList =
-        await _liveHouseService.featchLiveHouseList(placeApiUri);
-
-    final testList = liveHouseList.results.map((e) {
-      String imageApiUri = "";
-      if (e.photos.isNotEmpty) {
-        var photoReference = e.photos[0].photoReference;
-        imageApiUri =
-            "${baseImageRefApiUrl}photo_reference=$photoReference&key=$apiKey";
-      }
-
-      return e.copyWith(imageUrl: imageApiUri);
-    }).toList();
-
-    liveHouseList = liveHouseList.copyWith(results: testList);
-    await mapCTL.setCamera(testList);
-    state = AsyncValue.data(liveHouseList);
+  Future<List<LiveHouse>> featchLiveHouseList(GeoPoint point) async {
+    final snapshot =
+        await GeoCollectionReference(collectionReference).fetchWithin(
+      center: GeoFirePoint(point),
+      radiusInKm: 50,
+      field: 'geo',
+      geopointFrom: (data) => data.geo.geopoint,
+      strictMode: true,
+    );
+    return snapshot.map((e) => e.data()!).toList();
   }
 }

@@ -46,18 +46,17 @@ class PageRoot extends HookConsumerWidget {
             activeIcon: getDecaratedIcon(Icons.home, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: getDecaratedIcon(Icons.library_books_outlined),
-            activeIcon:
-                getDecaratedIcon(Icons.library_books, isDisableEffect: true),
+            icon: getDecaratedIcon(Icons.search_outlined),
+            activeIcon: getDecaratedIcon(Icons.search, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
             icon: getDecaratedIcon(Icons.add_box_outlined),
             activeIcon: getDecaratedIcon(Icons.add_box, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: getDecaratedIcon(Icons.notifications_outlined),
+            icon: getDecaratedIcon(Icons.library_books_outlined),
             activeIcon:
-                getDecaratedIcon(Icons.notifications, isDisableEffect: true),
+                getDecaratedIcon(Icons.library_books, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
             icon: getDecaratedIcon(Icons.settings_outlined),
@@ -67,23 +66,24 @@ class PageRoot extends HookConsumerWidget {
         onTap: (int index) {
           switch (index) {
             case 0:
-              context.go(Routes.liveHouseMap);
+              context.go(Routes.path().liveHouseMap);
               currentIndex.value = index;
               break;
             case 1:
-              context.go(Routes.articlesList);
+              context.go(Routes.path().searchPage);
+
               currentIndex.value = index;
               break;
             case 2:
-              context.go(Routes.addArticles);
+              context.go(Routes.path().addArticles);
               currentIndex.value = index;
               break;
             case 3:
-              context.go(Routes.notification);
+              context.go(Routes.path().articlesList);
               currentIndex.value = index;
               break;
             case 4:
-              context.go(Routes.setting);
+              context.go(Routes.path().setting);
               currentIndex.value = index;
               break;
           }

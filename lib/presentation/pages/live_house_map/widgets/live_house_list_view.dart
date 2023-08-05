@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../notifier/live_house/live_house_notifier.dart';
 import 'live_house_panel.dart';
@@ -8,24 +11,27 @@ class LiveHouseListView extends HookConsumerWidget {
   const LiveHouseListView({
     super.key,
     required this.pageController,
+    required this.location,
   });
   final PageController pageController;
+  final Position location;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final liveHouseNotifier = ref.watch(liveHouseNotifierProvider);
     final size = MediaQuery.of(context).size;
-    return liveHouseNotifier.when(
+    final newMethodsLive = ref.watch(livehouseNotifierProvider(
+        LatLng(location.latitude, location.longitude)));
+    return newMethodsLive.when(
       data: (liveHoue) {
         return Align(
           alignment: const Alignment(0, 1),
           child: Container(
             width: size.width,
-            height: 170,
+            height: 120,
             margin: const EdgeInsets.only(bottom: 15),
             child: PageView(
               controller: pageController,
-              children: liveHoue.results.map(
+              children: liveHoue.map(
                 (house) {
                   return LiveHousePanel(
                     liveHouse: house,

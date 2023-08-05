@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:live_house_nav/domain/live_house_list/value/live_house/live_house.dart';
+import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/presentation/notifier/live_house_detail/live_houe_detail_notifier.dart';
 import 'package:live_house_nav/presentation/pages/live_house_detail/widgets/openning_hours_panel.dart';
 import '../../../common/hex_color.dart';
 import '../../../common/text_theme/text_theme.dart';
+import '../../../domain/live_house/value/live_house/live_house.dart';
 import 'widgets/facility_info_link.dart';
 import 'widgets/sticky_tab_bar_delegate.dart';
 
@@ -15,14 +17,14 @@ class LiveHouseDetailPage extends ConsumerWidget {
     required this.liveHouse,
   });
 
-  final LiveHouse liveHouse;
+  final String liveHouse;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final font = ref.watch(myTextThemeProvider);
     final size = MediaQuery.of(context).size;
     final liveHoueDetail =
-        ref.watch(FeatchLiveHouseDetailProvider(priceId: liveHouse.placeId));
+        ref.watch(FeatchLiveHouseDetailProvider(priceId: liveHouse));
     return DefaultTabController(
       length: 3,
       child: Scaffold(
@@ -40,7 +42,9 @@ class LiveHouseDetailPage extends ConsumerWidget {
                         [
                           Container(
                             width: size.width,
-                            height: size.height / 2.5,
+                            height: data.imageList.isNotEmpty
+                                ? size.height / 2.5
+                                : null,
                             padding: const EdgeInsets.symmetric(
                               horizontal: 15,
                               vertical: 10,
@@ -54,14 +58,14 @@ class LiveHouseDetailPage extends ConsumerWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      liveHouse.name,
+                                      data.name,
                                       style: font.fs16.copyWith(
                                         fontWeight: FontWeight.bold,
                                         color: HexColor("EFEFEF"),
                                       ),
                                     ),
                                     Text(
-                                      liveHouse.vicinity,
+                                      data.vicinity,
                                       maxLines: 1,
                                       style: font.fs13.copyWith(
                                         color: HexColor("9E9E9E"),
@@ -70,36 +74,44 @@ class LiveHouseDetailPage extends ConsumerWidget {
                                   ],
                                 ),
                                 const SizedBox(height: 10),
-                                Expanded(
-                                  child: data.imageList.isNotEmpty
-                                      ? GridView.builder(
-                                          itemCount: data.imageList.length,
-                                          scrollDirection: Axis.horizontal,
-                                          gridDelegate:
-                                              SliverQuiltedGridDelegate(
-                                            crossAxisCount: 2,
-                                            mainAxisSpacing: 5,
-                                            crossAxisSpacing: 5,
-                                            repeatPattern:
-                                                QuiltedGridRepeatPattern
-                                                    .inverted,
-                                            pattern: [
-                                              const QuiltedGridTile(2, 2),
-                                              const QuiltedGridTile(1, 1),
-                                              const QuiltedGridTile(1, 1),
-                                              const QuiltedGridTile(2, 2),
-                                              const QuiltedGridTile(1, 1),
-                                              const QuiltedGridTile(1, 1),
-                                              const QuiltedGridTile(2, 2),
-                                              const QuiltedGridTile(1, 1),
-                                              const QuiltedGridTile(1, 1),
-                                              const QuiltedGridTile(2, 2),
-                                              const QuiltedGridTile(1, 1),
-                                              const QuiltedGridTile(1, 1),
-                                            ],
-                                          ),
-                                          itemBuilder: (context, index) {
-                                            return Container(
+                                data.imageList.isNotEmpty
+                                    ? Expanded(
+                                        child: GridView.builder(
+                                        itemCount: data.imageList.length,
+                                        scrollDirection: Axis.horizontal,
+                                        gridDelegate: SliverQuiltedGridDelegate(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 5,
+                                          crossAxisSpacing: 5,
+                                          repeatPattern:
+                                              QuiltedGridRepeatPattern.inverted,
+                                          pattern: [
+                                            const QuiltedGridTile(2, 2),
+                                            const QuiltedGridTile(1, 1),
+                                            const QuiltedGridTile(1, 1),
+                                            const QuiltedGridTile(2, 2),
+                                            const QuiltedGridTile(1, 1),
+                                            const QuiltedGridTile(1, 1),
+                                            const QuiltedGridTile(2, 2),
+                                            const QuiltedGridTile(1, 1),
+                                            const QuiltedGridTile(1, 1),
+                                            const QuiltedGridTile(2, 2),
+                                            const QuiltedGridTile(1, 1),
+                                            const QuiltedGridTile(1, 1),
+                                          ],
+                                        ),
+                                        itemBuilder: (context, index) {
+                                          return InkWell(
+                                            onTap: () {
+                                              context.pushNamed(
+                                                Routes.name().imagePreview,
+                                                extra: {
+                                                  "images": data.imageList,
+                                                  "initialIndex": index,
+                                                },
+                                              );
+                                            },
+                                            child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
@@ -110,22 +122,11 @@ class LiveHouseDetailPage extends ConsumerWidget {
                                                   ),
                                                 ),
                                               ),
-                                            );
-                                          },
-                                        )
-                                      : Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(
-                                                liveHouse.imageUrl,
-                                              ),
                                             ),
-                                          ),
-                                        ),
-                                ),
+                                          );
+                                        },
+                                      ))
+                                    : const SizedBox(),
                                 Row(
                                   children: [
                                     Container(

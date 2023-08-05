@@ -7,7 +7,7 @@ part of 'live_houe_detail_notifier.dart';
 // **************************************************************************
 
 String _$featchLiveHouseDetailHash() =>
-    r'2655d5167e921d696b25b326470f9734b5fef50c';
+    r'5bf95b47dbcf4baf4b4a25ce09393f938c83d80d';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,8 +30,7 @@ class _SystemHash {
   }
 }
 
-typedef FeatchLiveHouseDetailRef
-    = AutoDisposeFutureProviderRef<LiveHouseDetail>;
+typedef FeatchLiveHouseDetailRef = FutureProviderRef<LiveHouseDetail>;
 
 /// See also [featchLiveHouseDetail].
 @ProviderFor(featchLiveHouseDetail)
@@ -76,8 +75,7 @@ class FeatchLiveHouseDetailFamily extends Family<AsyncValue<LiveHouseDetail>> {
 }
 
 /// See also [featchLiveHouseDetail].
-class FeatchLiveHouseDetailProvider
-    extends AutoDisposeFutureProvider<LiveHouseDetail> {
+class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
   /// See also [featchLiveHouseDetail].
   FeatchLiveHouseDetailProvider({
     required this.priceId,
@@ -112,4 +110,5 @@ class FeatchLiveHouseDetailProvider
     return _SystemHash.finish(hash);
   }
 }
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
