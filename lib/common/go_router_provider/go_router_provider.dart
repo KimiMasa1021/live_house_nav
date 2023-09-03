@@ -79,36 +79,6 @@ final routerProvider = Provider(
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: Routes.path().articlesList,
-                name: Routes.name().articlesList,
-                pageBuilder: (context, state) {
-                  return NoTransitionPage(
-                    child: ArticlesListPage(
-                      key: state.pageKey,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: <RouteBase>[
-              GoRoute(
-                path: Routes.path().addArticles,
-                name: Routes.name().addArticles,
-                pageBuilder: (context, state) {
-                  return NoTransitionPage(
-                    child: AddArticlePage(
-                      key: state.pageKey,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: <RouteBase>[
-              GoRoute(
                 path: Routes.path().searchPage,
                 name: Routes.name().searchPage,
                 pageBuilder: (context, state) {
@@ -167,6 +137,36 @@ final routerProvider = Provider(
                     ],
                   ),
                 ],
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                path: Routes.path().addArticles,
+                name: Routes.name().addArticles,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    child: AddArticlePage(
+                      key: state.pageKey,
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: <RouteBase>[
+              GoRoute(
+                path: Routes.path().articlesList,
+                name: Routes.name().articlesList,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                    child: ArticlesListPage(
+                      key: state.pageKey,
+                    ),
+                  );
+                },
               ),
             ],
           ),

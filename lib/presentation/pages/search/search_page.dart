@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/common/hex_color.dart';
+import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:live_house_nav/presentation/pages/search/widgets/genre_panel.dart';
 import 'package:live_house_nav/presentation/pages/search/widgets/live_house_search_bar.dart';
 
@@ -61,25 +62,40 @@ class SearchPage extends HookConsumerWidget {
                         ),
                       ),
                     ),
-                    const Row(
+                    Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
-                            GenrePanel(),
-                            GenrePanel(),
-                            GenrePanel(),
+                            GenrePanel(
+                              title: 'ホール',
+                              imagePath: Assets.facility.hole.path,
+                            ),
+                            GenrePanel(
+                              title: 'アリーナ',
+                              imagePath: Assets.facility.aina.path,
+                            ),
+                            GenrePanel(
+                              title: 'クラブ',
+                              imagePath: Assets.facility.club.path,
+                            ),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
-                            GenrePanel(),
-                            GenrePanel(),
+                            GenrePanel(
+                              title: 'ライブハウス',
+                              imagePath: Assets.facility.liveHouse.path,
+                            ),
+                            GenrePanel(
+                              title: 'ジャズバー',
+                              imagePath: Assets.facility.jazz.path,
+                            ),
                           ],
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                       ],
                     ),
                     Padding(

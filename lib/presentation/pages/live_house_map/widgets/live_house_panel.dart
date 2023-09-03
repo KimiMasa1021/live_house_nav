@@ -5,6 +5,7 @@ import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/common/hex_color.dart';
 import 'package:live_house_nav/common/text_theme/text_theme.dart';
 import '../../../../domain/live_house/value/live_house/live_house.dart';
+import '../../../../gen/assets.gen.dart';
 
 class LiveHousePanel extends ConsumerWidget {
   const LiveHousePanel({
@@ -50,14 +51,13 @@ class LiveHousePanel extends ConsumerWidget {
                       ? DecorationImage(
                           image: NetworkImage(liveHouse.imageUrl),
                           fit: BoxFit.cover,
-                          onError: (exception, stackTrace) =>
-                              const DecorationImage(
-                            image: AssetImage("assets/pngs/no_image.png"),
+                          onError: (exception, stackTrace) => Image.asset(
+                            Assets.facility.noImage.path,
                             fit: BoxFit.cover,
                           ),
                         )
-                      : const DecorationImage(
-                          image: AssetImage("assets/pngs/no_image.png"),
+                      : DecorationImage(
+                          image: AssetImage(Assets.facility.noImage.path),
                           fit: BoxFit.cover,
                         ),
                 ),

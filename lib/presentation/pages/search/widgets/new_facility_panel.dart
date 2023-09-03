@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:live_house_nav/gen/assets.gen.dart';
 
 import '../../../../common/hex_color.dart';
 import '../../../../common/text_theme/text_theme.dart';
@@ -20,7 +21,10 @@ class NewFacilityPanel extends ConsumerWidget {
             width: size.width / 2.7,
             height: size.width / 2.7,
             decoration: BoxDecoration(
-              color: Colors.red,
+              image: DecorationImage(
+                image: AssetImage(Assets.facility.liveHouse.path),
+                fit: BoxFit.cover,
+              ),
               borderRadius: BorderRadius.circular(7),
             ),
           ),
