@@ -20,25 +20,25 @@ class MapNotifier extends _$MapNotifier {
   }
 
   Future<void> setCamera(List<LiveHouse> testList) async {
-    // final double north =
-    //     testList.map((e) => e.geometry.location.lat).reduce(max);
-    // final double south =
-    //     testList.map((e) => e.geometry.location.lat).reduce(min);
-    // final double east =
-    //     testList.map((e) => e.geometry.location.lng).reduce(max);
-    // final double west =
-    //     testList.map((e) => e.geometry.location.lng).reduce(min);
+    final double north =
+        testList.map((e) => e.geo.geopoint.latitude).reduce(max);
+    final double south =
+        testList.map((e) => e.geo.geopoint.latitude).reduce(min);
+    final double east =
+        testList.map((e) => e.geo.geopoint.longitude).reduce(max);
+    final double west =
+        testList.map((e) => e.geo.geopoint.longitude).reduce(min);
 
-    // await state.controller!.animateCamera(
-    //   CameraUpdate.newLatLngBounds(
-    //     LatLngBounds(
-    //       southwest: LatLng(south, west),
-    //       northeast: LatLng(north, east),
-    //     ),
-    //     60,
-    //   ),
-    // );
-    // state = state.copyWith(isCameraMoved: false);
+    await state.controller!.animateCamera(
+      CameraUpdate.newLatLngBounds(
+        LatLngBounds(
+          southwest: LatLng(south, west),
+          northeast: LatLng(north, east),
+        ),
+        60,
+      ),
+    );
+    state = state.copyWith(isCameraMoved: false);
   }
 
   void onCameraMoveStarted() {
@@ -47,5 +47,19 @@ class MapNotifier extends _$MapNotifier {
 
   void onCameraMove(LatLng latLng) {
     state = state.copyWith(latLng: latLng);
+  }
+
+  void setPreviousValue(
+    LatLng latLng,
+    double radiusInKm,
+  ) {
+    state = state.copyWith(
+      previousLatLng: latLng,
+      previousRadiusInKm: radiusInKm,
+    );
+  }
+
+  void setRadiusInKm(double radiusInKm) {
+    state = state.copyWith(radiusInKm: radiusInKm);
   }
 }

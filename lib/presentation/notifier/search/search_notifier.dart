@@ -4,26 +4,35 @@ import 'package:live_house_nav/domain/live_house/live_house_service.dart';
 
 import '../../../domain/live_house/value/live_house/live_house.dart';
 
-final searchNotifierProvider =
-    StateNotifierProvider.autoDispose<SearchNotifier, List<LiveHouse>>(
+final searchNotifierProvider = StateNotifierProvider
+    .autoDispose<SearchNotifier, AsyncValue<List<LiveHouse>>>(
         (ref) => SearchNotifier(
               liveHouseService: ref.read(liveHouseServiceProvider),
             ));
 
-class SearchNotifier extends StateNotifier<List<LiveHouse>> {
-  SearchNotifier({required this.liveHouseService}) : super([]);
+class SearchNotifier extends StateNotifier<AsyncValue<List<LiveHouse>>> {
+  SearchNotifier({required this.liveHouseService})
+      : super(const AsyncLoading());
   final LiveHouseService liveHouseService;
 
-  void featchQueryLiveHouseList(String queryString) {
-    liveHouseService.subscribeQueryLiveHouseList(queryString).listen((event) {
-      final list = event.map((e) => e.data()!).toList();
-      state = list;
-    });
-    debugPrint(state.toString());
+  void clearState() {
+    state = const AsyncData([]);
   }
 
-  void clearState() {
-    state = [];
+  Future<void> featchLiveHouseFromQuery(
+    List<String> facilityValue,
+    List<String> prefectureValue,
+  ) async {
+    final result = await liveHouseService.featchLiveHouseFromQuery(
+      prefectureValue,
+    );
+
+    final queryLiveHoues = facilityValue.isNotEmpty
+        ? result
+            .where((element) => facilityValue.contains(element.facilityType))
+            .toList()
+        : result;
+    state = AsyncData(queryLiveHoues);
   }
 
   final prefectureList = [

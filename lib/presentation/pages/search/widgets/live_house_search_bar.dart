@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../common/hex_color.dart';
-import '../../../../common/text_theme/text_theme.dart';
-import '../../../notifier/search/search_notifier.dart';
+
+import '../../../notifier/text_search/text_search_notifier.dart';
 
 class LiveHouseSearchBar extends ConsumerWidget {
   const LiveHouseSearchBar({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textTheme = ref.watch(myTextThemeProvider);
-    final searchLiveHouseCTL = ref.watch(searchNotifierProvider.notifier);
     final size = MediaQuery.of(context).size;
     final searchTextController = TextEditingController(text: "");
-
+    final textSearchLiveHouseCTL =
+        ref.watch(textSearchNotifierProvider.notifier);
     return Container(
       width: size.width,
       height: 50,
@@ -38,16 +36,15 @@ class LiveHouseSearchBar extends ConsumerWidget {
               ),
               autofocus: false,
               onChanged: (text) async {
-                if (text.isNotEmpty) {
-                  searchLiveHouseCTL.featchQueryLiveHouseList(text);
-                }
+                textSearchLiveHouseCTL.searchLiveHoue(text);
               },
+              controller: searchTextController,
             ),
           ),
           InkWell(
             onTap: () {
-              searchLiveHouseCTL.clearState();
               searchTextController.text = "";
+              textSearchLiveHouseCTL.clearState();
             },
             child: const Padding(
               padding: EdgeInsets.all(8.0),

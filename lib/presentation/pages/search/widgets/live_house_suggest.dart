@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import '../../../../common/go_router_provider/routes/routes.dart';
 import '../../../../common/hex_color.dart';
 import '../../../../common/text_theme/text_theme.dart';
-import '../../../../domain/live_house/value/live_house/live_house.dart';
+import '../../../../domain/text_search/value/text_search.dart';
 
 class LiveHouseSuggest extends ConsumerWidget {
   const LiveHouseSuggest({
     super.key,
     required this.textSearch,
   });
-  final LiveHouse textSearch;
+  final TextSearch textSearch;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,11 +22,11 @@ class LiveHouseSuggest extends ConsumerWidget {
         primaryFocus?.unfocus();
         context.pushNamed(
           Routes.name().liveHouseDetail,
-          extra: textSearch.placeId,
+          extra: textSearch.place_id,
         );
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 3),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,8 +37,9 @@ class LiveHouseSuggest extends ConsumerWidget {
                 color: HexColor("EFEFEF"),
               ),
             ),
-            const SizedBox(height: 2),
+            const SizedBox(height: 7),
             Divider(
+              height: 1,
               color: HexColor("9E9E9E"),
             )
           ],

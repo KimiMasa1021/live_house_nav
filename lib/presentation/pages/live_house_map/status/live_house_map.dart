@@ -7,6 +7,9 @@ class LiveHouseMap with _$LiveHouseMap {
   factory LiveHouseMap({
     @Default(null) GoogleMapController? controller,
     @Default(false) bool isCameraMoved,
+    @Default(null) LatLng? previousLatLng,
     @Default(null) LatLng? latLng,
+    @Default(10.0) double radiusInKm,
+    @Default(10.0) double previousRadiusInKm,
   }) = _LiveHouseMap;
 }

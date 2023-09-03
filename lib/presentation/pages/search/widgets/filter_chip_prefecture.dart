@@ -3,14 +3,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/hex_color.dart';
 
-import '../../../../common/text_theme/text_theme.dart';
-
-class LiveHousefilterChip extends HookConsumerWidget {
-  const LiveHousefilterChip({
+class FilterChipPrefecture extends HookConsumerWidget {
+  const FilterChipPrefecture({
     super.key,
-    required this.filterText,
+    required this.prefecture,
+    required this.prefectureValue,
   });
-  final String filterText;
+  final String prefecture;
+  final ValueNotifier<List<String>> prefectureValue;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isSeleced = useState(false);
@@ -18,7 +19,15 @@ class LiveHousefilterChip extends HookConsumerWidget {
 
     return InkWell(
       onTap: () {
-        isSeleced.value = !isSeleced.value;
+        if (isSeleced.value) {
+          isSeleced.value = false;
+          final newList = prefectureValue.value;
+          newList.remove(prefecture);
+          prefectureValue.value = newList;
+        } else {
+          isSeleced.value = true;
+          prefectureValue.value = [...prefectureValue.value, prefecture];
+        }
       },
       child: Container(
         width: size.width / 3,
@@ -42,7 +51,7 @@ class LiveHousefilterChip extends HookConsumerWidget {
                 : [],
           ),
           child: Center(
-            child: Text(filterText),
+            child: Text(prefecture),
           ),
         ),
       ),

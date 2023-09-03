@@ -24,6 +24,9 @@ mixin _$LiveHouse {
   String get name => throw _privateConstructorUsedError;
   String get vicinity => throw _privateConstructorUsedError;
   String get imageUrl => throw _privateConstructorUsedError;
+  double get distance => throw _privateConstructorUsedError;
+  String get prefectureValue => throw _privateConstructorUsedError;
+  String get facilityType => throw _privateConstructorUsedError;
   Geo get geo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -38,7 +41,14 @@ abstract class $LiveHouseCopyWith<$Res> {
       _$LiveHouseCopyWithImpl<$Res, LiveHouse>;
   @useResult
   $Res call(
-      {String placeId, String name, String vicinity, String imageUrl, Geo geo});
+      {String placeId,
+      String name,
+      String vicinity,
+      String imageUrl,
+      double distance,
+      String prefectureValue,
+      String facilityType,
+      Geo geo});
 
   $GeoCopyWith<$Res> get geo;
 }
@@ -60,6 +70,9 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
     Object? name = null,
     Object? vicinity = null,
     Object? imageUrl = null,
+    Object? distance = null,
+    Object? prefectureValue = null,
+    Object? facilityType = null,
     Object? geo = null,
   }) {
     return _then(_value.copyWith(
@@ -78,6 +91,18 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
       imageUrl: null == imageUrl
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      distance: null == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double,
+      prefectureValue: null == prefectureValue
+          ? _value.prefectureValue
+          : prefectureValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      facilityType: null == facilityType
+          ? _value.facilityType
+          : facilityType // ignore: cast_nullable_to_non_nullable
               as String,
       geo: null == geo
           ? _value.geo
@@ -103,7 +128,14 @@ abstract class _$$_LiveHouseCopyWith<$Res> implements $LiveHouseCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String placeId, String name, String vicinity, String imageUrl, Geo geo});
+      {String placeId,
+      String name,
+      String vicinity,
+      String imageUrl,
+      double distance,
+      String prefectureValue,
+      String facilityType,
+      Geo geo});
 
   @override
   $GeoCopyWith<$Res> get geo;
@@ -124,6 +156,9 @@ class __$$_LiveHouseCopyWithImpl<$Res>
     Object? name = null,
     Object? vicinity = null,
     Object? imageUrl = null,
+    Object? distance = null,
+    Object? prefectureValue = null,
+    Object? facilityType = null,
     Object? geo = null,
   }) {
     return _then(_$_LiveHouse(
@@ -143,6 +178,18 @@ class __$$_LiveHouseCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String,
+      distance: null == distance
+          ? _value.distance
+          : distance // ignore: cast_nullable_to_non_nullable
+              as double,
+      prefectureValue: null == prefectureValue
+          ? _value.prefectureValue
+          : prefectureValue // ignore: cast_nullable_to_non_nullable
+              as String,
+      facilityType: null == facilityType
+          ? _value.facilityType
+          : facilityType // ignore: cast_nullable_to_non_nullable
+              as String,
       geo: null == geo
           ? _value.geo
           : geo // ignore: cast_nullable_to_non_nullable
@@ -159,6 +206,9 @@ class _$_LiveHouse implements _LiveHouse {
       this.name = "",
       this.vicinity = "",
       this.imageUrl = "",
+      this.distance = 0.0,
+      this.prefectureValue = "",
+      this.facilityType = "",
       required this.geo});
 
   factory _$_LiveHouse.fromJson(Map<String, dynamic> json) =>
@@ -177,11 +227,20 @@ class _$_LiveHouse implements _LiveHouse {
   @JsonKey()
   final String imageUrl;
   @override
+  @JsonKey()
+  final double distance;
+  @override
+  @JsonKey()
+  final String prefectureValue;
+  @override
+  @JsonKey()
+  final String facilityType;
+  @override
   final Geo geo;
 
   @override
   String toString() {
-    return 'LiveHouse(placeId: $placeId, name: $name, vicinity: $vicinity, imageUrl: $imageUrl, geo: $geo)';
+    return 'LiveHouse(placeId: $placeId, name: $name, vicinity: $vicinity, imageUrl: $imageUrl, distance: $distance, prefectureValue: $prefectureValue, facilityType: $facilityType, geo: $geo)';
   }
 
   @override
@@ -195,13 +254,19 @@ class _$_LiveHouse implements _LiveHouse {
                 other.vicinity == vicinity) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
+            (identical(other.distance, distance) ||
+                other.distance == distance) &&
+            (identical(other.prefectureValue, prefectureValue) ||
+                other.prefectureValue == prefectureValue) &&
+            (identical(other.facilityType, facilityType) ||
+                other.facilityType == facilityType) &&
             (identical(other.geo, geo) || other.geo == geo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, placeId, name, vicinity, imageUrl, geo);
+  int get hashCode => Object.hash(runtimeType, placeId, name, vicinity,
+      imageUrl, distance, prefectureValue, facilityType, geo);
 
   @JsonKey(ignore: true)
   @override
@@ -223,6 +288,9 @@ abstract class _LiveHouse implements LiveHouse {
       final String name,
       final String vicinity,
       final String imageUrl,
+      final double distance,
+      final String prefectureValue,
+      final String facilityType,
       required final Geo geo}) = _$_LiveHouse;
 
   factory _LiveHouse.fromJson(Map<String, dynamic> json) =
@@ -236,6 +304,12 @@ abstract class _LiveHouse implements LiveHouse {
   String get vicinity;
   @override
   String get imageUrl;
+  @override
+  double get distance;
+  @override
+  String get prefectureValue;
+  @override
+  String get facilityType;
   @override
   Geo get geo;
   @override

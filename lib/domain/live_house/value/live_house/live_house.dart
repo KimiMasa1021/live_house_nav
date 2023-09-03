@@ -12,6 +12,9 @@ class LiveHouse with _$LiveHouse {
     @Default("") String name,
     @Default("") String vicinity,
     @Default("") String imageUrl,
+    @Default(0.0) double distance,
+    @Default("") String prefectureValue,
+    @Default("") String facilityType,
     required Geo geo,
   }) = _LiveHouse;
 

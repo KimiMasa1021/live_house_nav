@@ -2,9 +2,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/domain/live_house/value/live_house/live_house.dart';
+import 'package:live_house_nav/presentation/notifier/map/map_notifier.dart';
 
 final _stream = StreamController<List<LiveHouse>>();
 final _db = FirebaseFirestore.instance;
@@ -34,10 +36,39 @@ class LiveHouseNotifier extends StateNotifier<AsyncValue<List<LiveHouse>>> {
   LiveHouseNotifier(this.ref, {required this.initialPosition})
       : super(const AsyncLoading()) {
     Future(() async {
-      final result = await featchLiveHouseList(
-          GeoPoint(initialPosition.latitude, initialPosition.longitude));
-      state = AsyncData(result);
+      await test(initialPosition);
     });
+  }
+
+  Future<void> test(LatLng latLng) async {
+    final result = await featchLiveHouseList(
+      GeoPoint(
+        latLng.latitude,
+        latLng.longitude,
+      ),
+    );
+
+    result.asMap().entries.map((e) {
+      final distance = Geolocator.distanceBetween(
+        initialPosition.latitude,
+        initialPosition.longitude,
+        e.value.geo.geopoint.latitude,
+        e.value.geo.geopoint.longitude,
+      );
+      result[e.key] = result[e.key].copyWith(distance: distance);
+    }).toList();
+
+    result.sort(((a, b) => a.distance.compareTo(b.distance)));
+
+    state = AsyncData(result);
+    final mapNotifier = ref.read(mapNotifierProvider.notifier);
+
+    final mapState = ref.read(mapNotifierProvider);
+    mapNotifier.setPreviousValue(
+      latLng,
+      mapState.radiusInKm,
+    );
+    await mapNotifier.setCamera(result);
   }
 
   final CollectionReference<LiveHouse> collectionReference = _db
@@ -48,10 +79,12 @@ class LiveHouseNotifier extends StateNotifier<AsyncValue<List<LiveHouse>>> {
       );
 
   Future<List<LiveHouse>> featchLiveHouseList(GeoPoint point) async {
+    final mapNotifier = ref.read(mapNotifierProvider);
+
     final snapshot =
         await GeoCollectionReference(collectionReference).fetchWithin(
       center: GeoFirePoint(point),
-      radiusInKm: 50,
+      radiusInKm: mapNotifier.radiusInKm,
       field: 'geo',
       geopointFrom: (data) => data.geo.geopoint,
       strictMode: true,

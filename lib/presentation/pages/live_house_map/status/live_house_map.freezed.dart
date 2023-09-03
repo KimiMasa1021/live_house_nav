@@ -18,7 +18,10 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LiveHouseMap {
   GoogleMapController? get controller => throw _privateConstructorUsedError;
   bool get isCameraMoved => throw _privateConstructorUsedError;
+  LatLng? get previousLatLng => throw _privateConstructorUsedError;
   LatLng? get latLng => throw _privateConstructorUsedError;
+  double get radiusInKm => throw _privateConstructorUsedError;
+  double get previousRadiusInKm => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $LiveHouseMapCopyWith<LiveHouseMap> get copyWith =>
@@ -32,7 +35,12 @@ abstract class $LiveHouseMapCopyWith<$Res> {
       _$LiveHouseMapCopyWithImpl<$Res, LiveHouseMap>;
   @useResult
   $Res call(
-      {GoogleMapController? controller, bool isCameraMoved, LatLng? latLng});
+      {GoogleMapController? controller,
+      bool isCameraMoved,
+      LatLng? previousLatLng,
+      LatLng? latLng,
+      double radiusInKm,
+      double previousRadiusInKm});
 }
 
 /// @nodoc
@@ -50,7 +58,10 @@ class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
   $Res call({
     Object? controller = freezed,
     Object? isCameraMoved = null,
+    Object? previousLatLng = freezed,
     Object? latLng = freezed,
+    Object? radiusInKm = null,
+    Object? previousRadiusInKm = null,
   }) {
     return _then(_value.copyWith(
       controller: freezed == controller
@@ -61,10 +72,22 @@ class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
           ? _value.isCameraMoved
           : isCameraMoved // ignore: cast_nullable_to_non_nullable
               as bool,
+      previousLatLng: freezed == previousLatLng
+          ? _value.previousLatLng
+          : previousLatLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
       latLng: freezed == latLng
           ? _value.latLng
           : latLng // ignore: cast_nullable_to_non_nullable
               as LatLng?,
+      radiusInKm: null == radiusInKm
+          ? _value.radiusInKm
+          : radiusInKm // ignore: cast_nullable_to_non_nullable
+              as double,
+      previousRadiusInKm: null == previousRadiusInKm
+          ? _value.previousRadiusInKm
+          : previousRadiusInKm // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -78,7 +101,12 @@ abstract class _$$_LiveHouseMapCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {GoogleMapController? controller, bool isCameraMoved, LatLng? latLng});
+      {GoogleMapController? controller,
+      bool isCameraMoved,
+      LatLng? previousLatLng,
+      LatLng? latLng,
+      double radiusInKm,
+      double previousRadiusInKm});
 }
 
 /// @nodoc
@@ -94,7 +122,10 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
   $Res call({
     Object? controller = freezed,
     Object? isCameraMoved = null,
+    Object? previousLatLng = freezed,
     Object? latLng = freezed,
+    Object? radiusInKm = null,
+    Object? previousRadiusInKm = null,
   }) {
     return _then(_$_LiveHouseMap(
       controller: freezed == controller
@@ -105,10 +136,22 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
           ? _value.isCameraMoved
           : isCameraMoved // ignore: cast_nullable_to_non_nullable
               as bool,
+      previousLatLng: freezed == previousLatLng
+          ? _value.previousLatLng
+          : previousLatLng // ignore: cast_nullable_to_non_nullable
+              as LatLng?,
       latLng: freezed == latLng
           ? _value.latLng
           : latLng // ignore: cast_nullable_to_non_nullable
               as LatLng?,
+      radiusInKm: null == radiusInKm
+          ? _value.radiusInKm
+          : radiusInKm // ignore: cast_nullable_to_non_nullable
+              as double,
+      previousRadiusInKm: null == previousRadiusInKm
+          ? _value.previousRadiusInKm
+          : previousRadiusInKm // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -117,7 +160,12 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
 
 class _$_LiveHouseMap implements _LiveHouseMap {
   _$_LiveHouseMap(
-      {this.controller = null, this.isCameraMoved = false, this.latLng = null});
+      {this.controller = null,
+      this.isCameraMoved = false,
+      this.previousLatLng = null,
+      this.latLng = null,
+      this.radiusInKm = 10.0,
+      this.previousRadiusInKm = 10.0});
 
   @override
   @JsonKey()
@@ -127,11 +175,20 @@ class _$_LiveHouseMap implements _LiveHouseMap {
   final bool isCameraMoved;
   @override
   @JsonKey()
+  final LatLng? previousLatLng;
+  @override
+  @JsonKey()
   final LatLng? latLng;
+  @override
+  @JsonKey()
+  final double radiusInKm;
+  @override
+  @JsonKey()
+  final double previousRadiusInKm;
 
   @override
   String toString() {
-    return 'LiveHouseMap(controller: $controller, isCameraMoved: $isCameraMoved, latLng: $latLng)';
+    return 'LiveHouseMap(controller: $controller, isCameraMoved: $isCameraMoved, previousLatLng: $previousLatLng, latLng: $latLng, radiusInKm: $radiusInKm, previousRadiusInKm: $previousRadiusInKm)';
   }
 
   @override
@@ -143,12 +200,18 @@ class _$_LiveHouseMap implements _LiveHouseMap {
                 other.controller == controller) &&
             (identical(other.isCameraMoved, isCameraMoved) ||
                 other.isCameraMoved == isCameraMoved) &&
-            (identical(other.latLng, latLng) || other.latLng == latLng));
+            (identical(other.previousLatLng, previousLatLng) ||
+                other.previousLatLng == previousLatLng) &&
+            (identical(other.latLng, latLng) || other.latLng == latLng) &&
+            (identical(other.radiusInKm, radiusInKm) ||
+                other.radiusInKm == radiusInKm) &&
+            (identical(other.previousRadiusInKm, previousRadiusInKm) ||
+                other.previousRadiusInKm == previousRadiusInKm));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, controller, isCameraMoved, latLng);
+  int get hashCode => Object.hash(runtimeType, controller, isCameraMoved,
+      previousLatLng, latLng, radiusInKm, previousRadiusInKm);
 
   @JsonKey(ignore: true)
   @override
@@ -161,14 +224,23 @@ abstract class _LiveHouseMap implements LiveHouseMap {
   factory _LiveHouseMap(
       {final GoogleMapController? controller,
       final bool isCameraMoved,
-      final LatLng? latLng}) = _$_LiveHouseMap;
+      final LatLng? previousLatLng,
+      final LatLng? latLng,
+      final double radiusInKm,
+      final double previousRadiusInKm}) = _$_LiveHouseMap;
 
   @override
   GoogleMapController? get controller;
   @override
   bool get isCameraMoved;
   @override
+  LatLng? get previousLatLng;
+  @override
   LatLng? get latLng;
+  @override
+  double get radiusInKm;
+  @override
+  double get previousRadiusInKm;
   @override
   @JsonKey(ignore: true)
   _$$_LiveHouseMapCopyWith<_$_LiveHouseMap> get copyWith =>

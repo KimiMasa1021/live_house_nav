@@ -7,11 +7,9 @@ import '../../common/go_router_provider/routes/routes.dart';
 import 'widgets/custom_bottom_bar.dart';
 
 class PageRoot extends HookConsumerWidget {
-  final Widget child;
-
   const PageRoot({
     super.key,
-    required this.child,
+    required this.navigationShell,
   });
 
   Icon getDecaratedIcon(
@@ -31,15 +29,17 @@ class PageRoot extends HookConsumerWidget {
     );
   }
 
+  final StatefulNavigationShell navigationShell;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentIndex = useState(0);
 
     return Scaffold(
-      body: child,
+      body: navigationShell,
       bottomNavigationBar: CustomBottomBar(
         backgroundColor: HexColor("111111"),
-        currentIndex: currentIndex.value,
+        currentIndex: navigationShell.currentIndex,
         items: [
           BottomNavigationBarItem(
             icon: getDecaratedIcon(Icons.home_outlined),
@@ -63,30 +63,36 @@ class PageRoot extends HookConsumerWidget {
             activeIcon: getDecaratedIcon(Icons.settings, isDisableEffect: true),
           ),
         ],
-        onTap: (int index) {
-          switch (index) {
-            case 0:
-              context.go(Routes.path().liveHouseMap);
-              currentIndex.value = index;
-              break;
-            case 1:
-              context.go(Routes.path().searchPage);
+        // onTap: (int index) {
+        //   switch (index) {
+        //     case 0:
+        //       context.go(Routes.path().liveHouseMap);
+        //       currentIndex.value = index;
+        //       break;
+        //     case 1:
+        //       context.go(Routes.path().searchPage);
 
-              currentIndex.value = index;
-              break;
-            case 2:
-              context.go(Routes.path().addArticles);
-              currentIndex.value = index;
-              break;
-            case 3:
-              context.go(Routes.path().articlesList);
-              currentIndex.value = index;
-              break;
-            case 4:
-              context.go(Routes.path().setting);
-              currentIndex.value = index;
-              break;
-          }
+        //       currentIndex.value = index;
+        //       break;
+        //     case 2:
+        //       context.go(Routes.path().addArticles);
+        //       currentIndex.value = index;
+        //       break;
+        //     case 3:
+        //       context.go(Routes.path().articlesList);
+        //       currentIndex.value = index;
+        //       break;
+        //     case 4:
+        //       context.go(Routes.path().setting);
+        //       currentIndex.value = index;
+        //       break;
+        //   }
+        // },
+        onTap: (index) {
+          navigationShell.goBranch(
+            index,
+            initialLocation: index == navigationShell.currentIndex,
+          );
         },
       ),
     );
