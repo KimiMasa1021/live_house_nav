@@ -8,6 +8,7 @@ import 'package:live_house_nav/presentation/pages/live_house_detail/live_house_d
 import 'package:live_house_nav/presentation/pages/search/search_page.dart';
 import 'package:live_house_nav/presentation/pages/search_result/search_result_page.dart';
 import 'package:live_house_nav/presentation/pages/setting/setting_page.dart';
+import 'package:live_house_nav/presentation/pages/text_search/text_search_page.dart';
 import '../../presentation/pages/live_house_map/live_house_map_page.dart';
 import '../../presentation/pages/page_root.dart';
 import 'routes/routes.dart';
@@ -92,6 +93,7 @@ final routerProvider = Provider(
                   GoRoute(
                     path: Routes.path().searchResult,
                     name: Routes.name().searchResult,
+                    parentNavigatorKey: _rootNavigatorKey,
                     pageBuilder: (context, state) {
                       final query = state.extra as Map<String, dynamic>;
 
@@ -99,7 +101,6 @@ final routerProvider = Provider(
                         child: SearchResultPage(
                           key: state.pageKey,
                           facilityValue: query["facilityValue"],
-                          prefectureValue: query["prefectureValue"],
                         ),
                       );
                     },
@@ -135,6 +136,18 @@ final routerProvider = Provider(
                         ],
                       ),
                     ],
+                  ),
+                  GoRoute(
+                    path: Routes.path().textSearch,
+                    name: Routes.name().textSearch,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) {
+                      return NoTransitionPage(
+                        child: TextSearchPage(
+                          key: state.pageKey,
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

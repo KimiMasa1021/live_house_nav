@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/hex_color.dart';
 
 import '../../../../common/text_theme/text_theme.dart';
+import '../../../../constant/facility_type.dart';
 import '../search_page.dart';
 
 class FilterChipFacility extends HookConsumerWidget {

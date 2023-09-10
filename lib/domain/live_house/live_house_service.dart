@@ -30,11 +30,9 @@ class LiveHouseService {
     return await result.asFuture.then((value) => value);
   }
 
-  Future<List<LiveHouse>> featchLiveHouseFromQuery(
-    List<String> prefectureValue,
-  ) {
+  Future<List<LiveHouse>> featchLiveHouseFromQuery() {
     return _liveHouseRepository.featchLiveHouseFromQuery(
-      prefectureValue,
+      [],
     );
   }
 }

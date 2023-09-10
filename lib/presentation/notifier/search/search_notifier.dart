@@ -1,38 +1,24 @@
-import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/domain/live_house/live_house_service.dart';
-
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/live_house/value/live_house/live_house.dart';
 
-final searchNotifierProvider = StateNotifierProvider
-    .autoDispose<SearchNotifier, AsyncValue<List<LiveHouse>>>(
-        (ref) => SearchNotifier(
-              liveHouseService: ref.read(liveHouseServiceProvider),
-            ));
+part 'search_notifier.g.dart';
 
-class SearchNotifier extends StateNotifier<AsyncValue<List<LiveHouse>>> {
-  SearchNotifier({required this.liveHouseService})
-      : super(const AsyncLoading());
-  final LiveHouseService liveHouseService;
-
-  void clearState() {
-    state = const AsyncData([]);
-  }
-
-  Future<void> featchLiveHouseFromQuery(
+@riverpod
+class SearchNotifier extends _$SearchNotifier {
+  @override
+  FutureOr<List<LiveHouse>> build(
     List<String> facilityValue,
-    List<String> prefectureValue,
   ) async {
-    final result = await liveHouseService.featchLiveHouseFromQuery(
-      prefectureValue,
-    );
+    final result =
+        await ref.read(liveHouseServiceProvider).featchLiveHouseFromQuery();
 
     final queryLiveHoues = facilityValue.isNotEmpty
         ? result
             .where((element) => facilityValue.contains(element.facilityType))
             .toList()
         : result;
-    state = AsyncData(queryLiveHoues);
+    return queryLiveHoues;
   }
 
   final prefectureList = [

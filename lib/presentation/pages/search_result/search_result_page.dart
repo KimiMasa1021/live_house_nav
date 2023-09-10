@@ -8,24 +8,18 @@ class SearchResultPage extends ConsumerWidget {
   const SearchResultPage({
     super.key,
     required this.facilityValue,
-    required this.prefectureValue,
   });
   final List<String> facilityValue;
-  final List<String> prefectureValue;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchNotifierCTL = ref.watch(searchNotifierProvider.notifier)
-      ..featchLiveHouseFromQuery(
-        facilityValue,
-        prefectureValue,
-      );
-    final searchNotifier = ref.watch(searchNotifierProvider);
+    final searchNotifier = ref.watch(searchNotifierProvider(facilityValue));
 
     return Scaffold(
       appBar: AppBar(),
       body: searchNotifier.when(
         data: (data) {
+          debugPrint(data.toString());
           return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),

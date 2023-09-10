@@ -7,7 +7,7 @@ import '../../../domain/live_house/value/live_house/live_house.dart';
 import '../../pages/live_house_map/status/live_house_map.dart';
 part 'map_notifier.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class MapNotifier extends _$MapNotifier {
   @override
   LiveHouseMap build() => LiveHouseMap();

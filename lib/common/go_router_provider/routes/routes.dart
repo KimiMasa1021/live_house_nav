@@ -9,6 +9,7 @@ class Routes {
   final String searchResult;
   final String searchResultDetail;
   final String searchResultImagePreview;
+  final String textSearch;
 
   Routes({
     required this.liveHouseMap,
@@ -21,6 +22,7 @@ class Routes {
     required this.searchResult,
     required this.searchResultDetail,
     required this.searchResultImagePreview,
+    required this.textSearch,
   });
 
   factory Routes.path() {
@@ -35,6 +37,7 @@ class Routes {
       searchResult: "search_result",
       searchResultDetail: "search_result_detail",
       searchResultImagePreview: "search_result_image_preview",
+      textSearch: "text_search",
     );
   }
 
@@ -50,6 +53,7 @@ class Routes {
       searchResult: "searchResult",
       searchResultDetail: "SearchResultDetail",
       searchResultImagePreview: "searchResultImagePreview",
+      textSearch: "textSearch",
     );
   }
 }

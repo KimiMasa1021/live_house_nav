@@ -30,8 +30,6 @@ class _SystemHash {
   }
 }
 
-typedef FeatchLiveHouseDetailRef = FutureProviderRef<LiveHouseDetail>;
-
 /// See also [featchLiveHouseDetail].
 @ProviderFor(featchLiveHouseDetail)
 const featchLiveHouseDetailProvider = FeatchLiveHouseDetailFamily();
@@ -78,10 +76,10 @@ class FeatchLiveHouseDetailFamily extends Family<AsyncValue<LiveHouseDetail>> {
 class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
   /// See also [featchLiveHouseDetail].
   FeatchLiveHouseDetailProvider({
-    required this.priceId,
-  }) : super.internal(
+    required String priceId,
+  }) : this._internal(
           (ref) => featchLiveHouseDetail(
-            ref,
+            ref as FeatchLiveHouseDetailRef,
             priceId: priceId,
           ),
           from: featchLiveHouseDetailProvider,
@@ -93,9 +91,44 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
           dependencies: FeatchLiveHouseDetailFamily._dependencies,
           allTransitiveDependencies:
               FeatchLiveHouseDetailFamily._allTransitiveDependencies,
+          priceId: priceId,
         );
 
+  FeatchLiveHouseDetailProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.priceId,
+  }) : super.internal();
+
   final String priceId;
+
+  @override
+  Override overrideWith(
+    FutureOr<LiveHouseDetail> Function(FeatchLiveHouseDetailRef provider)
+        create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: FeatchLiveHouseDetailProvider._internal(
+        (ref) => create(ref as FeatchLiveHouseDetailRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        priceId: priceId,
+      ),
+    );
+  }
+
+  @override
+  FutureProviderElement<LiveHouseDetail> createElement() {
+    return _FeatchLiveHouseDetailProviderElement(this);
+  }
 
   @override
   bool operator ==(Object other) {
@@ -110,5 +143,19 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
     return _SystemHash.finish(hash);
   }
 }
+
+mixin FeatchLiveHouseDetailRef on FutureProviderRef<LiveHouseDetail> {
+  /// The parameter `priceId` of this provider.
+  String get priceId;
+}
+
+class _FeatchLiveHouseDetailProviderElement
+    extends FutureProviderElement<LiveHouseDetail>
+    with FeatchLiveHouseDetailRef {
+  _FeatchLiveHouseDetailProviderElement(super.provider);
+
+  @override
+  String get priceId => (origin as FeatchLiveHouseDetailProvider).priceId;
+}
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -5,8 +5,6 @@ class SettingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Text("設定"),
-    );
+    return const Placeholder();
   }
 }
