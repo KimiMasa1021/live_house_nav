@@ -23,10 +23,7 @@ class GenrePanel extends ConsumerWidget {
       onTap: () {
         context.pushNamed(
           Routes.name().searchResult,
-          extra: {
-            "facilityValue": [facilityType.name],
-            "prefectureValue": [],
-          },
+          extra: facilityType.name,
         );
       },
       child: Container(

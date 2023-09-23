@@ -7,7 +7,6 @@ import 'package:live_house_nav/presentation/notifier/live_house_detail/live_houe
 import 'package:live_house_nav/presentation/pages/live_house_detail/widgets/openning_hours_panel.dart';
 import '../../../common/hex_color.dart';
 import '../../../common/text_theme/text_theme.dart';
-import '../../../domain/live_house/value/live_house/live_house.dart';
 import 'widgets/facility_info_link.dart';
 import 'widgets/sticky_tab_bar_delegate.dart';
 

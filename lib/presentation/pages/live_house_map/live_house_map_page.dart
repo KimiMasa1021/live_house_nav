@@ -64,6 +64,11 @@ class LiveHouseMapPage extends HookConsumerWidget {
                   data: (data) => data
                       .map(
                         (e) => Marker(
+                          onTap: () {
+                            final index =
+                                data.indexWhere((facility) => facility == e);
+                            pageController.jumpToPage(index);
+                          },
                           markerId: MarkerId(e.placeId),
                           position: LatLng(
                             e.geo.geopoint.latitude,
@@ -118,7 +123,8 @@ class LiveHouseMapPage extends HookConsumerWidget {
                             await newMethodsLiveCTL.test(liveHouseMap.latLng!);
                           },
                           backgroundColor: HexColor("131313"),
-                          child: Icon(Icons.youtube_searched_for_outlined),
+                          child:
+                              const Icon(Icons.youtube_searched_for_outlined),
                         ),
                       ),
                     )

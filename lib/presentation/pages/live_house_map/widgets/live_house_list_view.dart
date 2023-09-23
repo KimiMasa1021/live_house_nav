@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../notifier/live_house/live_house_notifier.dart';
+import '../../../notifier/map/map_notifier.dart';
 import 'live_house_panel.dart';
 
 class LiveHouseListView extends HookConsumerWidget {
@@ -21,6 +22,8 @@ class LiveHouseListView extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final newMethodsLive = ref.watch(livehouseNotifierProvider(
         LatLng(location.latitude, location.longitude)));
+    final liveHouseMap = ref.watch(mapNotifierProvider);
+
     return newMethodsLive.when(
       data: (liveHoue) {
         return Align(
@@ -31,6 +34,17 @@ class LiveHouseListView extends HookConsumerWidget {
             margin: const EdgeInsets.only(bottom: 15),
             child: PageView(
               controller: pageController,
+              onPageChanged: (val) async {
+                final geo = liveHoue.elementAt(val).geo.geopoint;
+                await liveHouseMap.controller!.animateCamera(
+                  CameraUpdate.newLatLng(
+                    LatLng(
+                      geo.latitude,
+                      geo.longitude,
+                    ),
+                  ),
+                );
+              },
               children: liveHoue.map(
                 (house) {
                   return LiveHousePanel(

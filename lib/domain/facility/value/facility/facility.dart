@@ -1,13 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../geo/geo.dart';
-part 'live_house.freezed.dart';
-part 'live_house.g.dart';
+part 'facility.freezed.dart';
+part 'facility.g.dart';
 
 // flutter pub run build_runner build --delete-conflicting-outputs
 @freezed
-class LiveHouse with _$LiveHouse {
-  factory LiveHouse({
+class Facility with _$Facility {
+  factory Facility({
     @Default("") String placeId,
     @Default("") String name,
     @Default("") String vicinity,
@@ -16,8 +16,8 @@ class LiveHouse with _$LiveHouse {
     @Default("") String prefectureValue,
     @Default("") String facilityType,
     required Geo geo,
-  }) = _LiveHouse;
+  }) = _Facility;
 
-  factory LiveHouse.fromJson(Map<String, dynamic> json) =>
-      _$LiveHouseFromJson(json);
+  factory Facility.fromJson(Map<String, dynamic> json) =>
+      _$FacilityFromJson(json);
 }

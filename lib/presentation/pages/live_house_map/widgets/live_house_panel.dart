@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/common/hex_color.dart';
 import 'package:live_house_nav/common/text_theme/text_theme.dart';
-import '../../../../domain/live_house/value/live_house/live_house.dart';
+import '../../../../domain/facility/value/facility/facility.dart';
 import '../../../../gen/assets.gen.dart';
 
 class LiveHousePanel extends ConsumerWidget {
@@ -12,7 +12,7 @@ class LiveHousePanel extends ConsumerWidget {
     super.key,
     required this.liveHouse,
   });
-  final LiveHouse liveHouse;
+  final Facility liveHouse;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

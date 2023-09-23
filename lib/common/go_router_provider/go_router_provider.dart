@@ -95,12 +95,10 @@ final routerProvider = Provider(
                     name: Routes.name().searchResult,
                     parentNavigatorKey: _rootNavigatorKey,
                     pageBuilder: (context, state) {
-                      final query = state.extra as Map<String, dynamic>;
-
                       return NoTransitionPage(
                         child: SearchResultPage(
                           key: state.pageKey,
-                          facilityValue: query["facilityValue"],
+                          facilityValue: state.extra! as String,
                         ),
                       );
                     },

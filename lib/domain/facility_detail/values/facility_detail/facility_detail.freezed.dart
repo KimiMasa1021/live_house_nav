@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'live_house_detail.dart';
+part of 'facility_detail.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-LiveHouseDetail _$LiveHouseDetailFromJson(Map<String, dynamic> json) {
-  return _LiveHouseDetail.fromJson(json);
+FacilityDetail _$FacilityDetailFromJson(Map<String, dynamic> json) {
+  return _FacilityDetail.fromJson(json);
 }
 
 /// @nodoc
-mixin _$LiveHouseDetail {
+mixin _$FacilityDetail {
   String get name => throw _privateConstructorUsedError;
   String get vicinity => throw _privateConstructorUsedError;
   String get formattedPhoneNumber => throw _privateConstructorUsedError;
@@ -31,15 +31,15 @@ mixin _$LiveHouseDetail {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LiveHouseDetailCopyWith<LiveHouseDetail> get copyWith =>
+  $FacilityDetailCopyWith<FacilityDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LiveHouseDetailCopyWith<$Res> {
-  factory $LiveHouseDetailCopyWith(
-          LiveHouseDetail value, $Res Function(LiveHouseDetail) then) =
-      _$LiveHouseDetailCopyWithImpl<$Res, LiveHouseDetail>;
+abstract class $FacilityDetailCopyWith<$Res> {
+  factory $FacilityDetailCopyWith(
+          FacilityDetail value, $Res Function(FacilityDetail) then) =
+      _$FacilityDetailCopyWithImpl<$Res, FacilityDetail>;
   @useResult
   $Res call(
       {String name,
@@ -55,9 +55,9 @@ abstract class $LiveHouseDetailCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LiveHouseDetailCopyWithImpl<$Res, $Val extends LiveHouseDetail>
-    implements $LiveHouseDetailCopyWith<$Res> {
-  _$LiveHouseDetailCopyWithImpl(this._value, this._then);
+class _$FacilityDetailCopyWithImpl<$Res, $Val extends FacilityDetail>
+    implements $FacilityDetailCopyWith<$Res> {
+  _$FacilityDetailCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -126,11 +126,11 @@ class _$LiveHouseDetailCopyWithImpl<$Res, $Val extends LiveHouseDetail>
 }
 
 /// @nodoc
-abstract class _$$_LiveHouseDetailCopyWith<$Res>
-    implements $LiveHouseDetailCopyWith<$Res> {
-  factory _$$_LiveHouseDetailCopyWith(
-          _$_LiveHouseDetail value, $Res Function(_$_LiveHouseDetail) then) =
-      __$$_LiveHouseDetailCopyWithImpl<$Res>;
+abstract class _$$_FacilityDetailCopyWith<$Res>
+    implements $FacilityDetailCopyWith<$Res> {
+  factory _$$_FacilityDetailCopyWith(
+          _$_FacilityDetail value, $Res Function(_$_FacilityDetail) then) =
+      __$$_FacilityDetailCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -148,11 +148,11 @@ abstract class _$$_LiveHouseDetailCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LiveHouseDetailCopyWithImpl<$Res>
-    extends _$LiveHouseDetailCopyWithImpl<$Res, _$_LiveHouseDetail>
-    implements _$$_LiveHouseDetailCopyWith<$Res> {
-  __$$_LiveHouseDetailCopyWithImpl(
-      _$_LiveHouseDetail _value, $Res Function(_$_LiveHouseDetail) _then)
+class __$$_FacilityDetailCopyWithImpl<$Res>
+    extends _$FacilityDetailCopyWithImpl<$Res, _$_FacilityDetail>
+    implements _$$_FacilityDetailCopyWith<$Res> {
+  __$$_FacilityDetailCopyWithImpl(
+      _$_FacilityDetail _value, $Res Function(_$_FacilityDetail) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -167,7 +167,7 @@ class __$$_LiveHouseDetailCopyWithImpl<$Res>
     Object? imageList = null,
     Object? openingHours = freezed,
   }) {
-    return _then(_$_LiveHouseDetail(
+    return _then(_$_FacilityDetail(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -207,8 +207,8 @@ class __$$_LiveHouseDetailCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_LiveHouseDetail implements _LiveHouseDetail {
-  _$_LiveHouseDetail(
+class _$_FacilityDetail implements _FacilityDetail {
+  _$_FacilityDetail(
       {this.name = "",
       this.vicinity = "",
       this.formattedPhoneNumber = "",
@@ -220,8 +220,8 @@ class _$_LiveHouseDetail implements _LiveHouseDetail {
       : _photos = photos,
         _imageList = imageList;
 
-  factory _$_LiveHouseDetail.fromJson(Map<String, dynamic> json) =>
-      _$$_LiveHouseDetailFromJson(json);
+  factory _$_FacilityDetail.fromJson(Map<String, dynamic> json) =>
+      _$$_FacilityDetailFromJson(json);
 
   @override
   @JsonKey()
@@ -261,14 +261,14 @@ class _$_LiveHouseDetail implements _LiveHouseDetail {
 
   @override
   String toString() {
-    return 'LiveHouseDetail(name: $name, vicinity: $vicinity, formattedPhoneNumber: $formattedPhoneNumber, internationalPhoneNumber: $internationalPhoneNumber, website: $website, photos: $photos, imageList: $imageList, openingHours: $openingHours)';
+    return 'FacilityDetail(name: $name, vicinity: $vicinity, formattedPhoneNumber: $formattedPhoneNumber, internationalPhoneNumber: $internationalPhoneNumber, website: $website, photos: $photos, imageList: $imageList, openingHours: $openingHours)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LiveHouseDetail &&
+            other is _$_FacilityDetail &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.vicinity, vicinity) ||
                 other.vicinity == vicinity) &&
@@ -301,19 +301,19 @@ class _$_LiveHouseDetail implements _LiveHouseDetail {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LiveHouseDetailCopyWith<_$_LiveHouseDetail> get copyWith =>
-      __$$_LiveHouseDetailCopyWithImpl<_$_LiveHouseDetail>(this, _$identity);
+  _$$_FacilityDetailCopyWith<_$_FacilityDetail> get copyWith =>
+      __$$_FacilityDetailCopyWithImpl<_$_FacilityDetail>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LiveHouseDetailToJson(
+    return _$$_FacilityDetailToJson(
       this,
     );
   }
 }
 
-abstract class _LiveHouseDetail implements LiveHouseDetail {
-  factory _LiveHouseDetail(
+abstract class _FacilityDetail implements FacilityDetail {
+  factory _FacilityDetail(
       {final String name,
       final String vicinity,
       final String formattedPhoneNumber,
@@ -321,10 +321,10 @@ abstract class _LiveHouseDetail implements LiveHouseDetail {
       final String website,
       final List<Photo> photos,
       final List<String> imageList,
-      final OpeingHours? openingHours}) = _$_LiveHouseDetail;
+      final OpeingHours? openingHours}) = _$_FacilityDetail;
 
-  factory _LiveHouseDetail.fromJson(Map<String, dynamic> json) =
-      _$_LiveHouseDetail.fromJson;
+  factory _FacilityDetail.fromJson(Map<String, dynamic> json) =
+      _$_FacilityDetail.fromJson;
 
   @override
   String get name;
@@ -344,6 +344,6 @@ abstract class _LiveHouseDetail implements LiveHouseDetail {
   OpeingHours? get openingHours;
   @override
   @JsonKey(ignore: true)
-  _$$_LiveHouseDetailCopyWith<_$_LiveHouseDetail> get copyWith =>
+  _$$_FacilityDetailCopyWith<_$_FacilityDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }

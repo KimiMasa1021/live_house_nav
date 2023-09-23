@@ -3,16 +3,16 @@ import 'package:async/src/result/result.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:live_house_nav/domain/live_house_detail/live_house_detail_repository_base.dart';
-import '../../domain/live_house_detail/values/live_house_detail/live_house_detail.dart';
+import '../../domain/facility_detail/facility_detail_repository_base.dart';
+import '../../domain/facility_detail/values/facility_detail/facility_detail.dart';
 
-final lveHouseDetailRepository = Provider((ref) => LiveHouseDetailRepository());
+final facilityDetailRepository = Provider((ref) => FacilityDetailRepository());
 
-class LiveHouseDetailRepository implements LiveHouseDetailRepositoryBase {
+class FacilityDetailRepository implements FacilityDetailRepositoryBase {
   final headers = {'content-type': 'application/json'};
 
   @override
-  Future<Result<LiveHouseDetail>> featchLiveHouseDetail(Uri uri) async {
+  Future<Result<FacilityDetail>> featchLiveHouseDetail(Uri uri) async {
     try {
       final response = await http.get(uri, headers: headers);
       debugPrint("featchLiveHouse : ${response.statusCode}");
@@ -21,7 +21,7 @@ class LiveHouseDetailRepository implements LiveHouseDetailRepositoryBase {
       } else {
         final jsonResult = jsonDecode(response.body) as Map<String, dynamic>;
 
-        final model = LiveHouseDetail.fromJson(jsonResult["result"]);
+        final model = FacilityDetail.fromJson(jsonResult["result"]);
 
         return Result.value(model);
       }

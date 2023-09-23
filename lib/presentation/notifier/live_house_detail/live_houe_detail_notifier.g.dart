@@ -7,7 +7,7 @@ part of 'live_houe_detail_notifier.dart';
 // **************************************************************************
 
 String _$featchLiveHouseDetailHash() =>
-    r'5bf95b47dbcf4baf4b4a25ce09393f938c83d80d';
+    r'a191736850bdaf9b41b9920e68709bc3b633795e';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -35,7 +35,7 @@ class _SystemHash {
 const featchLiveHouseDetailProvider = FeatchLiveHouseDetailFamily();
 
 /// See also [featchLiveHouseDetail].
-class FeatchLiveHouseDetailFamily extends Family<AsyncValue<LiveHouseDetail>> {
+class FeatchLiveHouseDetailFamily extends Family<AsyncValue<FacilityDetail>> {
   /// See also [featchLiveHouseDetail].
   const FeatchLiveHouseDetailFamily();
 
@@ -73,7 +73,7 @@ class FeatchLiveHouseDetailFamily extends Family<AsyncValue<LiveHouseDetail>> {
 }
 
 /// See also [featchLiveHouseDetail].
-class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
+class FeatchLiveHouseDetailProvider extends FutureProvider<FacilityDetail> {
   /// See also [featchLiveHouseDetail].
   FeatchLiveHouseDetailProvider({
     required String priceId,
@@ -108,8 +108,7 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
 
   @override
   Override overrideWith(
-    FutureOr<LiveHouseDetail> Function(FeatchLiveHouseDetailRef provider)
-        create,
+    FutureOr<FacilityDetail> Function(FeatchLiveHouseDetailRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -126,7 +125,7 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
   }
 
   @override
-  FutureProviderElement<LiveHouseDetail> createElement() {
+  FutureProviderElement<FacilityDetail> createElement() {
     return _FeatchLiveHouseDetailProviderElement(this);
   }
 
@@ -144,13 +143,13 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<LiveHouseDetail> {
   }
 }
 
-mixin FeatchLiveHouseDetailRef on FutureProviderRef<LiveHouseDetail> {
+mixin FeatchLiveHouseDetailRef on FutureProviderRef<FacilityDetail> {
   /// The parameter `priceId` of this provider.
   String get priceId;
 }
 
 class _FeatchLiveHouseDetailProviderElement
-    extends FutureProviderElement<LiveHouseDetail>
+    extends FutureProviderElement<FacilityDetail>
     with FeatchLiveHouseDetailRef {
   _FeatchLiveHouseDetailProviderElement(super.provider);
 

@@ -1,14 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../opening_hours/opening_hours.dart';
 import '../photo/photo.dart';
-part 'live_house_detail.freezed.dart';
-part 'live_house_detail.g.dart';
+part 'facility_detail.freezed.dart';
+part 'facility_detail.g.dart';
 
 // flutter pub run build_runner build --delete-conflicting-outputs
 @freezed
-class LiveHouseDetail with _$LiveHouseDetail {
+class FacilityDetail with _$FacilityDetail {
   @JsonSerializable(fieldRename: FieldRename.snake)
-  factory LiveHouseDetail({
+  factory FacilityDetail({
     @Default("") String name,
     @Default("") String vicinity,
     @Default("") String formattedPhoneNumber,
@@ -17,8 +17,8 @@ class LiveHouseDetail with _$LiveHouseDetail {
     @Default([]) List<Photo> photos,
     @Default([]) List<String> imageList,
     OpeingHours? openingHours,
-  }) = _LiveHouseDetail;
+  }) = _FacilityDetail;
 
-  factory LiveHouseDetail.fromJson(Map<String, dynamic> json) =>
-      _$LiveHouseDetailFromJson(json);
+  factory FacilityDetail.fromJson(Map<String, dynamic> json) =>
+      _$FacilityDetailFromJson(json);
 }

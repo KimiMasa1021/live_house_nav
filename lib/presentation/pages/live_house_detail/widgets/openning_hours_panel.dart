@@ -3,8 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../common/hex_color.dart';
 import '../../../../common/text_theme/text_theme.dart';
-import '../../../../domain/live_house_detail/values/opening_hours/opening_hours.dart';
-import '../../../../domain/live_house_detail/values/store_hours/store_hours.dart';
+import '../../../../domain/facility_detail/values/opening_hours/opening_hours.dart';
+import '../../../../domain/facility_detail/values/store_hours/store_hours.dart';
 
 class OpenningHoursPanel extends ConsumerWidget {
   const OpenningHoursPanel({

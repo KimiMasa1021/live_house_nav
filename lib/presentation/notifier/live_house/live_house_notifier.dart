@@ -1,35 +1,23 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:live_house_nav/domain/live_house/value/live_house/live_house.dart';
+import 'package:live_house_nav/domain/facility/value/facility/facility.dart';
 import 'package:live_house_nav/presentation/notifier/map/map_notifier.dart';
 
-final _stream = StreamController<List<LiveHouse>>();
 final _db = FirebaseFirestore.instance;
 
-class GeoQueryCondition {
-  GeoQueryCondition({
-    required this.radiusInKm,
-    required this.cameraPosition,
-  });
-
-  final double radiusInKm;
-  final CameraPosition cameraPosition;
-}
-
 final livehouseNotifierProvider = StateNotifierProvider.family<
-    LiveHouseNotifier, AsyncValue<List<LiveHouse>>, LatLng>(
+    LiveHouseNotifier, AsyncValue<List<Facility>>, LatLng>(
   (ref, LatLng latLng) => LiveHouseNotifier(
     ref,
     initialPosition: latLng,
   ),
 );
 
-class LiveHouseNotifier extends StateNotifier<AsyncValue<List<LiveHouse>>> {
+class LiveHouseNotifier extends StateNotifier<AsyncValue<List<Facility>>> {
   Ref ref;
   final LatLng initialPosition;
 
@@ -68,17 +56,17 @@ class LiveHouseNotifier extends StateNotifier<AsyncValue<List<LiveHouse>>> {
       latLng,
       mapState.radiusInKm,
     );
-    await mapNotifier.setCamera(result);
+    final focusFacilities = result.take(5).toList();
+    await mapNotifier.setCamera(focusFacilities);
   }
 
-  final CollectionReference<LiveHouse> collectionReference = _db
-      .collection('liveHouses')
-      .withConverter<LiveHouse>(
-        fromFirestore: (snapshot, _) => LiveHouse.fromJson(snapshot.data()!),
-        toFirestore: (data, _) => data.toJson(),
-      );
+  final CollectionReference<Facility> collectionReference =
+      _db.collection('liveHouses').withConverter<Facility>(
+            fromFirestore: (snapshot, _) => Facility.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          );
 
-  Future<List<LiveHouse>> featchLiveHouseList(GeoPoint point) async {
+  Future<List<Facility>> featchLiveHouseList(GeoPoint point) async {
     final mapNotifier = ref.read(mapNotifierProvider);
 
     final snapshot =

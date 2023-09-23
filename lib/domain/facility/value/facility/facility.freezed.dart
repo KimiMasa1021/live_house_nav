@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'live_house.dart';
+part of 'facility.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-LiveHouse _$LiveHouseFromJson(Map<String, dynamic> json) {
-  return _LiveHouse.fromJson(json);
+Facility _$FacilityFromJson(Map<String, dynamic> json) {
+  return _Facility.fromJson(json);
 }
 
 /// @nodoc
-mixin _$LiveHouse {
+mixin _$Facility {
   String get placeId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get vicinity => throw _privateConstructorUsedError;
@@ -31,14 +31,14 @@ mixin _$LiveHouse {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $LiveHouseCopyWith<LiveHouse> get copyWith =>
+  $FacilityCopyWith<Facility> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LiveHouseCopyWith<$Res> {
-  factory $LiveHouseCopyWith(LiveHouse value, $Res Function(LiveHouse) then) =
-      _$LiveHouseCopyWithImpl<$Res, LiveHouse>;
+abstract class $FacilityCopyWith<$Res> {
+  factory $FacilityCopyWith(Facility value, $Res Function(Facility) then) =
+      _$FacilityCopyWithImpl<$Res, Facility>;
   @useResult
   $Res call(
       {String placeId,
@@ -54,9 +54,9 @@ abstract class $LiveHouseCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
-    implements $LiveHouseCopyWith<$Res> {
-  _$LiveHouseCopyWithImpl(this._value, this._then);
+class _$FacilityCopyWithImpl<$Res, $Val extends Facility>
+    implements $FacilityCopyWith<$Res> {
+  _$FacilityCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -121,10 +121,10 @@ class _$LiveHouseCopyWithImpl<$Res, $Val extends LiveHouse>
 }
 
 /// @nodoc
-abstract class _$$_LiveHouseCopyWith<$Res> implements $LiveHouseCopyWith<$Res> {
-  factory _$$_LiveHouseCopyWith(
-          _$_LiveHouse value, $Res Function(_$_LiveHouse) then) =
-      __$$_LiveHouseCopyWithImpl<$Res>;
+abstract class _$$_FacilityCopyWith<$Res> implements $FacilityCopyWith<$Res> {
+  factory _$$_FacilityCopyWith(
+          _$_Facility value, $Res Function(_$_Facility) then) =
+      __$$_FacilityCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -142,11 +142,11 @@ abstract class _$$_LiveHouseCopyWith<$Res> implements $LiveHouseCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_LiveHouseCopyWithImpl<$Res>
-    extends _$LiveHouseCopyWithImpl<$Res, _$_LiveHouse>
-    implements _$$_LiveHouseCopyWith<$Res> {
-  __$$_LiveHouseCopyWithImpl(
-      _$_LiveHouse _value, $Res Function(_$_LiveHouse) _then)
+class __$$_FacilityCopyWithImpl<$Res>
+    extends _$FacilityCopyWithImpl<$Res, _$_Facility>
+    implements _$$_FacilityCopyWith<$Res> {
+  __$$_FacilityCopyWithImpl(
+      _$_Facility _value, $Res Function(_$_Facility) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -161,7 +161,7 @@ class __$$_LiveHouseCopyWithImpl<$Res>
     Object? facilityType = null,
     Object? geo = null,
   }) {
-    return _then(_$_LiveHouse(
+    return _then(_$_Facility(
       placeId: null == placeId
           ? _value.placeId
           : placeId // ignore: cast_nullable_to_non_nullable
@@ -200,8 +200,8 @@ class __$$_LiveHouseCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_LiveHouse implements _LiveHouse {
-  _$_LiveHouse(
+class _$_Facility implements _Facility {
+  _$_Facility(
       {this.placeId = "",
       this.name = "",
       this.vicinity = "",
@@ -211,8 +211,8 @@ class _$_LiveHouse implements _LiveHouse {
       this.facilityType = "",
       required this.geo});
 
-  factory _$_LiveHouse.fromJson(Map<String, dynamic> json) =>
-      _$$_LiveHouseFromJson(json);
+  factory _$_Facility.fromJson(Map<String, dynamic> json) =>
+      _$$_FacilityFromJson(json);
 
   @override
   @JsonKey()
@@ -240,14 +240,14 @@ class _$_LiveHouse implements _LiveHouse {
 
   @override
   String toString() {
-    return 'LiveHouse(placeId: $placeId, name: $name, vicinity: $vicinity, imageUrl: $imageUrl, distance: $distance, prefectureValue: $prefectureValue, facilityType: $facilityType, geo: $geo)';
+    return 'Facility(placeId: $placeId, name: $name, vicinity: $vicinity, imageUrl: $imageUrl, distance: $distance, prefectureValue: $prefectureValue, facilityType: $facilityType, geo: $geo)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LiveHouse &&
+            other is _$_Facility &&
             (identical(other.placeId, placeId) || other.placeId == placeId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.vicinity, vicinity) ||
@@ -271,19 +271,19 @@ class _$_LiveHouse implements _LiveHouse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LiveHouseCopyWith<_$_LiveHouse> get copyWith =>
-      __$$_LiveHouseCopyWithImpl<_$_LiveHouse>(this, _$identity);
+  _$$_FacilityCopyWith<_$_Facility> get copyWith =>
+      __$$_FacilityCopyWithImpl<_$_Facility>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_LiveHouseToJson(
+    return _$$_FacilityToJson(
       this,
     );
   }
 }
 
-abstract class _LiveHouse implements LiveHouse {
-  factory _LiveHouse(
+abstract class _Facility implements Facility {
+  factory _Facility(
       {final String placeId,
       final String name,
       final String vicinity,
@@ -291,10 +291,9 @@ abstract class _LiveHouse implements LiveHouse {
       final double distance,
       final String prefectureValue,
       final String facilityType,
-      required final Geo geo}) = _$_LiveHouse;
+      required final Geo geo}) = _$_Facility;
 
-  factory _LiveHouse.fromJson(Map<String, dynamic> json) =
-      _$_LiveHouse.fromJson;
+  factory _Facility.fromJson(Map<String, dynamic> json) = _$_Facility.fromJson;
 
   @override
   String get placeId;
@@ -314,6 +313,6 @@ abstract class _LiveHouse implements LiveHouse {
   Geo get geo;
   @override
   @JsonKey(ignore: true)
-  _$$_LiveHouseCopyWith<_$_LiveHouse> get copyWith =>
+  _$$_FacilityCopyWith<_$_Facility> get copyWith =>
       throw _privateConstructorUsedError;
 }

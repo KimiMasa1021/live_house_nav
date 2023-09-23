@@ -6,7 +6,7 @@ part of 'search_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchNotifierHash() => r'6faef7b01c114a783ebc8d54503292fa82d35a77';
+String _$searchNotifierHash() => r'8c59ab55992b08ebd13986bb13840374d7136ace';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,12 +29,11 @@ class _SystemHash {
   }
 }
 
-abstract class _$SearchNotifier
-    extends BuildlessAutoDisposeAsyncNotifier<List<LiveHouse>> {
-  late final List<String> facilityValue;
+abstract class _$SearchNotifier extends BuildlessAsyncNotifier<List<Facility>> {
+  late final String facilityValue;
 
-  FutureOr<List<LiveHouse>> build(
-    List<String> facilityValue,
+  FutureOr<List<Facility>> build(
+    String facilityValue,
   );
 }
 
@@ -43,13 +42,13 @@ abstract class _$SearchNotifier
 const searchNotifierProvider = SearchNotifierFamily();
 
 /// See also [SearchNotifier].
-class SearchNotifierFamily extends Family<AsyncValue<List<LiveHouse>>> {
+class SearchNotifierFamily extends Family<AsyncValue<List<Facility>>> {
   /// See also [SearchNotifier].
   const SearchNotifierFamily();
 
   /// See also [SearchNotifier].
   SearchNotifierProvider call(
-    List<String> facilityValue,
+    String facilityValue,
   ) {
     return SearchNotifierProvider(
       facilityValue,
@@ -81,11 +80,11 @@ class SearchNotifierFamily extends Family<AsyncValue<List<LiveHouse>>> {
 }
 
 /// See also [SearchNotifier].
-class SearchNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
-    SearchNotifier, List<LiveHouse>> {
+class SearchNotifierProvider
+    extends AsyncNotifierProviderImpl<SearchNotifier, List<Facility>> {
   /// See also [SearchNotifier].
   SearchNotifierProvider(
-    List<String> facilityValue,
+    String facilityValue,
   ) : this._internal(
           () => SearchNotifier()..facilityValue = facilityValue,
           from: searchNotifierProvider,
@@ -110,10 +109,10 @@ class SearchNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
     required this.facilityValue,
   }) : super.internal();
 
-  final List<String> facilityValue;
+  final String facilityValue;
 
   @override
-  FutureOr<List<LiveHouse>> runNotifierBuild(
+  FutureOr<List<Facility>> runNotifierBuild(
     covariant SearchNotifier notifier,
   ) {
     return notifier.build(
@@ -138,8 +137,7 @@ class SearchNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<SearchNotifier, List<LiveHouse>>
-      createElement() {
+  AsyncNotifierProviderElement<SearchNotifier, List<Facility>> createElement() {
     return _SearchNotifierProviderElement(this);
   }
 
@@ -158,20 +156,18 @@ class SearchNotifierProvider extends AutoDisposeAsyncNotifierProviderImpl<
   }
 }
 
-mixin SearchNotifierRef
-    on AutoDisposeAsyncNotifierProviderRef<List<LiveHouse>> {
+mixin SearchNotifierRef on AsyncNotifierProviderRef<List<Facility>> {
   /// The parameter `facilityValue` of this provider.
-  List<String> get facilityValue;
+  String get facilityValue;
 }
 
 class _SearchNotifierProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<SearchNotifier,
-        List<LiveHouse>> with SearchNotifierRef {
+    extends AsyncNotifierProviderElement<SearchNotifier, List<Facility>>
+    with SearchNotifierRef {
   _SearchNotifierProviderElement(super.provider);
 
   @override
-  List<String> get facilityValue =>
-      (origin as SearchNotifierProvider).facilityValue;
+  String get facilityValue => (origin as SearchNotifierProvider).facilityValue;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

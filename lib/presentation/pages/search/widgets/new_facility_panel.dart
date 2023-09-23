@@ -4,26 +4,34 @@ import 'package:live_house_nav/gen/assets.gen.dart';
 
 import '../../../../common/hex_color.dart';
 import '../../../../common/text_theme/text_theme.dart';
+import '../../../../domain/facility/value/facility/facility.dart';
 
 class NewFacilityPanel extends ConsumerWidget {
-  const NewFacilityPanel({super.key});
+  const NewFacilityPanel({
+    super.key,
+    required this.liveHouse,
+  });
+  final Facility liveHouse;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
     final textTheme = ref.watch(myTextThemeProvider);
-    return Padding(
-      padding: const EdgeInsets.only(left: 10),
+    return Container(
+      width: size.width / 3,
+      margin: const EdgeInsets.symmetric(horizontal: 5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            width: size.width / 2.7,
-            height: size.width / 2.7,
+            width: size.width / 3,
+            height: size.width / 3,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(Assets.facility.liveHouse.path),
+                image: NetworkImage(liveHouse.imageUrl),
                 fit: BoxFit.cover,
+                onError: (exception, stackTrace) =>
+                    AssetImage(Assets.facility.noImage.path),
               ),
               borderRadius: BorderRadius.circular(7),
             ),
@@ -31,19 +39,21 @@ class NewFacilityPanel extends ConsumerWidget {
           Padding(
             padding: const EdgeInsets.only(),
             child: Text(
-              "下北沢Shelter",
+              liveHouse.name,
               style: textTheme.fs16.copyWith(
                 fontWeight: FontWeight.bold,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(),
             child: Text(
-              "東京都練馬区豊玉中",
+              liveHouse.vicinity,
               style: textTheme.fs12.copyWith(
                 color: HexColor("9F9F9F"),
               ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],

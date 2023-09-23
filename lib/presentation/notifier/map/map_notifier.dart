@@ -1,9 +1,8 @@
 import 'dart:math';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/live_house/value/live_house/live_house.dart';
+import '../../../domain/facility/value/facility/facility.dart';
 import '../../pages/live_house_map/status/live_house_map.dart';
 part 'map_notifier.g.dart';
 
@@ -19,7 +18,7 @@ class MapNotifier extends _$MapNotifier {
     state = state.copyWith(controller: mapController);
   }
 
-  Future<void> setCamera(List<LiveHouse> testList) async {
+  Future<void> setCamera(List<Facility> testList) async {
     final double north =
         testList.map((e) => e.geo.geopoint.latitude).reduce(max);
     final double south =

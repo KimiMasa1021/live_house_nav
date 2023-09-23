@@ -4,14 +4,14 @@ import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/common/hex_color.dart';
 import 'package:live_house_nav/common/text_theme/text_theme.dart';
-import '../../../../domain/live_house/value/live_house/live_house.dart';
+import '../../../../domain/facility/value/facility/facility.dart';
 
 class SearchResultPanel extends ConsumerWidget {
   const SearchResultPanel({
     super.key,
     required this.liveHouse,
   });
-  final LiveHouse liveHouse;
+  final Facility liveHouse;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +20,7 @@ class SearchResultPanel extends ConsumerWidget {
     return InkWell(
       onTap: () {
         context.pushNamed(
-          Routes.name().searchResultDetail,
+          Routes.name().liveHouseDetail,
           extra: liveHouse.placeId,
         );
       },

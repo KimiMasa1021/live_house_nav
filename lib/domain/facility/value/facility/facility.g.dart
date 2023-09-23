@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'live_house.dart';
+part of 'facility.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_LiveHouse _$$_LiveHouseFromJson(Map<String, dynamic> json) => _$_LiveHouse(
+_$_Facility _$$_FacilityFromJson(Map<String, dynamic> json) => _$_Facility(
       placeId: json['placeId'] as String? ?? "",
       name: json['name'] as String? ?? "",
       vicinity: json['vicinity'] as String? ?? "",
@@ -17,7 +17,7 @@ _$_LiveHouse _$$_LiveHouseFromJson(Map<String, dynamic> json) => _$_LiveHouse(
       geo: Geo.fromJson(json['geo'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$$_LiveHouseToJson(_$_LiveHouse instance) =>
+Map<String, dynamic> _$$_FacilityToJson(_$_Facility instance) =>
     <String, dynamic>{
       'placeId': instance.placeId,
       'name': instance.name,
