@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:live_house_nav/constant/facility_type.dart';
+import 'package:live_house_nav/presentation/notifier/facility/search_by_type/search_by_type_notifier.dart';
 
-import '../../notifier/search/search_notifier.dart';
 import 'widgets/search_result_panel.dart';
 
 class SearchResultPage extends HookConsumerWidget {
@@ -15,9 +14,10 @@ class SearchResultPage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final searchNotifier = ref.watch(searchNotifierProvider(facilityValue));
+    final searchNotifier =
+        ref.watch(searchByTypeNotifierProvider(facilityValue));
     final searchNotifierCTL =
-        ref.watch(searchNotifierProvider(facilityValue).notifier);
+        ref.watch(searchByTypeNotifierProvider(facilityValue).notifier);
     final scrollController = useScrollController();
     final isLoading = useState(false);
     scrollController.addListener(() async {

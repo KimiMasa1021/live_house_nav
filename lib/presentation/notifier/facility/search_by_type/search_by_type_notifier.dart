@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import '../../../domain/facility/facility_service.dart';
-import '../../../domain/facility/value/facility/facility.dart';
+import '../../../../domain/facility/facility_service.dart';
+import '../../../../domain/facility/value/facility/facility.dart';
 
-part 'search_notifier.g.dart';
+part 'search_by_type_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
-class SearchNotifier extends _$SearchNotifier {
+class SearchByTypeNotifier extends _$SearchByTypeNotifier {
   @override
   FutureOr<List<Facility>> build(
     String facilityValue,

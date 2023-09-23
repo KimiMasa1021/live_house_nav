@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../common/hex_color.dart';
-
 class CustomBottomBar extends StatelessWidget {
   const CustomBottomBar({
     super.key,

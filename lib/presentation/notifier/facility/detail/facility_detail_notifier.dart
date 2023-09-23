@@ -1,13 +1,13 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../domain/facility_detail/facility_detail_service.dart';
-import '../../../domain/facility_detail/values/facility_detail/facility_detail.dart';
+import '../../../../domain/facility_detail/facility_detail_service.dart';
+import '../../../../domain/facility_detail/values/facility_detail/facility_detail.dart';
 
-part 'live_houe_detail_notifier.g.dart';
+part 'facility_detail_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<FacilityDetail> featchLiveHouseDetail(
-  FeatchLiveHouseDetailRef ref, {
+Future<FacilityDetail> featchFacilityDetail(
+  FeatchFacilityDetailRef ref, {
   required String priceId,
 }) async {
   const basePlaceApiUrl =

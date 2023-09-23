@@ -1,7 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../domain/facility/facility_service.dart';
-import '../../../domain/facility/value/facility/facility.dart';
+import '../../../../domain/facility/facility_service.dart';
+import '../../../../domain/facility/value/facility/facility.dart';
 
 final newFacilityNotifierProvider =
     AsyncNotifierProvider<NewFacilityNotifier, List<Facility>>(

@@ -4,8 +4,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../notifier/live_house/live_house_notifier.dart';
-import '../../../notifier/map/map_notifier.dart';
+import '../../../notifier/facility/facility_list/facility_notifier.dart';
+import '../../../notifier/map_controller/map_controller_notifier.dart';
 import 'live_house_panel.dart';
 
 class LiveHouseListView extends HookConsumerWidget {
@@ -20,9 +20,9 @@ class LiveHouseListView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final newMethodsLive = ref.watch(livehouseNotifierProvider(
+    final newMethodsLive = ref.watch(facilityNotifierProvider(
         LatLng(location.latitude, location.longitude)));
-    final liveHouseMap = ref.watch(mapNotifierProvider);
+    final mapController = ref.watch(mapControllerNotifierProvider);
 
     return newMethodsLive.when(
       data: (liveHoue) {
@@ -36,7 +36,7 @@ class LiveHouseListView extends HookConsumerWidget {
               controller: pageController,
               onPageChanged: (val) async {
                 final geo = liveHoue.elementAt(val).geo.geopoint;
-                await liveHouseMap.controller!.animateCamera(
+                await mapController.controller!.animateCamera(
                   CameraUpdate.newLatLng(
                     LatLng(
                       geo.latitude,

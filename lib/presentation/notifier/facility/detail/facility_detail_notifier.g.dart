@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'live_houe_detail_notifier.dart';
+part of 'facility_detail_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$featchLiveHouseDetailHash() =>
-    r'a191736850bdaf9b41b9920e68709bc3b633795e';
+String _$featchFacilityDetailHash() =>
+    r'0bd7a3775081b6ee657d88242d37fd5130a60599';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -30,27 +30,27 @@ class _SystemHash {
   }
 }
 
-/// See also [featchLiveHouseDetail].
-@ProviderFor(featchLiveHouseDetail)
-const featchLiveHouseDetailProvider = FeatchLiveHouseDetailFamily();
+/// See also [featchFacilityDetail].
+@ProviderFor(featchFacilityDetail)
+const featchFacilityDetailProvider = FeatchFacilityDetailFamily();
 
-/// See also [featchLiveHouseDetail].
-class FeatchLiveHouseDetailFamily extends Family<AsyncValue<FacilityDetail>> {
-  /// See also [featchLiveHouseDetail].
-  const FeatchLiveHouseDetailFamily();
+/// See also [featchFacilityDetail].
+class FeatchFacilityDetailFamily extends Family<AsyncValue<FacilityDetail>> {
+  /// See also [featchFacilityDetail].
+  const FeatchFacilityDetailFamily();
 
-  /// See also [featchLiveHouseDetail].
-  FeatchLiveHouseDetailProvider call({
+  /// See also [featchFacilityDetail].
+  FeatchFacilityDetailProvider call({
     required String priceId,
   }) {
-    return FeatchLiveHouseDetailProvider(
+    return FeatchFacilityDetailProvider(
       priceId: priceId,
     );
   }
 
   @override
-  FeatchLiveHouseDetailProvider getProviderOverride(
-    covariant FeatchLiveHouseDetailProvider provider,
+  FeatchFacilityDetailProvider getProviderOverride(
+    covariant FeatchFacilityDetailProvider provider,
   ) {
     return call(
       priceId: provider.priceId,
@@ -69,32 +69,32 @@ class FeatchLiveHouseDetailFamily extends Family<AsyncValue<FacilityDetail>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'featchLiveHouseDetailProvider';
+  String? get name => r'featchFacilityDetailProvider';
 }
 
-/// See also [featchLiveHouseDetail].
-class FeatchLiveHouseDetailProvider extends FutureProvider<FacilityDetail> {
-  /// See also [featchLiveHouseDetail].
-  FeatchLiveHouseDetailProvider({
+/// See also [featchFacilityDetail].
+class FeatchFacilityDetailProvider extends FutureProvider<FacilityDetail> {
+  /// See also [featchFacilityDetail].
+  FeatchFacilityDetailProvider({
     required String priceId,
   }) : this._internal(
-          (ref) => featchLiveHouseDetail(
-            ref as FeatchLiveHouseDetailRef,
+          (ref) => featchFacilityDetail(
+            ref as FeatchFacilityDetailRef,
             priceId: priceId,
           ),
-          from: featchLiveHouseDetailProvider,
-          name: r'featchLiveHouseDetailProvider',
+          from: featchFacilityDetailProvider,
+          name: r'featchFacilityDetailProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$featchLiveHouseDetailHash,
-          dependencies: FeatchLiveHouseDetailFamily._dependencies,
+                  : _$featchFacilityDetailHash,
+          dependencies: FeatchFacilityDetailFamily._dependencies,
           allTransitiveDependencies:
-              FeatchLiveHouseDetailFamily._allTransitiveDependencies,
+              FeatchFacilityDetailFamily._allTransitiveDependencies,
           priceId: priceId,
         );
 
-  FeatchLiveHouseDetailProvider._internal(
+  FeatchFacilityDetailProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -108,12 +108,12 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<FacilityDetail> {
 
   @override
   Override overrideWith(
-    FutureOr<FacilityDetail> Function(FeatchLiveHouseDetailRef provider) create,
+    FutureOr<FacilityDetail> Function(FeatchFacilityDetailRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: FeatchLiveHouseDetailProvider._internal(
-        (ref) => create(ref as FeatchLiveHouseDetailRef),
+      override: FeatchFacilityDetailProvider._internal(
+        (ref) => create(ref as FeatchFacilityDetailRef),
         from: from,
         name: null,
         dependencies: null,
@@ -126,12 +126,12 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<FacilityDetail> {
 
   @override
   FutureProviderElement<FacilityDetail> createElement() {
-    return _FeatchLiveHouseDetailProviderElement(this);
+    return _FeatchFacilityDetailProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is FeatchLiveHouseDetailProvider && other.priceId == priceId;
+    return other is FeatchFacilityDetailProvider && other.priceId == priceId;
   }
 
   @override
@@ -143,18 +143,17 @@ class FeatchLiveHouseDetailProvider extends FutureProvider<FacilityDetail> {
   }
 }
 
-mixin FeatchLiveHouseDetailRef on FutureProviderRef<FacilityDetail> {
+mixin FeatchFacilityDetailRef on FutureProviderRef<FacilityDetail> {
   /// The parameter `priceId` of this provider.
   String get priceId;
 }
 
-class _FeatchLiveHouseDetailProviderElement
-    extends FutureProviderElement<FacilityDetail>
-    with FeatchLiveHouseDetailRef {
-  _FeatchLiveHouseDetailProviderElement(super.provider);
+class _FeatchFacilityDetailProviderElement
+    extends FutureProviderElement<FacilityDetail> with FeatchFacilityDetailRef {
+  _FeatchFacilityDetailProviderElement(super.provider);
 
   @override
-  String get priceId => (origin as FeatchLiveHouseDetailProvider).priceId;
+  String get priceId => (origin as FeatchFacilityDetailProvider).priceId;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'live_house_map.dart';
+part of 'map_controller.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$LiveHouseMap {
+mixin _$MapController {
   GoogleMapController? get controller => throw _privateConstructorUsedError;
   bool get isCameraMoved => throw _privateConstructorUsedError;
   LatLng? get previousLatLng => throw _privateConstructorUsedError;
@@ -24,15 +24,15 @@ mixin _$LiveHouseMap {
   double get previousRadiusInKm => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $LiveHouseMapCopyWith<LiveHouseMap> get copyWith =>
+  $MapControllerCopyWith<MapController> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $LiveHouseMapCopyWith<$Res> {
-  factory $LiveHouseMapCopyWith(
-          LiveHouseMap value, $Res Function(LiveHouseMap) then) =
-      _$LiveHouseMapCopyWithImpl<$Res, LiveHouseMap>;
+abstract class $MapControllerCopyWith<$Res> {
+  factory $MapControllerCopyWith(
+          MapController value, $Res Function(MapController) then) =
+      _$MapControllerCopyWithImpl<$Res, MapController>;
   @useResult
   $Res call(
       {GoogleMapController? controller,
@@ -44,9 +44,9 @@ abstract class $LiveHouseMapCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
-    implements $LiveHouseMapCopyWith<$Res> {
-  _$LiveHouseMapCopyWithImpl(this._value, this._then);
+class _$MapControllerCopyWithImpl<$Res, $Val extends MapController>
+    implements $MapControllerCopyWith<$Res> {
+  _$MapControllerCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -93,11 +93,11 @@ class _$LiveHouseMapCopyWithImpl<$Res, $Val extends LiveHouseMap>
 }
 
 /// @nodoc
-abstract class _$$_LiveHouseMapCopyWith<$Res>
-    implements $LiveHouseMapCopyWith<$Res> {
-  factory _$$_LiveHouseMapCopyWith(
-          _$_LiveHouseMap value, $Res Function(_$_LiveHouseMap) then) =
-      __$$_LiveHouseMapCopyWithImpl<$Res>;
+abstract class _$$_MapControllerCopyWith<$Res>
+    implements $MapControllerCopyWith<$Res> {
+  factory _$$_MapControllerCopyWith(
+          _$_MapController value, $Res Function(_$_MapController) then) =
+      __$$_MapControllerCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -110,11 +110,11 @@ abstract class _$$_LiveHouseMapCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_LiveHouseMapCopyWithImpl<$Res>
-    extends _$LiveHouseMapCopyWithImpl<$Res, _$_LiveHouseMap>
-    implements _$$_LiveHouseMapCopyWith<$Res> {
-  __$$_LiveHouseMapCopyWithImpl(
-      _$_LiveHouseMap _value, $Res Function(_$_LiveHouseMap) _then)
+class __$$_MapControllerCopyWithImpl<$Res>
+    extends _$MapControllerCopyWithImpl<$Res, _$_MapController>
+    implements _$$_MapControllerCopyWith<$Res> {
+  __$$_MapControllerCopyWithImpl(
+      _$_MapController _value, $Res Function(_$_MapController) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +127,7 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
     Object? radiusInKm = null,
     Object? previousRadiusInKm = null,
   }) {
-    return _then(_$_LiveHouseMap(
+    return _then(_$_MapController(
       controller: freezed == controller
           ? _value.controller
           : controller // ignore: cast_nullable_to_non_nullable
@@ -158,8 +158,8 @@ class __$$_LiveHouseMapCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_LiveHouseMap implements _LiveHouseMap {
-  _$_LiveHouseMap(
+class _$_MapController implements _MapController {
+  _$_MapController(
       {this.controller = null,
       this.isCameraMoved = false,
       this.previousLatLng = null,
@@ -188,14 +188,14 @@ class _$_LiveHouseMap implements _LiveHouseMap {
 
   @override
   String toString() {
-    return 'LiveHouseMap(controller: $controller, isCameraMoved: $isCameraMoved, previousLatLng: $previousLatLng, latLng: $latLng, radiusInKm: $radiusInKm, previousRadiusInKm: $previousRadiusInKm)';
+    return 'MapController(controller: $controller, isCameraMoved: $isCameraMoved, previousLatLng: $previousLatLng, latLng: $latLng, radiusInKm: $radiusInKm, previousRadiusInKm: $previousRadiusInKm)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_LiveHouseMap &&
+            other is _$_MapController &&
             (identical(other.controller, controller) ||
                 other.controller == controller) &&
             (identical(other.isCameraMoved, isCameraMoved) ||
@@ -216,18 +216,18 @@ class _$_LiveHouseMap implements _LiveHouseMap {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_LiveHouseMapCopyWith<_$_LiveHouseMap> get copyWith =>
-      __$$_LiveHouseMapCopyWithImpl<_$_LiveHouseMap>(this, _$identity);
+  _$$_MapControllerCopyWith<_$_MapController> get copyWith =>
+      __$$_MapControllerCopyWithImpl<_$_MapController>(this, _$identity);
 }
 
-abstract class _LiveHouseMap implements LiveHouseMap {
-  factory _LiveHouseMap(
+abstract class _MapController implements MapController {
+  factory _MapController(
       {final GoogleMapController? controller,
       final bool isCameraMoved,
       final LatLng? previousLatLng,
       final LatLng? latLng,
       final double radiusInKm,
-      final double previousRadiusInKm}) = _$_LiveHouseMap;
+      final double previousRadiusInKm}) = _$_MapController;
 
   @override
   GoogleMapController? get controller;
@@ -243,6 +243,6 @@ abstract class _LiveHouseMap implements LiveHouseMap {
   double get previousRadiusInKm;
   @override
   @JsonKey(ignore: true)
-  _$$_LiveHouseMapCopyWith<_$_LiveHouseMap> get copyWith =>
+  _$$_MapControllerCopyWith<_$_MapController> get copyWith =>
       throw _privateConstructorUsedError;
 }

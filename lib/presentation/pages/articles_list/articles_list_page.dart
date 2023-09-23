@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/hex_color.dart';
 
@@ -11,14 +10,13 @@ class ArticlesListPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = ref.watch(myTextThemeProvider);
-    final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ...List.generate(
                 20,
                 (index) => Padding(
@@ -50,7 +48,7 @@ class ArticlesListPage extends ConsumerWidget {
                                         ),
                                       ),
                                     ),
-                                    SizedBox(width: 5),
+                                    const SizedBox(width: 5),
                                     Expanded(
                                       child: Text(
                                         "2023.06.12",
@@ -62,7 +60,7 @@ class ArticlesListPage extends ConsumerWidget {
                                     ),
                                   ],
                                 ),
-                                Row(
+                                const Row(
                                   children: [
                                     Icon(Icons.location_on_outlined),
                                     Text("下北沢Shelter"),
@@ -73,15 +71,15 @@ class ArticlesListPage extends ConsumerWidget {
                           ),
                           IconButton(
                             onPressed: () {},
-                            icon: Icon(Icons.more_vert_outlined),
+                            icon: const Icon(Icons.more_vert_outlined),
                           )
                         ],
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       const Text(
                         "サンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキストサンプルテキスト",
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       Row(
                         children: [
                           Expanded(
@@ -92,14 +90,14 @@ class ArticlesListPage extends ConsumerWidget {
                                   image: AssetImage(Assets.facility.jazz.path),
                                   fit: BoxFit.cover,
                                 ),
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                   topLeft: Radius.circular(10),
                                   bottomLeft: Radius.circular(10),
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Expanded(
                             child: Container(
                               height: 150,
@@ -108,7 +106,7 @@ class ArticlesListPage extends ConsumerWidget {
                                   image: AssetImage(Assets.facility.club.path),
                                   fit: BoxFit.cover,
                                 ),
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                   topRight: Radius.circular(10),
                                   bottomRight: Radius.circular(10),
                                 ),
@@ -117,8 +115,8 @@ class ArticlesListPage extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: 5),
-                      Row(
+                      const SizedBox(height: 5),
+                      const Row(
                         children: [
                           Icon(Icons.people_alt_outlined),
                           Text("  突然少年、Zazen Boys,トリプルファイヤー"),

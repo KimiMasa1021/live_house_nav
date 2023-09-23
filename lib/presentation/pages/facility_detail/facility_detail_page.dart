@@ -3,15 +3,15 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
-import 'package:live_house_nav/presentation/notifier/live_house_detail/live_houe_detail_notifier.dart';
-import 'package:live_house_nav/presentation/pages/live_house_detail/widgets/openning_hours_panel.dart';
+import 'package:live_house_nav/presentation/pages/facility_detail/widgets/openning_hours_panel.dart';
 import '../../../common/hex_color.dart';
 import '../../../common/text_theme/text_theme.dart';
+import '../../notifier/facility/detail/facility_detail_notifier.dart';
 import 'widgets/facility_info_link.dart';
 import 'widgets/sticky_tab_bar_delegate.dart';
 
-class LiveHouseDetailPage extends ConsumerWidget {
-  const LiveHouseDetailPage({
+class FacilityDetailPage extends ConsumerWidget {
+  const FacilityDetailPage({
     super.key,
     required this.liveHouse,
   });
@@ -23,7 +23,7 @@ class LiveHouseDetailPage extends ConsumerWidget {
     final font = ref.watch(myTextThemeProvider);
     final size = MediaQuery.of(context).size;
     final liveHoueDetail =
-        ref.watch(FeatchLiveHouseDetailProvider(priceId: liveHouse));
+        ref.watch(FeatchFacilityDetailProvider(priceId: liveHouse));
     return DefaultTabController(
       length: 3,
       child: Scaffold(

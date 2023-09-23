@@ -1,19 +1,20 @@
 import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/facility/value/facility/facility.dart';
-import '../../pages/live_house_map/status/live_house_map.dart';
-part 'map_notifier.g.dart';
+import 'status/map_controller.dart';
+part 'map_controller_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
-class MapNotifier extends _$MapNotifier {
+class MapControllerNotifier extends _$MapControllerNotifier {
   @override
-  LiveHouseMap build() => LiveHouseMap();
+  MapController build() => MapController();
 
   Future<void> onMapCreated(GoogleMapController mapController) async {
     final googleMapStyle =
-        await rootBundle.loadString('assets/jsons/google_map_style.json');
+        await rootBundle.loadString(Assets.jsons.googleMapStyle);
     await mapController.setMapStyle(googleMapStyle);
     state = state.copyWith(controller: mapController);
   }

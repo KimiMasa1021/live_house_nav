@@ -5,30 +5,22 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/domain/facility/value/facility/facility.dart';
-import 'package:live_house_nav/presentation/notifier/map/map_notifier.dart';
+import 'package:live_house_nav/presentation/notifier/map_controller/map_controller_notifier.dart';
 
 final _db = FirebaseFirestore.instance;
 
-final livehouseNotifierProvider = StateNotifierProvider.family<
-    LiveHouseNotifier, AsyncValue<List<Facility>>, LatLng>(
-  (ref, LatLng latLng) => LiveHouseNotifier(
-    ref,
-    initialPosition: latLng,
-  ),
+final facilityNotifierProvider =
+    AsyncNotifierProviderFamily<FacilityNotifier, List<Facility>, LatLng>(
+  () => FacilityNotifier(),
 );
 
-class LiveHouseNotifier extends StateNotifier<AsyncValue<List<Facility>>> {
-  Ref ref;
-  final LatLng initialPosition;
-
-  LiveHouseNotifier(this.ref, {required this.initialPosition})
-      : super(const AsyncLoading()) {
-    Future(() async {
-      await test(initialPosition);
-    });
+class FacilityNotifier extends FamilyAsyncNotifier<List<Facility>, LatLng> {
+  @override
+  FutureOr<List<Facility>> build(LatLng initialPosition) async {
+    return await test(initialPosition);
   }
 
-  Future<void> test(LatLng latLng) async {
+  Future<List<Facility>> test(LatLng latLng) async {
     final result = await featchLiveHouseList(
       GeoPoint(
         latLng.latitude,
@@ -38,8 +30,8 @@ class LiveHouseNotifier extends StateNotifier<AsyncValue<List<Facility>>> {
 
     result.asMap().entries.map((e) {
       final distance = Geolocator.distanceBetween(
-        initialPosition.latitude,
-        initialPosition.longitude,
+        latLng.latitude,
+        latLng.longitude,
         e.value.geo.geopoint.latitude,
         e.value.geo.geopoint.longitude,
       );
@@ -48,16 +40,16 @@ class LiveHouseNotifier extends StateNotifier<AsyncValue<List<Facility>>> {
 
     result.sort(((a, b) => a.distance.compareTo(b.distance)));
 
-    state = AsyncData(result);
-    final mapNotifier = ref.read(mapNotifierProvider.notifier);
+    final mapNotifier = ref.read(mapControllerNotifierProvider.notifier);
 
-    final mapState = ref.read(mapNotifierProvider);
+    final mapState = ref.read(mapControllerNotifierProvider);
     mapNotifier.setPreviousValue(
       latLng,
       mapState.radiusInKm,
     );
     final focusFacilities = result.take(5).toList();
     await mapNotifier.setCamera(focusFacilities);
+    return result;
   }
 
   final CollectionReference<Facility> collectionReference =
@@ -67,7 +59,7 @@ class LiveHouseNotifier extends StateNotifier<AsyncValue<List<Facility>>> {
           );
 
   Future<List<Facility>> featchLiveHouseList(GeoPoint point) async {
-    final mapNotifier = ref.read(mapNotifierProvider);
+    final mapNotifier = ref.read(mapControllerNotifierProvider);
 
     final snapshot =
         await GeoCollectionReference(collectionReference).fetchWithin(

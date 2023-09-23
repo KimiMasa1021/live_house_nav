@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:live_house_nav/domain/text_search/live_house_suggests.dart';
-import 'package:live_house_nav/presentation/notifier/text_search/text_search_notifier.dart';
+import 'package:live_house_nav/presentation/notifier/facility/search_by_text/search_by_text.dart';
 
 import '../widgets/live_house_search_bar.dart';
 import '../search/widgets/live_house_suggest.dart';
@@ -11,8 +10,7 @@ class TextSearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final textSearch = ref.watch(textSearchNotifierProvider);
-    final textSearchNotifier = ref.watch(textSearchNotifierProvider.notifier);
+    final textSearch = ref.watch(searchByTextNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(

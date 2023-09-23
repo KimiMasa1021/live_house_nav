@@ -4,12 +4,12 @@ import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/presentation/pages/add_article/add_article_page.dart';
 import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
 import 'package:live_house_nav/presentation/pages/image_preview/image_preview_page.dart';
-import 'package:live_house_nav/presentation/pages/live_house_detail/live_house_detail_page.dart';
+import 'package:live_house_nav/presentation/pages/facility_detail/facility_detail_page.dart';
 import 'package:live_house_nav/presentation/pages/search/search_page.dart';
 import 'package:live_house_nav/presentation/pages/search_result/search_result_page.dart';
 import 'package:live_house_nav/presentation/pages/setting/setting_page.dart';
 import 'package:live_house_nav/presentation/pages/text_search/text_search_page.dart';
-import '../../presentation/pages/live_house_map/live_house_map_page.dart';
+import '../../presentation/pages/map/map_page.dart';
 import '../../presentation/pages/page_root.dart';
 import 'routes/routes.dart';
 
@@ -36,7 +36,7 @@ final routerProvider = Provider(
                 name: Routes.name().liveHouseMap,
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
-                    child: LiveHouseMapPage(
+                    child: MapPage(
                       key: state.pageKey,
                     ),
                   );
@@ -49,7 +49,7 @@ final routerProvider = Provider(
                     pageBuilder: (context, state) {
                       final liveHoue = state.extra.toString();
                       return NoTransitionPage(
-                        child: LiveHouseDetailPage(
+                        child: FacilityDetailPage(
                           key: state.pageKey,
                           liveHouse: liveHoue,
                         ),
@@ -109,7 +109,7 @@ final routerProvider = Provider(
                         pageBuilder: (context, state) {
                           final liveHoue = state.extra.toString();
                           return NoTransitionPage(
-                            child: LiveHouseDetailPage(
+                            child: FacilityDetailPage(
                               key: state.pageKey,
                               liveHouse: liveHoue,
                             ),

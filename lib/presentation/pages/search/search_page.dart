@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/gen/assets.gen.dart';
-import 'package:live_house_nav/presentation/notifier/new_facility/new_facility_notifier.dart';
+import 'package:live_house_nav/presentation/notifier/facility/new_facility/new_facility_notifier.dart';
 import 'package:live_house_nav/presentation/pages/search/widgets/genre_panel.dart';
 import 'package:live_house_nav/presentation/pages/widgets/live_house_search_bar.dart';
 import '../../../common/go_router_provider/routes/routes.dart';
@@ -118,7 +118,7 @@ class SearchPage extends HookConsumerWidget {
                   );
                 },
                 orElse: () {
-                  return Text("Loading...");
+                  return const Text("Loading...");
                 },
               ),
               Padding(
@@ -149,7 +149,7 @@ class SearchPage extends HookConsumerWidget {
                   );
                 },
                 orElse: () {
-                  return Text("Loading...");
+                  return const Text("Loading...");
                 },
               ),
               const SizedBox(height: 100),

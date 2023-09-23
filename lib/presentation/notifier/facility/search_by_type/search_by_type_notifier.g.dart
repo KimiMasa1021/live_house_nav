@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'search_notifier.dart';
+part of 'search_by_type_notifier.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$searchNotifierHash() => r'8c59ab55992b08ebd13986bb13840374d7136ace';
+String _$searchByTypeNotifierHash() =>
+    r'968c655308a01c96636d62da3b3c944553414931';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,7 +30,8 @@ class _SystemHash {
   }
 }
 
-abstract class _$SearchNotifier extends BuildlessAsyncNotifier<List<Facility>> {
+abstract class _$SearchByTypeNotifier
+    extends BuildlessAsyncNotifier<List<Facility>> {
   late final String facilityValue;
 
   FutureOr<List<Facility>> build(
@@ -37,27 +39,27 @@ abstract class _$SearchNotifier extends BuildlessAsyncNotifier<List<Facility>> {
   );
 }
 
-/// See also [SearchNotifier].
-@ProviderFor(SearchNotifier)
-const searchNotifierProvider = SearchNotifierFamily();
+/// See also [SearchByTypeNotifier].
+@ProviderFor(SearchByTypeNotifier)
+const searchByTypeNotifierProvider = SearchByTypeNotifierFamily();
 
-/// See also [SearchNotifier].
-class SearchNotifierFamily extends Family<AsyncValue<List<Facility>>> {
-  /// See also [SearchNotifier].
-  const SearchNotifierFamily();
+/// See also [SearchByTypeNotifier].
+class SearchByTypeNotifierFamily extends Family<AsyncValue<List<Facility>>> {
+  /// See also [SearchByTypeNotifier].
+  const SearchByTypeNotifierFamily();
 
-  /// See also [SearchNotifier].
-  SearchNotifierProvider call(
+  /// See also [SearchByTypeNotifier].
+  SearchByTypeNotifierProvider call(
     String facilityValue,
   ) {
-    return SearchNotifierProvider(
+    return SearchByTypeNotifierProvider(
       facilityValue,
     );
   }
 
   @override
-  SearchNotifierProvider getProviderOverride(
-    covariant SearchNotifierProvider provider,
+  SearchByTypeNotifierProvider getProviderOverride(
+    covariant SearchByTypeNotifierProvider provider,
   ) {
     return call(
       provider.facilityValue,
@@ -76,30 +78,30 @@ class SearchNotifierFamily extends Family<AsyncValue<List<Facility>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'searchNotifierProvider';
+  String? get name => r'searchByTypeNotifierProvider';
 }
 
-/// See also [SearchNotifier].
-class SearchNotifierProvider
-    extends AsyncNotifierProviderImpl<SearchNotifier, List<Facility>> {
-  /// See also [SearchNotifier].
-  SearchNotifierProvider(
+/// See also [SearchByTypeNotifier].
+class SearchByTypeNotifierProvider
+    extends AsyncNotifierProviderImpl<SearchByTypeNotifier, List<Facility>> {
+  /// See also [SearchByTypeNotifier].
+  SearchByTypeNotifierProvider(
     String facilityValue,
   ) : this._internal(
-          () => SearchNotifier()..facilityValue = facilityValue,
-          from: searchNotifierProvider,
-          name: r'searchNotifierProvider',
+          () => SearchByTypeNotifier()..facilityValue = facilityValue,
+          from: searchByTypeNotifierProvider,
+          name: r'searchByTypeNotifierProvider',
           debugGetCreateSourceHash:
               const bool.fromEnvironment('dart.vm.product')
                   ? null
-                  : _$searchNotifierHash,
-          dependencies: SearchNotifierFamily._dependencies,
+                  : _$searchByTypeNotifierHash,
+          dependencies: SearchByTypeNotifierFamily._dependencies,
           allTransitiveDependencies:
-              SearchNotifierFamily._allTransitiveDependencies,
+              SearchByTypeNotifierFamily._allTransitiveDependencies,
           facilityValue: facilityValue,
         );
 
-  SearchNotifierProvider._internal(
+  SearchByTypeNotifierProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -113,7 +115,7 @@ class SearchNotifierProvider
 
   @override
   FutureOr<List<Facility>> runNotifierBuild(
-    covariant SearchNotifier notifier,
+    covariant SearchByTypeNotifier notifier,
   ) {
     return notifier.build(
       facilityValue,
@@ -121,10 +123,10 @@ class SearchNotifierProvider
   }
 
   @override
-  Override overrideWith(SearchNotifier Function() create) {
+  Override overrideWith(SearchByTypeNotifier Function() create) {
     return ProviderOverride(
       origin: this,
-      override: SearchNotifierProvider._internal(
+      override: SearchByTypeNotifierProvider._internal(
         () => create()..facilityValue = facilityValue,
         from: from,
         name: null,
@@ -137,13 +139,14 @@ class SearchNotifierProvider
   }
 
   @override
-  AsyncNotifierProviderElement<SearchNotifier, List<Facility>> createElement() {
-    return _SearchNotifierProviderElement(this);
+  AsyncNotifierProviderElement<SearchByTypeNotifier, List<Facility>>
+      createElement() {
+    return _SearchByTypeNotifierProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is SearchNotifierProvider &&
+    return other is SearchByTypeNotifierProvider &&
         other.facilityValue == facilityValue;
   }
 
@@ -156,18 +159,19 @@ class SearchNotifierProvider
   }
 }
 
-mixin SearchNotifierRef on AsyncNotifierProviderRef<List<Facility>> {
+mixin SearchByTypeNotifierRef on AsyncNotifierProviderRef<List<Facility>> {
   /// The parameter `facilityValue` of this provider.
   String get facilityValue;
 }
 
-class _SearchNotifierProviderElement
-    extends AsyncNotifierProviderElement<SearchNotifier, List<Facility>>
-    with SearchNotifierRef {
-  _SearchNotifierProviderElement(super.provider);
+class _SearchByTypeNotifierProviderElement
+    extends AsyncNotifierProviderElement<SearchByTypeNotifier, List<Facility>>
+    with SearchByTypeNotifierRef {
+  _SearchByTypeNotifierProviderElement(super.provider);
 
   @override
-  String get facilityValue => (origin as SearchNotifierProvider).facilityValue;
+  String get facilityValue =>
+      (origin as SearchByTypeNotifierProvider).facilityValue;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../common/hex_color.dart';
-import '../../notifier/text_search/text_search_notifier.dart';
+import '../../notifier/facility/search_by_text/search_by_text.dart';
 
 class LiveHouseSearchBar extends HookConsumerWidget {
   const LiveHouseSearchBar({
@@ -14,7 +14,7 @@ class LiveHouseSearchBar extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final searchTextController = useTextEditingController(text: "");
     final textSearchLiveHouseCTL =
-        ref.watch(textSearchNotifierProvider.notifier);
+        ref.watch(searchByTextNotifierProvider.notifier);
     return Container(
       width: size.width,
       height: 50,

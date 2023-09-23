@@ -1,17 +1,17 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../domain/facility/facility_service.dart';
-import '../../../domain/text_search/live_house_suggests.dart';
+import '../../../../domain/facility/facility_service.dart';
+import '../../../../domain/text_search/live_house_suggests.dart';
 
-final textSearchNotifierProvider =
-    StateNotifierProvider.autoDispose<TextSearchNotifier, LiveHoueSuggests>(
-  (ref) => TextSearchNotifier(
+final searchByTextNotifierProvider =
+    StateNotifierProvider.autoDispose<SearchByTextNotifier, LiveHoueSuggests>(
+  (ref) => SearchByTextNotifier(
     ref,
     liveHouseService: ref.read(facilityServiceProvider),
   ),
 );
 
-class TextSearchNotifier extends StateNotifier<LiveHoueSuggests> {
-  TextSearchNotifier(this.ref, {required FacilityService liveHouseService})
+class SearchByTextNotifier extends StateNotifier<LiveHoueSuggests> {
+  SearchByTextNotifier(this.ref, {required FacilityService liveHouseService})
       : _liveHouseService = liveHouseService,
         super(LiveHoueSuggests());
   final Ref ref;
