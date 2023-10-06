@@ -50,10 +50,6 @@ class PageRoot extends HookConsumerWidget {
             activeIcon: getDecaratedIcon(Icons.search, isDisableEffect: true),
           ),
           BottomNavigationBarItem(
-            icon: getDecaratedIcon(Icons.add_box_outlined),
-            activeIcon: getDecaratedIcon(Icons.add_box, isDisableEffect: true),
-          ),
-          BottomNavigationBarItem(
             icon: getDecaratedIcon(Icons.library_books_outlined),
             activeIcon:
                 getDecaratedIcon(Icons.library_books, isDisableEffect: true),
@@ -63,31 +59,6 @@ class PageRoot extends HookConsumerWidget {
             activeIcon: getDecaratedIcon(Icons.settings, isDisableEffect: true),
           ),
         ],
-        // onTap: (int index) {
-        //   switch (index) {
-        //     case 0:
-        //       context.go(Routes.path().liveHouseMap);
-        //       currentIndex.value = index;
-        //       break;
-        //     case 1:
-        //       context.go(Routes.path().searchPage);
-
-        //       currentIndex.value = index;
-        //       break;
-        //     case 2:
-        //       context.go(Routes.path().addArticles);
-        //       currentIndex.value = index;
-        //       break;
-        //     case 3:
-        //       context.go(Routes.path().articlesList);
-        //       currentIndex.value = index;
-        //       break;
-        //     case 4:
-        //       context.go(Routes.path().setting);
-        //       currentIndex.value = index;
-        //       break;
-        //   }
-        // },
         onTap: (index) {
           navigationShell.goBranch(
             index,

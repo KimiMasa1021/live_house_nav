@@ -1,7 +1,7 @@
 class Routes {
   final String liveHouseMap;
   final String addArticles;
-  final String setting;
+  final String profile;
   final String liveHouseDetail;
   final String imagePreview;
   final String searchPage;
@@ -10,11 +10,13 @@ class Routes {
   final String searchResultDetail;
   final String searchResultImagePreview;
   final String textSearch;
-
+  final String signUp;
+  final String waitScreen;
+  final String postArticle;
   Routes({
     required this.liveHouseMap,
     required this.addArticles,
-    required this.setting,
+    required this.profile,
     required this.liveHouseDetail,
     required this.imagePreview,
     required this.searchPage,
@@ -23,13 +25,16 @@ class Routes {
     required this.searchResultDetail,
     required this.searchResultImagePreview,
     required this.textSearch,
+    required this.signUp,
+    required this.waitScreen,
+    required this.postArticle,
   });
 
   factory Routes.path() {
     return Routes(
       liveHouseMap: "/live_house_map",
       addArticles: "/add_articles",
-      setting: "/setting",
+      profile: "/profile",
       liveHouseDetail: "live_house_detail",
       imagePreview: "image_preview",
       searchPage: "/search_page",
@@ -38,6 +43,9 @@ class Routes {
       searchResultDetail: "search_result_detail",
       searchResultImagePreview: "search_result_image_preview",
       textSearch: "text_search",
+      signUp: "sign_up",
+      waitScreen: "wait_screen",
+      postArticle: "post_article",
     );
   }
 
@@ -45,7 +53,7 @@ class Routes {
     return Routes(
       liveHouseMap: "liveHouseMap",
       addArticles: "addArticles",
-      setting: "setting",
+      profile: "profile",
       liveHouseDetail: "liveHouseDetail",
       imagePreview: "imagePreview",
       searchPage: "searchPage",
@@ -54,6 +62,9 @@ class Routes {
       searchResultDetail: "SearchResultDetail",
       searchResultImagePreview: "searchResultImagePreview",
       textSearch: "textSearch",
+      signUp: "signUp",
+      waitScreen: "waitScreen",
+      postArticle: "postArticle",
     );
   }
 }

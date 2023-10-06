@@ -7,14 +7,43 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:766760725471:android:4547771c2a934bc16a726a",
+        "mobilesdk_app_id": "1:766760725471:android:e79a0c4949c918816a726a",
+        "android_client_info": {
+          "package_name": "com.example.admin_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766760725471-oclkp39l2ok4o8j3u3eu4ops12d5n3a4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAanIiNm4rMImjiTHfOBf3kSN6FTfGnn9c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766760725471-637ic02fuf33glsvt54sa5ug5a5a1b77.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766760725471:android:45d6db11c90c12d26a726a",
         "android_client_info": {
           "package_name": "com.kmass.LiveHouseNav.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "766760725471-637ic02fuf33glsvt54sa5ug5a5a1b77.apps.googleusercontent.com",
+          "client_id": "766760725471-oclkp39l2ok4o8j3u3eu4ops12d5n3a4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

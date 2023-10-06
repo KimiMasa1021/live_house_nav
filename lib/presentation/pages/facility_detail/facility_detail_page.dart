@@ -128,25 +128,33 @@ class FacilityDetailPage extends ConsumerWidget {
                                     : const SizedBox(),
                                 Row(
                                   children: [
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 15,
-                                        vertical: 8,
-                                      ),
-                                      margin: const EdgeInsets.only(
-                                          top: 10, right: 10),
-                                      decoration: BoxDecoration(
-                                        color: HexColor("292929"),
-                                        borderRadius:
-                                            BorderRadius.circular(200),
-                                      ),
-                                      child: const Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: [
-                                          Icon(Icons.reviews_outlined),
-                                          SizedBox(width: 8),
-                                          Text("口コミ投稿")
-                                        ],
+                                    InkWell(
+                                      onTap: () {
+                                        context.pushNamed(
+                                          Routes.name().postArticle,
+                                          extra: data,
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                          vertical: 8,
+                                        ),
+                                        margin: const EdgeInsets.only(
+                                            top: 10, right: 10),
+                                        decoration: BoxDecoration(
+                                          color: HexColor("292929"),
+                                          borderRadius:
+                                              BorderRadius.circular(200),
+                                        ),
+                                        child: const Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Icon(Icons.reviews_outlined),
+                                            SizedBox(width: 8),
+                                            Text("口コミ投稿")
+                                          ],
+                                        ),
                                       ),
                                     ),
                                     Container(

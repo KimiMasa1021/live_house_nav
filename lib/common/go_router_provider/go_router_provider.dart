@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:live_house_nav/presentation/pages/add_article/add_article_page.dart';
+import 'package:live_house_nav/presentation/pages/post_article/post_article_page.dart';
 import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
+import 'package:live_house_nav/presentation/pages/auth/sign_up/sign_up_page.dart';
+import 'package:live_house_nav/presentation/pages/auth/wait_screen/wait_screen_page.dart';
 import 'package:live_house_nav/presentation/pages/image_preview/image_preview_page.dart';
 import 'package:live_house_nav/presentation/pages/facility_detail/facility_detail_page.dart';
 import 'package:live_house_nav/presentation/pages/search/search_page.dart';
 import 'package:live_house_nav/presentation/pages/search_result/search_result_page.dart';
-import 'package:live_house_nav/presentation/pages/setting/setting_page.dart';
+import 'package:live_house_nav/presentation/pages/profile/profile_page.dart';
 import 'package:live_house_nav/presentation/pages/text_search/text_search_page.dart';
+import '../../domain/facility_detail/values/facility_detail/facility_detail.dart';
 import '../../presentation/pages/map/map_page.dart';
 import '../../presentation/pages/page_root.dart';
 import 'routes/routes.dart';
@@ -67,6 +70,19 @@ final routerProvider = Provider(
                               key: state.pageKey,
                               imageList: imageInfo["images"],
                               initialIndex: imageInfo["initialIndex"],
+                            ),
+                          );
+                        },
+                      ),
+                      GoRoute(
+                        path: Routes.path().postArticle,
+                        name: Routes.name().postArticle,
+                        parentNavigatorKey: _rootNavigatorKey,
+                        pageBuilder: (context, state) {
+                          final detail = state.extra as FacilityDetail;
+                          return NoTransitionPage(
+                            child: PostArticlePage(
+                              facilityDetail: detail,
                             ),
                           );
                         },
@@ -154,21 +170,6 @@ final routerProvider = Provider(
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: Routes.path().addArticles,
-                name: Routes.name().addArticles,
-                pageBuilder: (context, state) {
-                  return NoTransitionPage(
-                    child: AddArticlePage(
-                      key: state.pageKey,
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: <RouteBase>[
-              GoRoute(
                 path: Routes.path().articlesList,
                 name: Routes.name().articlesList,
                 pageBuilder: (context, state) {
@@ -184,15 +185,39 @@ final routerProvider = Provider(
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
-                path: Routes.path().setting,
-                name: Routes.name().setting,
+                path: Routes.path().profile,
+                name: Routes.name().profile,
                 pageBuilder: (context, state) {
                   return NoTransitionPage(
-                    child: SettingPage(
+                    child: ProfilePage(
                       key: state.pageKey,
                     ),
                   );
                 },
+                routes: [
+                  GoRoute(
+                    path: Routes.path().signUp,
+                    name: Routes.name().signUp,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) {
+                      return const NoTransitionPage(
+                        child: SignUpPage(),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: Routes.path().waitScreen,
+                        name: Routes.name().waitScreen,
+                        parentNavigatorKey: _rootNavigatorKey,
+                        pageBuilder: (context, state) {
+                          return NoTransitionPage(
+                            child: WaitScreenPage(),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ],
           ),
