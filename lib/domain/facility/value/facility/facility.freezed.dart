@@ -26,7 +26,7 @@ mixin _$Facility {
   String get imageUrl => throw _privateConstructorUsedError;
   double get distance => throw _privateConstructorUsedError;
   String get prefectureValue => throw _privateConstructorUsedError;
-  String get facilityType => throw _privateConstructorUsedError;
+  List<String> get facilityType => throw _privateConstructorUsedError;
   Geo get geo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $FacilityCopyWith<$Res> {
       String imageUrl,
       double distance,
       String prefectureValue,
-      String facilityType,
+      List<String> facilityType,
       Geo geo});
 
   $GeoCopyWith<$Res> get geo;
@@ -103,7 +103,7 @@ class _$FacilityCopyWithImpl<$Res, $Val extends Facility>
       facilityType: null == facilityType
           ? _value.facilityType
           : facilityType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
       geo: null == geo
           ? _value.geo
           : geo // ignore: cast_nullable_to_non_nullable
@@ -134,7 +134,7 @@ abstract class _$$_FacilityCopyWith<$Res> implements $FacilityCopyWith<$Res> {
       String imageUrl,
       double distance,
       String prefectureValue,
-      String facilityType,
+      List<String> facilityType,
       Geo geo});
 
   @override
@@ -187,9 +187,9 @@ class __$$_FacilityCopyWithImpl<$Res>
           : prefectureValue // ignore: cast_nullable_to_non_nullable
               as String,
       facilityType: null == facilityType
-          ? _value.facilityType
+          ? _value._facilityType
           : facilityType // ignore: cast_nullable_to_non_nullable
-              as String,
+              as List<String>,
       geo: null == geo
           ? _value.geo
           : geo // ignore: cast_nullable_to_non_nullable
@@ -208,8 +208,9 @@ class _$_Facility implements _Facility {
       this.imageUrl = "",
       this.distance = 0.0,
       this.prefectureValue = "",
-      this.facilityType = "",
-      required this.geo});
+      final List<String> facilityType = const [],
+      required this.geo})
+      : _facilityType = facilityType;
 
   factory _$_Facility.fromJson(Map<String, dynamic> json) =>
       _$$_FacilityFromJson(json);
@@ -232,9 +233,15 @@ class _$_Facility implements _Facility {
   @override
   @JsonKey()
   final String prefectureValue;
+  final List<String> _facilityType;
   @override
   @JsonKey()
-  final String facilityType;
+  List<String> get facilityType {
+    if (_facilityType is EqualUnmodifiableListView) return _facilityType;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_facilityType);
+  }
+
   @override
   final Geo geo;
 
@@ -258,15 +265,23 @@ class _$_Facility implements _Facility {
                 other.distance == distance) &&
             (identical(other.prefectureValue, prefectureValue) ||
                 other.prefectureValue == prefectureValue) &&
-            (identical(other.facilityType, facilityType) ||
-                other.facilityType == facilityType) &&
+            const DeepCollectionEquality()
+                .equals(other._facilityType, _facilityType) &&
             (identical(other.geo, geo) || other.geo == geo));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, placeId, name, vicinity,
-      imageUrl, distance, prefectureValue, facilityType, geo);
+  int get hashCode => Object.hash(
+      runtimeType,
+      placeId,
+      name,
+      vicinity,
+      imageUrl,
+      distance,
+      prefectureValue,
+      const DeepCollectionEquality().hash(_facilityType),
+      geo);
 
   @JsonKey(ignore: true)
   @override
@@ -290,7 +305,7 @@ abstract class _Facility implements Facility {
       final String imageUrl,
       final double distance,
       final String prefectureValue,
-      final String facilityType,
+      final List<String> facilityType,
       required final Geo geo}) = _$_Facility;
 
   factory _Facility.fromJson(Map<String, dynamic> json) = _$_Facility.fromJson;
@@ -308,7 +323,7 @@ abstract class _Facility implements Facility {
   @override
   String get prefectureValue;
   @override
-  String get facilityType;
+  List<String> get facilityType;
   @override
   Geo get geo;
   @override

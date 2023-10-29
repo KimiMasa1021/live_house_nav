@@ -10,10 +10,8 @@ class GenrePanel extends ConsumerWidget {
   const GenrePanel({
     super.key,
     required this.facilityType,
-    required this.imagePath,
   });
   final FacilityType facilityType;
-  final String imagePath;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,37 +24,27 @@ class GenrePanel extends ConsumerWidget {
           extra: facilityType.name,
         );
       },
-      child: Container(
-        width: size.width / 2 - 15,
-        height: 51,
-        margin: const EdgeInsets.only(bottom: 10),
-        decoration: BoxDecoration(
-          color: HexColor("2A2A2A"),
-          borderRadius: BorderRadius.circular(7),
-        ),
-        child: Row(
+      child: SizedBox(
+        width: 90,
+        child: Column(
           children: [
-            AspectRatio(
-              aspectRatio: 1,
-              child: Container(
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(7),
-                    bottomLeft: Radius.circular(7),
-                  ),
-                  image: DecorationImage(
-                    image: AssetImage(imagePath),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
+            CircleAvatar(
+              radius: 35,
+              backgroundImage: AssetImage(facilityType.imagePath),
             ),
-            const SizedBox(width: 7),
+            const SizedBox(height: 3),
             Text(
               facilityType.displayName,
-              style: textTheme.fs16.copyWith(
+              style: textTheme.fs14.copyWith(
                 fontWeight: FontWeight.bold,
+                color: HexColor("FFC700"),
+                shadows: [
+                  BoxShadow(
+                    color: HexColor("FF0000"),
+                    offset: const Offset(1, 1),
+                    blurRadius: 0,
+                  )
+                ],
               ),
             )
           ],

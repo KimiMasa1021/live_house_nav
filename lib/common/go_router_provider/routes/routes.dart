@@ -13,6 +13,7 @@ class Routes {
   final String signUp;
   final String waitScreen;
   final String postArticle;
+  final String setArtists;
   Routes({
     required this.liveHouseMap,
     required this.addArticles,
@@ -28,6 +29,7 @@ class Routes {
     required this.signUp,
     required this.waitScreen,
     required this.postArticle,
+    required this.setArtists,
   });
 
   factory Routes.path() {
@@ -46,6 +48,7 @@ class Routes {
       signUp: "sign_up",
       waitScreen: "wait_screen",
       postArticle: "post_article",
+      setArtists: "set_artists",
     );
   }
 
@@ -65,6 +68,7 @@ class Routes {
       signUp: "signUp",
       waitScreen: "waitScreen",
       postArticle: "postArticle",
+      setArtists: "setArtists",
     );
   }
 }

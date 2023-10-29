@@ -1,3 +1,5 @@
+import '../gen/assets.gen.dart';
+
 enum FacilityType {
   liveHoue,
   jazzBar,
@@ -23,6 +25,15 @@ extension FacilityTypeExtension on FacilityType {
     FacilityType.club: "club",
   };
 
+  static final imagePaths = {
+    FacilityType.liveHoue: Assets.facility.liveHouse.path,
+    FacilityType.jazzBar: Assets.facility.jazz.path,
+    FacilityType.hole: Assets.facility.hole.path,
+    FacilityType.arena: Assets.facility.aina.path,
+    FacilityType.club: Assets.facility.club.path,
+  };
+
   String get displayName => displayNames[this]!;
   String get name => names[this]!;
+  String get imagePath => imagePaths[this]!;
 }

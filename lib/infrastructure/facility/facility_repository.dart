@@ -1,15 +1,26 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/facility/facility_repository_base.dart';
 import '../../domain/facility/value/facility/facility.dart';
 import '../../domain/text_search/live_house_suggests.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:async/async.dart';
+import 'package:http/io_client.dart';
 
 final facilityRepository = Provider((ref) => FacilityRepository());
 
 class FacilityRepository implements FacilityRepositoryBase {
+  late HttpClient client;
+  late IOClient http;
+  FacilityRepository() {
+    client = HttpClient();
+    client.badCertificateCallback =
+        ((X509Certificate cert, String host, int port) => true);
+    http = IOClient(client);
+  }
   final _db = FirebaseFirestore.instance;
   QueryDocumentSnapshot<Facility>? lastItem;
 
@@ -48,7 +59,7 @@ class FacilityRepository implements FacilityRepositoryBase {
         );
 
     final querySnapshot = await collectionReference
-        .where("facilityType", isEqualTo: facilityType)
+        .where("facilityType", arrayContains: facilityType)
         .orderBy("createdAt")
         .limit(10)
         .get();
@@ -70,7 +81,7 @@ class FacilityRepository implements FacilityRepositoryBase {
     if (lastItem == null) return [];
 
     final querySnapshot = await collectionReference
-        .where("facilityType", isEqualTo: facilityType)
+        .where("facilityType", arrayContains: facilityType)
         .orderBy("createdAt")
         .startAfterDocument(lastItem!)
         .limit(10)

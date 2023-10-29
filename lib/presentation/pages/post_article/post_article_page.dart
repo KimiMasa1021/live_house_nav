@@ -2,13 +2,16 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:live_house_nav/presentation/notifier/article/post_article/post_article_notifier.dart';
 
 import '../../../common/text_theme/text_theme.dart';
 import '../../../domain/facility_detail/values/facility_detail/facility_detail.dart';
+import '../../notifier/spotify/search_artists/search_artists_notifier.dart';
 import 'widgets/pick_image_panel.dart';
 
 class PostArticlePage extends HookConsumerWidget {
@@ -77,10 +80,9 @@ class PostArticlePage extends HookConsumerWidget {
                           SizedBox(
                             width: size.width / 3,
                             child: AspectRatio(
-                              aspectRatio: 3 / 4,
+                              aspectRatio: 1,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.red,
                                   borderRadius: BorderRadius.circular(15),
                                   image: DecorationImage(
                                     image: FileImage(
@@ -122,25 +124,51 @@ class PostArticlePage extends HookConsumerWidget {
                 ],
               ),
             ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                color: Colors.white,
+            postArticle.artists.items.isNotEmpty
+                ? Column(
+                    children: List.generate(
+                      postArticle.artists.items.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 5,
+                        ),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: NetworkImage(postArticle
+                                  .artists.items[index].images[0].url),
+                            ),
+                            const SizedBox(width: 5),
+                            Text(postArticle.artists.items[index].name)
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                : const SizedBox(),
+            InkWell(
+              onTap: () {
+                context.pushNamed(Routes.name().setArtists);
+              },
+              child: Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  color: Colors.white,
+                ),
+                child: Text(
+                  "アーティストタグを追加",
+                  style: textTheme.fs15.copyWith(color: Colors.black),
+                ),
               ),
-              child: Text(
-                "アーティストタグを追加",
-                style: textTheme.fs15.copyWith(color: Colors.black),
-              ),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-/*
-https://api.spotify.com/v1/search?q=%E3%83%8F%E3%82%B7%E3%83%AA%E3%82%B3%E3%83%9F%E3%83%BC%E3%82%BA&type=album%2Cartist
-*/ 

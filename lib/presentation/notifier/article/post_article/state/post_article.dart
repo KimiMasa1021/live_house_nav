@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:live_house_nav/presentation/notifier/spotify/search_artists/state/artists.dart';
 
 part 'post_article.freezed.dart';
 
@@ -9,5 +10,6 @@ part 'post_article.freezed.dart';
 class PostArticle with _$PostArticle {
   factory PostArticle({
     @Default([]) List<File> pickedImages,
+    required Artists artists,
   }) = _PostArticle;
 }

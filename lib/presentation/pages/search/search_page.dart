@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:live_house_nav/presentation/notifier/facility/new_facility/new_facility_notifier.dart';
 import 'package:live_house_nav/presentation/pages/search/widgets/genre_panel.dart';
-import 'package:live_house_nav/presentation/pages/widgets/live_house_search_bar.dart';
 import '../../../common/go_router_provider/routes/routes.dart';
 import '../../../common/text_theme/text_theme.dart';
 import '../../../constant/facility_type.dart';
-import '../page_root.dart';
 import 'widgets/fake_search_bar.dart';
 import 'widgets/new_facility_panel.dart';
 import 'widgets/search_method_bar.dart';
@@ -21,7 +18,6 @@ class SearchPage extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final textTheme = ref.watch(myTextThemeProvider);
     final newFacility = ref.watch(newFacilityNotifierProvider);
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,
@@ -45,42 +41,22 @@ class SearchPage extends HookConsumerWidget {
                   ),
                 ),
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(width: 10),
-                  Column(
-                    children: [
-                      GenrePanel(
-                        facilityType: FacilityType.hole,
-                        imagePath: Assets.facility.hole.path,
-                      ),
-                      GenrePanel(
-                        facilityType: FacilityType.arena,
-                        imagePath: Assets.facility.aina.path,
-                      ),
-                      GenrePanel(
-                        facilityType: FacilityType.club,
-                        imagePath: Assets.facility.club.path,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 10),
-                  Column(
-                    children: [
-                      GenrePanel(
-                        facilityType: FacilityType.liveHoue,
-                        imagePath: Assets.facility.liveHouse.path,
-                      ),
-                      GenrePanel(
-                        facilityType: FacilityType.jazzBar,
-                        imagePath: Assets.facility.jazz.path,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(width: 10),
-                ],
+              const SizedBox(height: 10),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(width: 10),
+                    ...List.generate(
+                      FacilityType.values.length,
+                      (index) =>
+                          GenrePanel(facilityType: FacilityType.values[index]),
+                    ),
+                  ],
+                ),
               ),
+              const SizedBox(height: 15),
               SearchMethodBar(
                 text: "エリアから検索",
                 onTap: () {},
@@ -108,12 +84,15 @@ class SearchPage extends HookConsumerWidget {
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: List.generate(
-                        data.length,
-                        (index) => NewFacilityPanel(
-                          liveHouse: data[index],
+                      children: [
+                        const SizedBox(width: 10),
+                        ...List.generate(
+                          data.length,
+                          (index) => NewFacilityPanel(
+                            liveHouse: data[index],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   );
                 },
@@ -139,12 +118,15 @@ class SearchPage extends HookConsumerWidget {
                   return SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: List.generate(
-                        data.length,
-                        (index) => NewFacilityPanel(
-                          liveHouse: data[index],
+                      children: [
+                        const SizedBox(width: 10),
+                        ...List.generate(
+                          data.length,
+                          (index) => NewFacilityPanel(
+                            liveHouse: data[index],
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   );
                 },

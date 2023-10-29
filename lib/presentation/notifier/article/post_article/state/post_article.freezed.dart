@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$PostArticle {
   List<File> get pickedImages => throw _privateConstructorUsedError;
+  Artists get artists => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostArticleCopyWith<PostArticle> get copyWith =>
@@ -29,7 +30,9 @@ abstract class $PostArticleCopyWith<$Res> {
           PostArticle value, $Res Function(PostArticle) then) =
       _$PostArticleCopyWithImpl<$Res, PostArticle>;
   @useResult
-  $Res call({List<File> pickedImages});
+  $Res call({List<File> pickedImages, Artists artists});
+
+  $ArtistsCopyWith<$Res> get artists;
 }
 
 /// @nodoc
@@ -46,13 +49,26 @@ class _$PostArticleCopyWithImpl<$Res, $Val extends PostArticle>
   @override
   $Res call({
     Object? pickedImages = null,
+    Object? artists = null,
   }) {
     return _then(_value.copyWith(
       pickedImages: null == pickedImages
           ? _value.pickedImages
           : pickedImages // ignore: cast_nullable_to_non_nullable
               as List<File>,
+      artists: null == artists
+          ? _value.artists
+          : artists // ignore: cast_nullable_to_non_nullable
+              as Artists,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ArtistsCopyWith<$Res> get artists {
+    return $ArtistsCopyWith<$Res>(_value.artists, (value) {
+      return _then(_value.copyWith(artists: value) as $Val);
+    });
   }
 }
 
@@ -64,7 +80,10 @@ abstract class _$$_PostArticleCopyWith<$Res>
       __$$_PostArticleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<File> pickedImages});
+  $Res call({List<File> pickedImages, Artists artists});
+
+  @override
+  $ArtistsCopyWith<$Res> get artists;
 }
 
 /// @nodoc
@@ -79,12 +98,17 @@ class __$$_PostArticleCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pickedImages = null,
+    Object? artists = null,
   }) {
     return _then(_$_PostArticle(
       pickedImages: null == pickedImages
           ? _value._pickedImages
           : pickedImages // ignore: cast_nullable_to_non_nullable
               as List<File>,
+      artists: null == artists
+          ? _value.artists
+          : artists // ignore: cast_nullable_to_non_nullable
+              as Artists,
     ));
   }
 }
@@ -92,7 +116,8 @@ class __$$_PostArticleCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PostArticle implements _PostArticle {
-  _$_PostArticle({final List<File> pickedImages = const []})
+  _$_PostArticle(
+      {final List<File> pickedImages = const [], required this.artists})
       : _pickedImages = pickedImages;
 
   final List<File> _pickedImages;
@@ -105,8 +130,11 @@ class _$_PostArticle implements _PostArticle {
   }
 
   @override
+  final Artists artists;
+
+  @override
   String toString() {
-    return 'PostArticle(pickedImages: $pickedImages)';
+    return 'PostArticle(pickedImages: $pickedImages, artists: $artists)';
   }
 
   @override
@@ -115,12 +143,13 @@ class _$_PostArticle implements _PostArticle {
         (other.runtimeType == runtimeType &&
             other is _$_PostArticle &&
             const DeepCollectionEquality()
-                .equals(other._pickedImages, _pickedImages));
+                .equals(other._pickedImages, _pickedImages) &&
+            (identical(other.artists, artists) || other.artists == artists));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_pickedImages));
+      runtimeType, const DeepCollectionEquality().hash(_pickedImages), artists);
 
   @JsonKey(ignore: true)
   @override
@@ -130,10 +159,14 @@ class _$_PostArticle implements _PostArticle {
 }
 
 abstract class _PostArticle implements PostArticle {
-  factory _PostArticle({final List<File> pickedImages}) = _$_PostArticle;
+  factory _PostArticle(
+      {final List<File> pickedImages,
+      required final Artists artists}) = _$_PostArticle;
 
   @override
   List<File> get pickedImages;
+  @override
+  Artists get artists;
   @override
   @JsonKey(ignore: true)
   _$$_PostArticleCopyWith<_$_PostArticle> get copyWith =>

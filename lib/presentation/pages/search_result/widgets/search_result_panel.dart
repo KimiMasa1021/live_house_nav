@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/common/hex_color.dart';
 import 'package:live_house_nav/common/text_theme/text_theme.dart';
+import 'package:live_house_nav/gen/assets.gen.dart';
 import '../../../../domain/facility/value/facility/facility.dart';
 
 class SearchResultPanel extends ConsumerWidget {
@@ -47,14 +48,13 @@ class SearchResultPanel extends ConsumerWidget {
                       ? DecorationImage(
                           image: NetworkImage(liveHouse.imageUrl),
                           fit: BoxFit.cover,
-                          onError: (exception, stackTrace) =>
-                              const DecorationImage(
-                            image: AssetImage("assets/pngs/no_image.png"),
+                          onError: (exception, stackTrace) => DecorationImage(
+                            image: AssetImage(Assets.facility.noImage.path),
                             fit: BoxFit.cover,
                           ),
                         )
-                      : const DecorationImage(
-                          image: AssetImage("assets/pngs/no_image.png"),
+                      : DecorationImage(
+                          image: AssetImage(Assets.facility.noImage.path),
                           fit: BoxFit.cover,
                         ),
                 ),

@@ -7,6 +7,7 @@ import 'package:live_house_nav/presentation/pages/auth/sign_up/sign_up_page.dart
 import 'package:live_house_nav/presentation/pages/auth/wait_screen/wait_screen_page.dart';
 import 'package:live_house_nav/presentation/pages/image_preview/image_preview_page.dart';
 import 'package:live_house_nav/presentation/pages/facility_detail/facility_detail_page.dart';
+import 'package:live_house_nav/presentation/pages/post_article/set_artists/set_artists_page.dart';
 import 'package:live_house_nav/presentation/pages/search/search_page.dart';
 import 'package:live_house_nav/presentation/pages/search_result/search_result_page.dart';
 import 'package:live_house_nav/presentation/pages/profile/profile_page.dart';
@@ -86,6 +87,20 @@ final routerProvider = Provider(
                             ),
                           );
                         },
+                        routes: [
+                          GoRoute(
+                            path: Routes.path().setArtists,
+                            name: Routes.name().setArtists,
+                            parentNavigatorKey: _rootNavigatorKey,
+                            pageBuilder: (context, state) {
+                              return NoTransitionPage(
+                                child: SetArtistsPage(
+                                  key: state.pageKey,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),

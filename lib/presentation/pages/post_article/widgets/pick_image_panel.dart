@@ -51,7 +51,7 @@ class PickImagePanel extends ConsumerWidget {
         child: SizedBox(
           width: size.width / 3,
           child: AspectRatio(
-            aspectRatio: 3 / 4,
+            aspectRatio: 1,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),

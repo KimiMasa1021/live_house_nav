@@ -14,7 +14,7 @@ class Facility with _$Facility {
     @Default("") String imageUrl,
     @Default(0.0) double distance,
     @Default("") String prefectureValue,
-    @Default("") String facilityType,
+    @Default([]) List<String> facilityType,
     required Geo geo,
   }) = _Facility;
 

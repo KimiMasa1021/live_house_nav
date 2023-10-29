@@ -13,7 +13,10 @@ _$_Facility _$$_FacilityFromJson(Map<String, dynamic> json) => _$_Facility(
       imageUrl: json['imageUrl'] as String? ?? "",
       distance: (json['distance'] as num?)?.toDouble() ?? 0.0,
       prefectureValue: json['prefectureValue'] as String? ?? "",
-      facilityType: json['facilityType'] as String? ?? "",
+      facilityType: (json['facilityType'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
       geo: Geo.fromJson(json['geo'] as Map<String, dynamic>),
     );
 

@@ -117,6 +117,8 @@ class MapPage extends HookConsumerWidget {
                         padding: const EdgeInsets.only(bottom: 150, right: 25),
                         child: FloatingActionButton(
                           onPressed: () async {
+                            debugPrint("${mapController.latLng!}");
+                            animationController.reverse();
                             await newMethodsLiveCTL.test(mapController.latLng!);
                           },
                           backgroundColor: HexColor("131313"),

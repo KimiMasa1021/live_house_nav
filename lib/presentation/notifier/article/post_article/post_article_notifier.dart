@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:live_house_nav/domain/spotify/values/artist/artist.dart';
+import 'package:live_house_nav/presentation/notifier/spotify/search_artists/state/artists.dart';
 
 import 'state/post_article.dart';
 
@@ -14,7 +16,7 @@ final postArticleNotifierProvider =
 class PostArticleNotifier extends Notifier<PostArticle> {
   @override
   PostArticle build() {
-    return PostArticle();
+    return PostArticle(artists: Artists());
   }
 
   final picker = ImagePicker();
@@ -36,7 +38,6 @@ class PostArticleNotifier extends Notifier<PostArticle> {
       pickedImages: [...state.pickedImages, file],
     );
     stop.stop();
-    debugPrint("あああ${stop.elapsedMilliseconds}");
     pop();
   }
 
@@ -47,6 +48,18 @@ class PostArticleNotifier extends Notifier<PostArticle> {
 
     state = state.copyWith(
       pickedImages: newList,
+    );
+  }
+
+  void addArtist(Artist artist) {
+    state = state.copyWith(
+      artists: Artists(items: [...state.artists.items, artist]),
+    );
+  }
+
+  void removeArtist(Artist artist) {
+    state = state.copyWith(
+      artists: Artists(items: [...state.artists.items, artist]),
     );
   }
 }

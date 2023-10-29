@@ -20,6 +20,7 @@ class MapControllerNotifier extends _$MapControllerNotifier {
   }
 
   Future<void> setCamera(List<Facility> testList) async {
+    if (testList.isEmpty) return;
     final double north =
         testList.map((e) => e.geo.geopoint.latitude).reduce(max);
     final double south =

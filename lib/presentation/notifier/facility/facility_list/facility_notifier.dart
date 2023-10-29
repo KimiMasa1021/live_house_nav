@@ -16,8 +16,8 @@ final facilityNotifierProvider =
 
 class FacilityNotifier extends FamilyAsyncNotifier<List<Facility>, LatLng> {
   @override
-  FutureOr<List<Facility>> build(LatLng initialPosition) async {
-    return await test(initialPosition);
+  FutureOr<List<Facility>> build(LatLng arg) async {
+    return await test(arg);
   }
 
   Future<List<Facility>> test(LatLng latLng) async {
@@ -28,27 +28,10 @@ class FacilityNotifier extends FamilyAsyncNotifier<List<Facility>, LatLng> {
       ),
     );
 
-    result.asMap().entries.map((e) {
-      final distance = Geolocator.distanceBetween(
-        latLng.latitude,
-        latLng.longitude,
-        e.value.geo.geopoint.latitude,
-        e.value.geo.geopoint.longitude,
-      );
-      result[e.key] = result[e.key].copyWith(distance: distance);
-    }).toList();
-
-    result.sort(((a, b) => a.distance.compareTo(b.distance)));
-
     final mapNotifier = ref.read(mapControllerNotifierProvider.notifier);
 
-    final mapState = ref.read(mapControllerNotifierProvider);
-    mapNotifier.setPreviousValue(
-      latLng,
-      mapState.radiusInKm,
-    );
-    final focusFacilities = result.take(5).toList();
-    await mapNotifier.setCamera(focusFacilities);
+    await mapNotifier.setCamera(result);
+    state = AsyncValue.data(result);
     return result;
   }
 
