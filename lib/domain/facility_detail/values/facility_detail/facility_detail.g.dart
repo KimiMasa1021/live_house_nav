@@ -8,6 +8,7 @@ part of 'facility_detail.dart';
 
 _$_FacilityDetail _$$_FacilityDetailFromJson(Map<String, dynamic> json) =>
     _$_FacilityDetail(
+      placeId: json['place_id'] as String? ?? "",
       name: json['name'] as String? ?? "",
       vicinity: json['vicinity'] as String? ?? "",
       formattedPhoneNumber: json['formatted_phone_number'] as String? ?? "",
@@ -29,6 +30,7 @@ _$_FacilityDetail _$$_FacilityDetailFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_FacilityDetailToJson(_$_FacilityDetail instance) =>
     <String, dynamic>{
+      'place_id': instance.placeId,
       'name': instance.name,
       'vicinity': instance.vicinity,
       'formatted_phone_number': instance.formattedPhoneNumber,

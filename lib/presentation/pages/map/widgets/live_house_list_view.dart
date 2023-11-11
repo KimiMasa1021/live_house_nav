@@ -23,6 +23,8 @@ class LiveHouseListView extends HookConsumerWidget {
     final newMethodsLive = ref.watch(facilityNotifierProvider(
         LatLng(location.latitude, location.longitude)));
     final mapController = ref.watch(mapControllerNotifierProvider);
+    final mapControllerNotifier =
+        ref.watch(mapControllerNotifierProvider.notifier);
 
     return newMethodsLive.when(
       data: (liveHoue) {
@@ -35,7 +37,8 @@ class LiveHouseListView extends HookConsumerWidget {
             child: PageView(
               controller: pageController,
               onPageChanged: (val) async {
-                final geo = liveHoue.elementAt(val).geo.geopoint;
+                final facility = liveHoue.elementAt(val);
+                final geo = facility.geo.geopoint;
                 await mapController.controller!.animateCamera(
                   CameraUpdate.newLatLng(
                     LatLng(
@@ -44,6 +47,7 @@ class LiveHouseListView extends HookConsumerWidget {
                     ),
                   ),
                 );
+                mapControllerNotifier.updateMarkerId(facility.placeId);
               },
               children: liveHoue.map(
                 (house) {

@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PostArticle {
   List<File> get pickedImages => throw _privateConstructorUsedError;
   Artists get artists => throw _privateConstructorUsedError;
+  String get text => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PostArticleCopyWith<PostArticle> get copyWith =>
@@ -30,7 +31,7 @@ abstract class $PostArticleCopyWith<$Res> {
           PostArticle value, $Res Function(PostArticle) then) =
       _$PostArticleCopyWithImpl<$Res, PostArticle>;
   @useResult
-  $Res call({List<File> pickedImages, Artists artists});
+  $Res call({List<File> pickedImages, Artists artists, String text});
 
   $ArtistsCopyWith<$Res> get artists;
 }
@@ -50,6 +51,7 @@ class _$PostArticleCopyWithImpl<$Res, $Val extends PostArticle>
   $Res call({
     Object? pickedImages = null,
     Object? artists = null,
+    Object? text = null,
   }) {
     return _then(_value.copyWith(
       pickedImages: null == pickedImages
@@ -60,6 +62,10 @@ class _$PostArticleCopyWithImpl<$Res, $Val extends PostArticle>
           ? _value.artists
           : artists // ignore: cast_nullable_to_non_nullable
               as Artists,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -80,7 +86,7 @@ abstract class _$$_PostArticleCopyWith<$Res>
       __$$_PostArticleCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<File> pickedImages, Artists artists});
+  $Res call({List<File> pickedImages, Artists artists, String text});
 
   @override
   $ArtistsCopyWith<$Res> get artists;
@@ -99,6 +105,7 @@ class __$$_PostArticleCopyWithImpl<$Res>
   $Res call({
     Object? pickedImages = null,
     Object? artists = null,
+    Object? text = null,
   }) {
     return _then(_$_PostArticle(
       pickedImages: null == pickedImages
@@ -109,6 +116,10 @@ class __$$_PostArticleCopyWithImpl<$Res>
           ? _value.artists
           : artists // ignore: cast_nullable_to_non_nullable
               as Artists,
+      text: null == text
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -117,7 +128,9 @@ class __$$_PostArticleCopyWithImpl<$Res>
 
 class _$_PostArticle implements _PostArticle {
   _$_PostArticle(
-      {final List<File> pickedImages = const [], required this.artists})
+      {final List<File> pickedImages = const [],
+      required this.artists,
+      this.text = ""})
       : _pickedImages = pickedImages;
 
   final List<File> _pickedImages;
@@ -131,10 +144,13 @@ class _$_PostArticle implements _PostArticle {
 
   @override
   final Artists artists;
+  @override
+  @JsonKey()
+  final String text;
 
   @override
   String toString() {
-    return 'PostArticle(pickedImages: $pickedImages, artists: $artists)';
+    return 'PostArticle(pickedImages: $pickedImages, artists: $artists, text: $text)';
   }
 
   @override
@@ -144,12 +160,13 @@ class _$_PostArticle implements _PostArticle {
             other is _$_PostArticle &&
             const DeepCollectionEquality()
                 .equals(other._pickedImages, _pickedImages) &&
-            (identical(other.artists, artists) || other.artists == artists));
+            (identical(other.artists, artists) || other.artists == artists) &&
+            (identical(other.text, text) || other.text == text));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_pickedImages), artists);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_pickedImages), artists, text);
 
   @JsonKey(ignore: true)
   @override
@@ -161,12 +178,15 @@ class _$_PostArticle implements _PostArticle {
 abstract class _PostArticle implements PostArticle {
   factory _PostArticle(
       {final List<File> pickedImages,
-      required final Artists artists}) = _$_PostArticle;
+      required final Artists artists,
+      final String text}) = _$_PostArticle;
 
   @override
   List<File> get pickedImages;
   @override
   Artists get artists;
+  @override
+  String get text;
   @override
   @JsonKey(ignore: true)
   _$$_PostArticleCopyWith<_$_PostArticle> get copyWith =>

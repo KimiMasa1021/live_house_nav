@@ -14,6 +14,7 @@ class Routes {
   final String waitScreen;
   final String postArticle;
   final String setArtists;
+  final String articleDetail;
   Routes({
     required this.liveHouseMap,
     required this.addArticles,
@@ -30,6 +31,7 @@ class Routes {
     required this.waitScreen,
     required this.postArticle,
     required this.setArtists,
+    required this.articleDetail,
   });
 
   factory Routes.path() {
@@ -49,6 +51,7 @@ class Routes {
       waitScreen: "wait_screen",
       postArticle: "post_article",
       setArtists: "set_artists",
+      articleDetail: "article_detail",
     );
   }
 
@@ -69,6 +72,7 @@ class Routes {
       waitScreen: "waitScreen",
       postArticle: "postArticle",
       setArtists: "setArtists",
+      articleDetail: "articleDetail",
     );
   }
 }

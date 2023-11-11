@@ -7,7 +7,7 @@ part of 'map_controller_notifier.dart';
 // **************************************************************************
 
 String _$mapControllerNotifierHash() =>
-    r'd6a9fdd3709fd098eb1b8ed934978930685b5490';
+    r'd39e0725281e7fcb0cd3520acb9f835631b4fc2c';
 
 /// See also [MapControllerNotifier].
 @ProviderFor(MapControllerNotifier)

@@ -9,6 +9,7 @@ part 'facility_detail.g.dart';
 class FacilityDetail with _$FacilityDetail {
   @JsonSerializable(fieldRename: FieldRename.snake)
   factory FacilityDetail({
+    @Default("") String placeId,
     @Default("") String name,
     @Default("") String vicinity,
     @Default("") String formattedPhoneNumber,

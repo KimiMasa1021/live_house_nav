@@ -5,6 +5,7 @@ import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../domain/facility/value/facility/facility.dart';
 import 'status/map_controller.dart';
+
 part 'map_controller_notifier.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -62,5 +63,9 @@ class MapControllerNotifier extends _$MapControllerNotifier {
 
   void setRadiusInKm(double radiusInKm) {
     state = state.copyWith(radiusInKm: radiusInKm);
+  }
+
+  void updateMarkerId(String id) {
+    state = state.copyWith(markerId: id);
   }
 }

@@ -11,5 +11,6 @@ class MapController with _$MapController {
     @Default(null) LatLng? latLng,
     @Default(10.0) double radiusInKm,
     @Default(10.0) double previousRadiusInKm,
+    @Default("") String markerId,
   }) = _MapController;
 }

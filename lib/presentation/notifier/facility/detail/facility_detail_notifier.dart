@@ -25,5 +25,8 @@ Future<FacilityDetail> featchFacilityDetail(
     return "${baseImageRefApiUrl}photo_reference=${e.photoReference}&key=$apiKey";
   }).toList();
 
-  return result.copyWith(imageList: imageList);
+  return result.copyWith(
+    imageList: imageList,
+    placeId: priceId,
+  );
 }

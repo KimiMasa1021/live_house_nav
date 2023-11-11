@@ -27,6 +27,8 @@ mixin _$Facility {
   double get distance => throw _privateConstructorUsedError;
   String get prefectureValue => throw _privateConstructorUsedError;
   List<String> get facilityType => throw _privateConstructorUsedError;
+  BitmapDescriptor? get marker => throw _privateConstructorUsedError;
+  BitmapDescriptor? get activeMarker => throw _privateConstructorUsedError;
   Geo get geo => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -48,6 +50,8 @@ abstract class $FacilityCopyWith<$Res> {
       double distance,
       String prefectureValue,
       List<String> facilityType,
+      BitmapDescriptor? marker,
+      BitmapDescriptor? activeMarker,
       Geo geo});
 
   $GeoCopyWith<$Res> get geo;
@@ -73,6 +77,8 @@ class _$FacilityCopyWithImpl<$Res, $Val extends Facility>
     Object? distance = null,
     Object? prefectureValue = null,
     Object? facilityType = null,
+    Object? marker = freezed,
+    Object? activeMarker = freezed,
     Object? geo = null,
   }) {
     return _then(_value.copyWith(
@@ -104,6 +110,14 @@ class _$FacilityCopyWithImpl<$Res, $Val extends Facility>
           ? _value.facilityType
           : facilityType // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      marker: freezed == marker
+          ? _value.marker
+          : marker // ignore: cast_nullable_to_non_nullable
+              as BitmapDescriptor?,
+      activeMarker: freezed == activeMarker
+          ? _value.activeMarker
+          : activeMarker // ignore: cast_nullable_to_non_nullable
+              as BitmapDescriptor?,
       geo: null == geo
           ? _value.geo
           : geo // ignore: cast_nullable_to_non_nullable
@@ -135,6 +149,8 @@ abstract class _$$_FacilityCopyWith<$Res> implements $FacilityCopyWith<$Res> {
       double distance,
       String prefectureValue,
       List<String> facilityType,
+      BitmapDescriptor? marker,
+      BitmapDescriptor? activeMarker,
       Geo geo});
 
   @override
@@ -159,6 +175,8 @@ class __$$_FacilityCopyWithImpl<$Res>
     Object? distance = null,
     Object? prefectureValue = null,
     Object? facilityType = null,
+    Object? marker = freezed,
+    Object? activeMarker = freezed,
     Object? geo = null,
   }) {
     return _then(_$_Facility(
@@ -190,6 +208,14 @@ class __$$_FacilityCopyWithImpl<$Res>
           ? _value._facilityType
           : facilityType // ignore: cast_nullable_to_non_nullable
               as List<String>,
+      marker: freezed == marker
+          ? _value.marker
+          : marker // ignore: cast_nullable_to_non_nullable
+              as BitmapDescriptor?,
+      activeMarker: freezed == activeMarker
+          ? _value.activeMarker
+          : activeMarker // ignore: cast_nullable_to_non_nullable
+              as BitmapDescriptor?,
       geo: null == geo
           ? _value.geo
           : geo // ignore: cast_nullable_to_non_nullable
@@ -209,6 +235,8 @@ class _$_Facility implements _Facility {
       this.distance = 0.0,
       this.prefectureValue = "",
       final List<String> facilityType = const [],
+      this.marker = null,
+      this.activeMarker = null,
       required this.geo})
       : _facilityType = facilityType;
 
@@ -243,11 +271,17 @@ class _$_Facility implements _Facility {
   }
 
   @override
+  @JsonKey()
+  final BitmapDescriptor? marker;
+  @override
+  @JsonKey()
+  final BitmapDescriptor? activeMarker;
+  @override
   final Geo geo;
 
   @override
   String toString() {
-    return 'Facility(placeId: $placeId, name: $name, vicinity: $vicinity, imageUrl: $imageUrl, distance: $distance, prefectureValue: $prefectureValue, facilityType: $facilityType, geo: $geo)';
+    return 'Facility(placeId: $placeId, name: $name, vicinity: $vicinity, imageUrl: $imageUrl, distance: $distance, prefectureValue: $prefectureValue, facilityType: $facilityType, marker: $marker, activeMarker: $activeMarker, geo: $geo)';
   }
 
   @override
@@ -267,6 +301,9 @@ class _$_Facility implements _Facility {
                 other.prefectureValue == prefectureValue) &&
             const DeepCollectionEquality()
                 .equals(other._facilityType, _facilityType) &&
+            (identical(other.marker, marker) || other.marker == marker) &&
+            (identical(other.activeMarker, activeMarker) ||
+                other.activeMarker == activeMarker) &&
             (identical(other.geo, geo) || other.geo == geo));
   }
 
@@ -281,6 +318,8 @@ class _$_Facility implements _Facility {
       distance,
       prefectureValue,
       const DeepCollectionEquality().hash(_facilityType),
+      marker,
+      activeMarker,
       geo);
 
   @JsonKey(ignore: true)
@@ -306,6 +345,8 @@ abstract class _Facility implements Facility {
       final double distance,
       final String prefectureValue,
       final List<String> facilityType,
+      final BitmapDescriptor? marker,
+      final BitmapDescriptor? activeMarker,
       required final Geo geo}) = _$_Facility;
 
   factory _Facility.fromJson(Map<String, dynamic> json) = _$_Facility.fromJson;
@@ -324,6 +365,10 @@ abstract class _Facility implements Facility {
   String get prefectureValue;
   @override
   List<String> get facilityType;
+  @override
+  BitmapDescriptor? get marker;
+  @override
+  BitmapDescriptor? get activeMarker;
   @override
   Geo get geo;
   @override

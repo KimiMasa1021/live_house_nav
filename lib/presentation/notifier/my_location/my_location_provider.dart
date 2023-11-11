@@ -20,7 +20,7 @@ Future<Position> featchMyLocation(FeatchMyLocationRef ref) async {
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-    return Future.error('Location services are disabled.');
+    return defaultPosition;
   }
 
   permission = await Geolocator.checkPermission();

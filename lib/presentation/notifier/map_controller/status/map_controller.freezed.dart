@@ -22,6 +22,7 @@ mixin _$MapController {
   LatLng? get latLng => throw _privateConstructorUsedError;
   double get radiusInKm => throw _privateConstructorUsedError;
   double get previousRadiusInKm => throw _privateConstructorUsedError;
+  String get markerId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MapControllerCopyWith<MapController> get copyWith =>
@@ -40,7 +41,8 @@ abstract class $MapControllerCopyWith<$Res> {
       LatLng? previousLatLng,
       LatLng? latLng,
       double radiusInKm,
-      double previousRadiusInKm});
+      double previousRadiusInKm,
+      String markerId});
 }
 
 /// @nodoc
@@ -62,6 +64,7 @@ class _$MapControllerCopyWithImpl<$Res, $Val extends MapController>
     Object? latLng = freezed,
     Object? radiusInKm = null,
     Object? previousRadiusInKm = null,
+    Object? markerId = null,
   }) {
     return _then(_value.copyWith(
       controller: freezed == controller
@@ -88,6 +91,10 @@ class _$MapControllerCopyWithImpl<$Res, $Val extends MapController>
           ? _value.previousRadiusInKm
           : previousRadiusInKm // ignore: cast_nullable_to_non_nullable
               as double,
+      markerId: null == markerId
+          ? _value.markerId
+          : markerId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -106,7 +113,8 @@ abstract class _$$_MapControllerCopyWith<$Res>
       LatLng? previousLatLng,
       LatLng? latLng,
       double radiusInKm,
-      double previousRadiusInKm});
+      double previousRadiusInKm,
+      String markerId});
 }
 
 /// @nodoc
@@ -126,6 +134,7 @@ class __$$_MapControllerCopyWithImpl<$Res>
     Object? latLng = freezed,
     Object? radiusInKm = null,
     Object? previousRadiusInKm = null,
+    Object? markerId = null,
   }) {
     return _then(_$_MapController(
       controller: freezed == controller
@@ -152,6 +161,10 @@ class __$$_MapControllerCopyWithImpl<$Res>
           ? _value.previousRadiusInKm
           : previousRadiusInKm // ignore: cast_nullable_to_non_nullable
               as double,
+      markerId: null == markerId
+          ? _value.markerId
+          : markerId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -165,7 +178,8 @@ class _$_MapController implements _MapController {
       this.previousLatLng = null,
       this.latLng = null,
       this.radiusInKm = 10.0,
-      this.previousRadiusInKm = 10.0});
+      this.previousRadiusInKm = 10.0,
+      this.markerId = ""});
 
   @override
   @JsonKey()
@@ -185,10 +199,13 @@ class _$_MapController implements _MapController {
   @override
   @JsonKey()
   final double previousRadiusInKm;
+  @override
+  @JsonKey()
+  final String markerId;
 
   @override
   String toString() {
-    return 'MapController(controller: $controller, isCameraMoved: $isCameraMoved, previousLatLng: $previousLatLng, latLng: $latLng, radiusInKm: $radiusInKm, previousRadiusInKm: $previousRadiusInKm)';
+    return 'MapController(controller: $controller, isCameraMoved: $isCameraMoved, previousLatLng: $previousLatLng, latLng: $latLng, radiusInKm: $radiusInKm, previousRadiusInKm: $previousRadiusInKm, markerId: $markerId)';
   }
 
   @override
@@ -206,12 +223,14 @@ class _$_MapController implements _MapController {
             (identical(other.radiusInKm, radiusInKm) ||
                 other.radiusInKm == radiusInKm) &&
             (identical(other.previousRadiusInKm, previousRadiusInKm) ||
-                other.previousRadiusInKm == previousRadiusInKm));
+                other.previousRadiusInKm == previousRadiusInKm) &&
+            (identical(other.markerId, markerId) ||
+                other.markerId == markerId));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, controller, isCameraMoved,
-      previousLatLng, latLng, radiusInKm, previousRadiusInKm);
+      previousLatLng, latLng, radiusInKm, previousRadiusInKm, markerId);
 
   @JsonKey(ignore: true)
   @override
@@ -227,7 +246,8 @@ abstract class _MapController implements MapController {
       final LatLng? previousLatLng,
       final LatLng? latLng,
       final double radiusInKm,
-      final double previousRadiusInKm}) = _$_MapController;
+      final double previousRadiusInKm,
+      final String markerId}) = _$_MapController;
 
   @override
   GoogleMapController? get controller;
@@ -241,6 +261,8 @@ abstract class _MapController implements MapController {
   double get radiusInKm;
   @override
   double get previousRadiusInKm;
+  @override
+  String get markerId;
   @override
   @JsonKey(ignore: true)
   _$$_MapControllerCopyWith<_$_MapController> get copyWith =>

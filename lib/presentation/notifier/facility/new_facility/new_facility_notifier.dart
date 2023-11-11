@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/facility/facility_service.dart';
@@ -16,6 +17,7 @@ class NewFacilityNotifier extends AsyncNotifier<List<Facility>> {
 
   Future<List<Facility>> fetchNewFacility() async {
     final result = await ref.read(facilityServiceProvider).fetchNewFacility();
+
     return result;
   }
 }

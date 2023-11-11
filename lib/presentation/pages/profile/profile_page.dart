@@ -1,75 +1,56 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 
-class ProfilePage extends StatelessWidget {
+import '../../../domain/profile/value/profile/profile.dart';
+import '../../notifier/profile/profile_list_notifier.dart';
+import '../../notifier/profile/profile_notifier.dart';
+
+class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 15,
-              ),
-              child: Text(FirebaseAuth.instance.currentUser!.displayName!),
-            ),
-            Container(
-              width: 75,
-              height: 75,
-              margin: const EdgeInsets.symmetric(horizontal: 15),
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
-            ),
-            InkWell(
-              onTap: () async {
-                // await FirebaseAuth.instance.verifyPhoneNumber(
-                //   phoneNumber: '+817085782936',
-                //   verificationCompleted: (PhoneAuthCredential credential) {
-                //     debugPrint("");
-                //   },
-                //   verificationFailed: (FirebaseAuthException e) {
-                //     debugPrint(e.message);
-                //   },
-                //   codeSent: (String verificationId, int? resendToken) {
-                //     debugPrint("");
-                //   },
-                //   codeAutoRetrievalTimeout: (String verificationId) {
-                //     debugPrint("");
-                //   },
-                // );
+          body: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SizedBox();
+          }
+          if (snapshot.hasData) {
+            final profile = ref.watch(usersStreamProvider);
+
+            return profile.maybeWhen(
+              data: (user) {
+                return Column(
+                  children: [
+                    Text(user?.name ?? ""),
+                  ],
+                );
               },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 15,
-                ),
-                child: Text("ログイン"),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                context.pushNamed(Routes.name().signUp);
+              orElse: () {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
               },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15,
-                  vertical: 15,
-                ),
-                child: Text("新規登録"),
+            );
+          }
+          return Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  context.goNamed(Routes.name().signUp);
+                },
+                child: Text("新規"),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          );
+        },
+      )),
     );
   }
 }

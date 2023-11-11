@@ -6,6 +6,8 @@ import 'package:live_house_nav/presentation/pages/search/widgets/genre_panel.dar
 import '../../../common/go_router_provider/routes/routes.dart';
 import '../../../common/text_theme/text_theme.dart';
 import '../../../constant/facility_type.dart';
+import '../../../domain/profile/value/profile/profile.dart';
+import '../../notifier/profile/profile_list_notifier.dart';
 import 'widgets/fake_search_bar.dart';
 import 'widgets/new_facility_panel.dart';
 import 'widgets/search_method_bar.dart';
@@ -18,6 +20,7 @@ class SearchPage extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final textTheme = ref.watch(myTextThemeProvider);
     final newFacility = ref.watch(newFacilityNotifierProvider);
+
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 80,

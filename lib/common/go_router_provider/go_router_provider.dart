@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:live_house_nav/domain/article/values/article.dart';
+import 'package:live_house_nav/presentation/pages/article_detail/article_detail_page.dart';
 import 'package:live_house_nav/presentation/pages/post_article/post_article_page.dart';
 import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
 import 'package:live_house_nav/presentation/pages/auth/sign_up/sign_up_page.dart';
@@ -194,6 +196,40 @@ final routerProvider = Provider(
                     ),
                   );
                 },
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: _rootNavigatorKey,
+                    path: Routes.path().articleDetail,
+                    name: Routes.name().articleDetail,
+                    pageBuilder: (context, state) {
+                      return CustomTransitionPage(
+                        transitionDuration: const Duration(milliseconds: 200),
+                        reverseTransitionDuration:
+                            const Duration(milliseconds: 200),
+                        child: ArticleDetailPage(
+                          key: state.pageKey,
+                        ),
+                        transitionsBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child,
+                        ) {
+                          const Offset begin = Offset(1.0, 0.0);
+                          const Offset end = Offset.zero;
+                          final Tween<Offset> tween =
+                              Tween(begin: begin, end: end);
+                          final Animation<Offset> offsetAnimation =
+                              animation.drive(tween);
+                          return SlideTransition(
+                            position: offsetAnimation,
+                            child: child,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -225,7 +261,7 @@ final routerProvider = Provider(
                         name: Routes.name().waitScreen,
                         parentNavigatorKey: _rootNavigatorKey,
                         pageBuilder: (context, state) {
-                          return NoTransitionPage(
+                          return const NoTransitionPage(
                             child: WaitScreenPage(),
                           );
                         },

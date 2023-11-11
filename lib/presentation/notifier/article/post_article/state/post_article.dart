@@ -11,5 +11,6 @@ class PostArticle with _$PostArticle {
   factory PostArticle({
     @Default([]) List<File> pickedImages,
     required Artists artists,
+    @Default("") String text,
   }) = _PostArticle;
 }

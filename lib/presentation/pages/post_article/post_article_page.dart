@@ -1,17 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
-import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:live_house_nav/presentation/notifier/article/post_article/post_article_notifier.dart';
 
 import '../../../common/text_theme/text_theme.dart';
 import '../../../domain/facility_detail/values/facility_detail/facility_detail.dart';
-import '../../notifier/spotify/search_artists/search_artists_notifier.dart';
 import 'widgets/pick_image_panel.dart';
 
 class PostArticlePage extends HookConsumerWidget {
@@ -27,12 +22,16 @@ class PostArticlePage extends HookConsumerWidget {
     final size = MediaQuery.of(context).size;
     final postArticle = ref.watch(postArticleNotifierProvider);
     final postArticleNotifier = ref.watch(postArticleNotifierProvider.notifier);
+    final textController = useTextEditingController(text: "");
 
     return Scaffold(
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await postArticleNotifier.postArticle(
+                  textController.text, facilityDetail);
+            },
             icon: const Icon(
               Icons.post_add,
             ),
@@ -53,12 +52,13 @@ class PostArticlePage extends HookConsumerWidget {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 15),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextField(
+                controller: textController,
                 maxLines: 100,
                 minLines: 1,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: InputBorder.none,
                   hintText: "テキスト...",
                 ),

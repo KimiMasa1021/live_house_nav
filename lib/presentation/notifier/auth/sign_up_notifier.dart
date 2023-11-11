@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../domain/profile/profile_searvice.dart';
+import '../../../domain/profile/value/profile/profile.dart';
 
 final signUpNotifierProvider = AsyncNotifierProvider(() => SignUpNotifier());
 
@@ -18,13 +20,12 @@ class SignUpNotifier extends AsyncNotifier<void> {
     Function() transitionWaitScreen,
   ) async {
     try {
-      await auth.createUserWithEmailAndPassword(
+      final credential = await auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-
-      await auth.currentUser!.updateDisplayName(name);
       await sendVerifyMail();
+      await setUserInfo(name, credential.user?.uid ?? "");
       transitionWaitScreen();
     } catch (e) {
       return "";
@@ -36,5 +37,16 @@ class SignUpNotifier extends AsyncNotifier<void> {
     try {
       await auth.currentUser!.sendEmailVerification();
     } catch (e) {}
+  }
+
+  Future<void> setUserInfo(
+    String userName,
+    String userId,
+  ) async {
+    final user = Profile(
+      name: userName,
+      userId: userId,
+    );
+    await ref.read(profileSearviceProvider).setUserInfo(user);
   }
 }

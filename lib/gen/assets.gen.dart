@@ -9,6 +9,16 @@
 
 import 'package:flutter/widgets.dart';
 
+class $AssetsCommonGen {
+  const $AssetsCommonGen();
+
+  /// File path: assets/common/profile.png
+  AssetGenImage get profile => const AssetGenImage('assets/common/profile.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [profile];
+}
+
 class $AssetsFacilityGen {
   const $AssetsFacilityGen();
 
@@ -50,6 +60,7 @@ class $AssetsJsonsGen {
 class Assets {
   Assets._();
 
+  static const $AssetsCommonGen common = $AssetsCommonGen();
   static const $AssetsFacilityGen facility = $AssetsFacilityGen();
   static const $AssetsJsonsGen jsons = $AssetsJsonsGen();
 }

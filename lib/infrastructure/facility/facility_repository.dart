@@ -6,7 +6,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../domain/facility/facility_repository_base.dart';
 import '../../domain/facility/value/facility/facility.dart';
 import '../../domain/text_search/live_house_suggests.dart';
-import 'package:http/http.dart';
 import 'package:async/async.dart';
 import 'package:http/io_client.dart';
 

@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../geo/geo.dart';
 part 'facility.freezed.dart';
@@ -15,6 +16,8 @@ class Facility with _$Facility {
     @Default(0.0) double distance,
     @Default("") String prefectureValue,
     @Default([]) List<String> facilityType,
+    @Default(null) BitmapDescriptor? marker,
+    @Default(null) BitmapDescriptor? activeMarker,
     required Geo geo,
   }) = _Facility;
 

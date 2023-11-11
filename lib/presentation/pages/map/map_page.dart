@@ -57,25 +57,33 @@ class MapPage extends HookConsumerWidget {
                 },
                 onCameraMoveStarted: () =>
                     mapControllerNotifier.onCameraMoveStarted(),
-                markers: newMethodsLive.when(
-                  data: (data) => data
-                      .map(
-                        (e) => Marker(
-                          onTap: () {
-                            final index =
-                                data.indexWhere((facility) => facility == e);
-                            pageController.jumpToPage(index);
-                          },
-                          markerId: MarkerId(e.placeId),
-                          position: LatLng(
-                            e.geo.geopoint.latitude,
-                            e.geo.geopoint.longitude,
-                          ),
-                        ),
-                      )
-                      .toSet(),
-                  error: (e, s) => {},
-                  loading: () => {},
+                markers: newMethodsLive.maybeWhen(
+                  data: (data) {
+                    return {
+                      ...data
+                          .map(
+                            (e) => Marker(
+                              onTap: () {
+                                final index = data
+                                    .indexWhere((facility) => facility == e);
+                                pageController.jumpToPage(index);
+                                mapControllerNotifier.updateMarkerId(e.placeId);
+                              },
+                              markerId: MarkerId(e.placeId),
+                              position: LatLng(
+                                e.geo.geopoint.latitude,
+                                e.geo.geopoint.longitude,
+                              ),
+                              icon: (mapController.markerId == e.placeId
+                                      ? e.activeMarker
+                                      : e.marker) ??
+                                  BitmapDescriptor.defaultMarker,
+                            ),
+                          )
+                          .toSet(),
+                    };
+                  },
+                  orElse: () => {},
                 ),
                 circles: {
                   Circle(
@@ -132,8 +140,8 @@ class MapPage extends HookConsumerWidget {
           );
         },
         error: (e, s) {
-          return const Center(
-            child: Text("エラー"),
+          return Center(
+            child: Text("${e.toString()}"),
           );
         },
         loading: () {
@@ -154,6 +162,7 @@ class MapPage extends HookConsumerWidget {
                     SizedBox(
                       height: tweenAnimation.value,
                       child: FloatingActionButton(
+                        heroTag: null,
                         backgroundColor: HexColor("131313"),
                         onPressed: () {
                           if (animationController.isCompleted) {
@@ -209,6 +218,7 @@ class MapPage extends HookConsumerWidget {
                     const SizedBox(height: 10),
                     animationController.isCompleted
                         ? FloatingActionButton(
+                            heroTag: null,
                             backgroundColor: HexColor("131313"),
                             child: const Icon(Icons.close),
                             onPressed: () {

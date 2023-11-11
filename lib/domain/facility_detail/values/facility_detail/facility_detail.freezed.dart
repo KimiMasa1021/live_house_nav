@@ -20,6 +20,7 @@ FacilityDetail _$FacilityDetailFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$FacilityDetail {
+  String get placeId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get vicinity => throw _privateConstructorUsedError;
   String get formattedPhoneNumber => throw _privateConstructorUsedError;
@@ -42,7 +43,8 @@ abstract class $FacilityDetailCopyWith<$Res> {
       _$FacilityDetailCopyWithImpl<$Res, FacilityDetail>;
   @useResult
   $Res call(
-      {String name,
+      {String placeId,
+      String name,
       String vicinity,
       String formattedPhoneNumber,
       String internationalPhoneNumber,
@@ -67,6 +69,7 @@ class _$FacilityDetailCopyWithImpl<$Res, $Val extends FacilityDetail>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? placeId = null,
     Object? name = null,
     Object? vicinity = null,
     Object? formattedPhoneNumber = null,
@@ -77,6 +80,10 @@ class _$FacilityDetailCopyWithImpl<$Res, $Val extends FacilityDetail>
     Object? openingHours = freezed,
   }) {
     return _then(_value.copyWith(
+      placeId: null == placeId
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -134,7 +141,8 @@ abstract class _$$_FacilityDetailCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name,
+      {String placeId,
+      String name,
       String vicinity,
       String formattedPhoneNumber,
       String internationalPhoneNumber,
@@ -158,6 +166,7 @@ class __$$_FacilityDetailCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? placeId = null,
     Object? name = null,
     Object? vicinity = null,
     Object? formattedPhoneNumber = null,
@@ -168,6 +177,10 @@ class __$$_FacilityDetailCopyWithImpl<$Res>
     Object? openingHours = freezed,
   }) {
     return _then(_$_FacilityDetail(
+      placeId: null == placeId
+          ? _value.placeId
+          : placeId // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -209,7 +222,8 @@ class __$$_FacilityDetailCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_FacilityDetail implements _FacilityDetail {
   _$_FacilityDetail(
-      {this.name = "",
+      {this.placeId = "",
+      this.name = "",
       this.vicinity = "",
       this.formattedPhoneNumber = "",
       this.internationalPhoneNumber = "",
@@ -223,6 +237,9 @@ class _$_FacilityDetail implements _FacilityDetail {
   factory _$_FacilityDetail.fromJson(Map<String, dynamic> json) =>
       _$$_FacilityDetailFromJson(json);
 
+  @override
+  @JsonKey()
+  final String placeId;
   @override
   @JsonKey()
   final String name;
@@ -261,7 +278,7 @@ class _$_FacilityDetail implements _FacilityDetail {
 
   @override
   String toString() {
-    return 'FacilityDetail(name: $name, vicinity: $vicinity, formattedPhoneNumber: $formattedPhoneNumber, internationalPhoneNumber: $internationalPhoneNumber, website: $website, photos: $photos, imageList: $imageList, openingHours: $openingHours)';
+    return 'FacilityDetail(placeId: $placeId, name: $name, vicinity: $vicinity, formattedPhoneNumber: $formattedPhoneNumber, internationalPhoneNumber: $internationalPhoneNumber, website: $website, photos: $photos, imageList: $imageList, openingHours: $openingHours)';
   }
 
   @override
@@ -269,6 +286,7 @@ class _$_FacilityDetail implements _FacilityDetail {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FacilityDetail &&
+            (identical(other.placeId, placeId) || other.placeId == placeId) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.vicinity, vicinity) ||
                 other.vicinity == vicinity) &&
@@ -289,6 +307,7 @@ class _$_FacilityDetail implements _FacilityDetail {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      placeId,
       name,
       vicinity,
       formattedPhoneNumber,
@@ -314,7 +333,8 @@ class _$_FacilityDetail implements _FacilityDetail {
 
 abstract class _FacilityDetail implements FacilityDetail {
   factory _FacilityDetail(
-      {final String name,
+      {final String placeId,
+      final String name,
       final String vicinity,
       final String formattedPhoneNumber,
       final String internationalPhoneNumber,
@@ -326,6 +346,8 @@ abstract class _FacilityDetail implements FacilityDetail {
   factory _FacilityDetail.fromJson(Map<String, dynamic> json) =
       _$_FacilityDetail.fromJson;
 
+  @override
+  String get placeId;
   @override
   String get name;
   @override
