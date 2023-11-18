@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/presentation/notifier/facility/search_by_type/search_by_type_notifier.dart';
 
+import '../../../common/indicator/ record_indicator.dart';
 import 'widgets/search_result_panel.dart';
 
 class SearchResultPage extends HookConsumerWidget {
@@ -56,7 +57,7 @@ class SearchResultPage extends HookConsumerWidget {
           return Text("エラー$e");
         },
         loading: () {
-          return const Text("ロード");
+          return const RecordIndicator();
         },
       ),
     );

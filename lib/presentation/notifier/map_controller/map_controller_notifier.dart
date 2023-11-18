@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:live_house_nav/gen/assets.gen.dart';
@@ -22,6 +23,7 @@ class MapControllerNotifier extends _$MapControllerNotifier {
 
   Future<void> setCamera(List<Facility> testList) async {
     if (testList.isEmpty) return;
+
     final double north =
         testList.map((e) => e.geo.geopoint.latitude).reduce(max);
     final double south =
@@ -40,6 +42,7 @@ class MapControllerNotifier extends _$MapControllerNotifier {
         60,
       ),
     );
+
     state = state.copyWith(isCameraMoved: false);
   }
 

@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/presentation/pages/facility_detail/widgets/openning_hours_panel.dart';
 import '../../../common/hex_color.dart';
+import '../../../common/indicator/ record_indicator.dart';
 import '../../../common/text_theme/text_theme.dart';
 import '../../notifier/facility/detail/facility_detail_notifier.dart';
 import 'widgets/facility_info_link.dart';
@@ -242,14 +243,10 @@ class FacilityDetailPage extends ConsumerWidget {
               );
             },
             error: (Object error, StackTrace stackTrace) {
-              return const Center(
-                child: Text("エラー"),
-              );
+              return const RecordIndicator();
             },
             loading: () {
-              return const Center(
-                child: Text("Loading..."),
-              );
+              return const RecordIndicator();
             },
           ),
         ),

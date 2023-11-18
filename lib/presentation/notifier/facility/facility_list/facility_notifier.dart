@@ -2,11 +2,14 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:geoflutterfire_plus/geoflutterfire_plus.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:live_house_nav/domain/facility/value/facility/facility.dart';
+import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:live_house_nav/presentation/notifier/map_controller/map_controller_notifier.dart';
 import 'dart:ui' as ui;
 import 'dart:typed_data';
@@ -31,7 +34,6 @@ class FacilityNotifier extends FamilyAsyncNotifier<List<Facility>, LatLng> {
         latLng.longitude,
       ),
     );
-
     final processedValue = await Future.wait(result.map((facility) async {
       final marker = await getMarkerIcon(
         const Size(140, 140),
@@ -144,16 +146,21 @@ class FacilityNotifier extends FamilyAsyncNotifier<List<Facility>, LatLng> {
     return BitmapDescriptor.fromBytes(uint8List);
   }
 
+  final apiKey = dotenv.get('GOOGLE_API_KEY');
+
   Future<ui.Image> getImageFromPath(String imagePath) async {
-    http.Response response = await http.get(Uri.parse(
-      imagePath != ""
-          ? imagePath
-          : "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photo_reference=AcJnMuGc9j1SQBTdvspMRRUHzwvGdJBW8YKvJWekfLto3x8IE8QyHUDGML_XSX7bAjl57CUYvlbwNMS2OlFlZRC1-Vv0rouBlc4TuLmwl2bHBvJ_FLo2cCclBC2rwyETVDVAnDsd5kdN7Bz_kS38m6fOgcD-xu5I77YVZ_oW48KWrnl4EFQl&key=AIzaSyDzB3j0TAQolKL9K-C_jqFQD6i3I_CHs9M",
-    ));
+    late Uint8List result;
+    if (imagePath != "") {
+      final response = await http.get(Uri.parse(imagePath));
+      result = response.bodyBytes;
+    } else {
+      final aaa = await rootBundle.load(Assets.facility.noImage.path);
+      result = aaa.buffer.asUint8List();
+    }
 
     final Completer<ui.Image> completer = Completer();
 
-    ui.decodeImageFromList(response.bodyBytes, (ui.Image img) {
+    ui.decodeImageFromList(result, (ui.Image img) {
       return completer.complete(img);
     });
 

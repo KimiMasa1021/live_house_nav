@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../../../domain/facility_detail/facility_detail_service.dart';
@@ -14,7 +16,8 @@ Future<FacilityDetail> featchFacilityDetail(
       "https://maps.googleapis.com/maps/api/place/details/json?";
   const baseImageRefApiUrl =
       "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&";
-  const apiKey = "AIzaSyDzB3j0TAQolKL9K-C_jqFQD6i3I_CHs9M";
+  final apiKey = dotenv.get('GOOGLE_API_KEY');
+  debugPrint("あああああああああああああ${apiKey}");
 
   final Uri detailApiUri = Uri.parse(
       "${basePlaceApiUrl}place_id=$priceId&fields=name,photo,website,international_phone_number,formatted_phone_number,opening_hours,geometry,vicinity&key=$apiKey");

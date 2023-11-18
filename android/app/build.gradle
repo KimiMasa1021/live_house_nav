@@ -20,6 +20,12 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+
+def mapsApiKey = localProperties.getProperty('MAPS_API_KEY')
+if (mapsApiKey == null) {
+    mapsApiKey = ''
+}
+
 // google services.json
 task selectGoogleServicesJson(type: Copy) {
     from "src/$flavor/google-services.json"
@@ -62,6 +68,7 @@ android {
         versionName flutterVersionName
         applicationIdSuffix appIdSuffix
         resValue "string", "app_name", appName
+        manifestPlaceholders += [MAPS_API_KEY: mapsApiKey]
     }
 
     buildTypes {
