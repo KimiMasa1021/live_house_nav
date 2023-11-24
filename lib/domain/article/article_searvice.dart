@@ -14,18 +14,18 @@ class ArticleSearvice {
     String text,
     FacilityDetail facilityDetail,
   ) async {
-    final userName = FirebaseAuth.instance.currentUser?.displayName;
-    final userId = FirebaseAuth.instance.currentUser?.uid;
+    final userId = FirebaseAuth.instance.currentUser!.uid;
+    final images = await repository.postArticleImage(postArticle.pickedImages);
+    final minHeight = await repository.getImageMinHeight(images);
 
     final article = Article(
-      images: [],
+      images: images,
+      minImageHeight: minHeight,
       artists: postArticle.artists.items,
       placeId: facilityDetail.placeId,
       facilityName: facilityDetail.name,
       text: text,
-      userId: userId ?? "",
-      userName: userName ?? "",
-      userImage: "https://www.tv-asahi.co.jp/doraemon/cast/img/doraemon.jpg",
+      userId: userId,
       createdAt: DateTime.now(),
       eventedAt: DateTime.now(),
     );

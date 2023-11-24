@@ -15,6 +15,7 @@ class Routes {
   final String postArticle;
   final String setArtists;
   final String articleDetail;
+  final String signInPage;
   Routes({
     required this.liveHouseMap,
     required this.addArticles,
@@ -32,6 +33,7 @@ class Routes {
     required this.postArticle,
     required this.setArtists,
     required this.articleDetail,
+    required this.signInPage,
   });
 
   factory Routes.path() {
@@ -52,6 +54,7 @@ class Routes {
       postArticle: "post_article",
       setArtists: "set_artists",
       articleDetail: "article_detail",
+      signInPage: "sign_in_page",
     );
   }
 
@@ -73,6 +76,7 @@ class Routes {
       postArticle: "postArticle",
       setArtists: "setArtists",
       articleDetail: "articleDetail",
+      signInPage: "signInPage",
     );
   }
 }

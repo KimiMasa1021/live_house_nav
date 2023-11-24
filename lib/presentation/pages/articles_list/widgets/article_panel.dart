@@ -4,11 +4,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 import 'package:live_house_nav/gen/assets.gen.dart';
 import 'package:live_house_nav/presentation/notifier/profile/profile_list_notifier.dart';
+import 'package:live_house_nav/presentation/pages/articles_list/widgets/two_sheet_image.dart';
 
 import '../../../../common/hex_color.dart';
 import '../../../../common/text_theme/text_theme.dart';
 import '../../../../domain/article/values/article.dart';
 import '../../article_detail/article_detail_page.dart';
+import 'single_sheet_image.dart';
 
 class ArticlePanel extends ConsumerWidget {
   const ArticlePanel({
@@ -41,7 +43,7 @@ class ArticlePanel extends ConsumerWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            userProfile.when(
+            userProfile.maybeWhen(
               data: (profile) {
                 return Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -80,11 +82,42 @@ class ArticlePanel extends ConsumerWidget {
                   ],
                 );
               },
-              loading: () {
-                return const Text("loading...");
-              },
-              error: (e, s) {
-                return Text("$e");
+              orElse: () {
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage:
+                          Image.asset(Assets.common.profile.path).image,
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "",
+                            style: textTheme.fs16.copyWith(
+                              fontWeight: FontWeight.bold,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(height: 5),
+                          Row(
+                            children: [
+                              const Icon(Icons.location_on_outlined),
+                              Text(article.facilityName),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.more_vert_outlined),
+                    )
+                  ],
+                );
               },
             ),
             const SizedBox(height: 5),
@@ -92,7 +125,14 @@ class ArticlePanel extends ConsumerWidget {
               article.text,
               maxLines: 9,
             ),
-            const SizedBox(height: 5),
+            article.images.isEmpty
+                ? const SizedBox(height: 10)
+                : article.images.length == 1
+                    ? SingleSheetImage(
+                        image: article.images[0],
+                        aspectRatio: article.minImageHeight,
+                      )
+                    : TwoSheetImage(images: article.images),
             Row(
               children: [
                 const Icon(Icons.people_alt_outlined),
@@ -105,7 +145,7 @@ class ArticlePanel extends ConsumerWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 5),
+            const SizedBox(width: 5),
             Divider(
               color: HexColor("505050"),
             )

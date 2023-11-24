@@ -17,6 +17,7 @@ class Article with _$Article {
     @Default("") String userId,
     @Default("") String userName,
     @Default("") String userImage,
+    @Default(0) double minImageHeight,
     @UpdatedAtField() DateTime? createdAt,
     @UpdatedAtField() DateTime? eventedAt,
   }) = _Article;

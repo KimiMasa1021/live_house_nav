@@ -7,7 +7,7 @@ part of 'facility_detail_notifier.dart';
 // **************************************************************************
 
 String _$featchFacilityDetailHash() =>
-    r'638098219a64317f2b12ea3cb5bb6aa1083991f0';
+    r'0351132d88680400792e91bf9f3e988bae743adf';
 
 /// Copied from Dart SDK
 class _SystemHash {

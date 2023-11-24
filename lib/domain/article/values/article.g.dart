@@ -21,6 +21,7 @@ _$_Article _$$_ArticleFromJson(Map<String, dynamic> json) => _$_Article(
       userId: json['userId'] as String? ?? "",
       userName: json['userName'] as String? ?? "",
       userImage: json['userImage'] as String? ?? "",
+      minImageHeight: (json['minImageHeight'] as num?)?.toDouble() ?? 0,
       createdAt: const UpdatedAtField().fromJson(json['createdAt']),
       eventedAt: const UpdatedAtField().fromJson(json['eventedAt']),
     );
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$_ArticleToJson(_$_Article instance) =>
       'userId': instance.userId,
       'userName': instance.userName,
       'userImage': instance.userImage,
+      'minImageHeight': instance.minImageHeight,
       'createdAt': const UpdatedAtField().toJson(instance.createdAt),
       'eventedAt': const UpdatedAtField().toJson(instance.eventedAt),
     };

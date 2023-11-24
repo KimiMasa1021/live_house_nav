@@ -15,6 +15,7 @@ class RecordIndicator extends HookConsumerWidget {
 
     useEffect(() {
       controller.repeat();
+      return null;
     }, const []);
 
     return Center(

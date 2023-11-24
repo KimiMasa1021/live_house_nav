@@ -3,26 +3,24 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
-import 'package:live_house_nav/common/text_theme/text_theme.dart';
 import 'package:live_house_nav/presentation/notifier/auth/sign_up_notifier.dart';
 import 'package:live_house_nav/presentation/pages/auth/widgets/input_text_field.dart';
 
 import '../../../../common/unit/form_validation.dart';
 
-class SignUpPage extends HookConsumerWidget {
-  const SignUpPage({super.key});
+class SignInPage extends HookConsumerWidget {
+  const SignInPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
     final email = useState("");
     final password = useState("");
-    final name = useState("");
     final authNotifier = ref.watch(authNotifierProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("新規登録"),
+        title: const Text("ログイン"),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -43,26 +41,18 @@ class SignUpPage extends HookConsumerWidget {
                 keyboardType: TextInputType.visiblePassword,
                 setValue: password,
               ),
-              InputTextField(
-                title: "ユーザー名",
-                hintText: "うんこちゃん(変更可能です)",
-                formValidation: (val) => FormValidation.nameValidation(val),
-                keyboardType: TextInputType.name,
-                setValue: name,
-              ),
               TextButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
                   }
-                  await authNotifier.signUp(
+                  await authNotifier.signIn(
                     email.value,
                     password.value,
-                    name.value,
-                    () => context.goNamed(Routes.name().waitScreen),
+                    () => context.pop(),
                   );
                 },
-                child: const Text("登録"),
+                child: const Text("ログイン"),
               )
             ],
           ),

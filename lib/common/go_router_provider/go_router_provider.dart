@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/presentation/pages/article_detail/article_detail_page.dart';
+import 'package:live_house_nav/presentation/pages/auth/sign_in/sign_in_page.dart';
 import 'package:live_house_nav/presentation/pages/post_article/post_article_page.dart';
 import 'package:live_house_nav/presentation/pages/articles_list/articles_list_page.dart';
 import 'package:live_house_nav/presentation/pages/auth/sign_up/sign_up_page.dart';
@@ -266,6 +267,16 @@ final routerProvider = Provider(
                         },
                       ),
                     ],
+                  ),
+                  GoRoute(
+                    path: Routes.path().signInPage,
+                    name: Routes.name().signInPage,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) {
+                      return const NoTransitionPage(
+                        child: SignInPage(),
+                      );
+                    },
                   ),
                 ],
               ),

@@ -6,9 +6,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../domain/profile/profile_searvice.dart';
 import '../../../domain/profile/value/profile/profile.dart';
 
-final signUpNotifierProvider = AsyncNotifierProvider(() => SignUpNotifier());
+final authNotifierProvider = AsyncNotifierProvider(() => AuthNotifier());
 
-class SignUpNotifier extends AsyncNotifier<void> {
+class AuthNotifier extends AsyncNotifier<void> {
   @override
   FutureOr<void> build() {}
   final auth = FirebaseAuth.instance;
@@ -48,5 +48,22 @@ class SignUpNotifier extends AsyncNotifier<void> {
       userId: userId,
     );
     await ref.read(profileSearviceProvider).setUserInfo(user);
+  }
+
+  Future<String?> signIn(
+    String email,
+    String password,
+    Function() transitionWaitScreen,
+  ) async {
+    try {
+      await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      transitionWaitScreen();
+    } catch (e) {
+      return "";
+    }
+    return null;
   }
 }

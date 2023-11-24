@@ -6,7 +6,7 @@ part of 'my_location_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$featchMyLocationHash() => r'3cb5d4f6fc11c3dd061ed760065c9f87f8ac3623';
+String _$featchMyLocationHash() => r'411f166f7afdf6c419a1746aac01eecc6527bddf';
 
 /// See also [featchMyLocation].
 @ProviderFor(featchMyLocation)

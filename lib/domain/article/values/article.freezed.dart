@@ -28,6 +28,7 @@ mixin _$Article {
   String get userId => throw _privateConstructorUsedError;
   String get userName => throw _privateConstructorUsedError;
   String get userImage => throw _privateConstructorUsedError;
+  double get minImageHeight => throw _privateConstructorUsedError;
   @UpdatedAtField()
   DateTime? get createdAt => throw _privateConstructorUsedError;
   @UpdatedAtField()
@@ -52,6 +53,7 @@ abstract class $ArticleCopyWith<$Res> {
       String userId,
       String userName,
       String userImage,
+      double minImageHeight,
       @UpdatedAtField() DateTime? createdAt,
       @UpdatedAtField() DateTime? eventedAt});
 }
@@ -77,6 +79,7 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
     Object? userId = null,
     Object? userName = null,
     Object? userImage = null,
+    Object? minImageHeight = null,
     Object? createdAt = freezed,
     Object? eventedAt = freezed,
   }) {
@@ -113,6 +116,10 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
           ? _value.userImage
           : userImage // ignore: cast_nullable_to_non_nullable
               as String,
+      minImageHeight: null == minImageHeight
+          ? _value.minImageHeight
+          : minImageHeight // ignore: cast_nullable_to_non_nullable
+              as double,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -141,6 +148,7 @@ abstract class _$$_ArticleCopyWith<$Res> implements $ArticleCopyWith<$Res> {
       String userId,
       String userName,
       String userImage,
+      double minImageHeight,
       @UpdatedAtField() DateTime? createdAt,
       @UpdatedAtField() DateTime? eventedAt});
 }
@@ -163,6 +171,7 @@ class __$$_ArticleCopyWithImpl<$Res>
     Object? userId = null,
     Object? userName = null,
     Object? userImage = null,
+    Object? minImageHeight = null,
     Object? createdAt = freezed,
     Object? eventedAt = freezed,
   }) {
@@ -199,6 +208,10 @@ class __$$_ArticleCopyWithImpl<$Res>
           ? _value.userImage
           : userImage // ignore: cast_nullable_to_non_nullable
               as String,
+      minImageHeight: null == minImageHeight
+          ? _value.minImageHeight
+          : minImageHeight // ignore: cast_nullable_to_non_nullable
+              as double,
       createdAt: freezed == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -223,6 +236,7 @@ class _$_Article implements _Article {
       this.userId = "",
       this.userName = "",
       this.userImage = "",
+      this.minImageHeight = 0,
       @UpdatedAtField() this.createdAt,
       @UpdatedAtField() this.eventedAt})
       : _images = images,
@@ -268,6 +282,9 @@ class _$_Article implements _Article {
   @JsonKey()
   final String userImage;
   @override
+  @JsonKey()
+  final double minImageHeight;
+  @override
   @UpdatedAtField()
   final DateTime? createdAt;
   @override
@@ -276,7 +293,7 @@ class _$_Article implements _Article {
 
   @override
   String toString() {
-    return 'Article(images: $images, artists: $artists, placeId: $placeId, facilityName: $facilityName, text: $text, userId: $userId, userName: $userName, userImage: $userImage, createdAt: $createdAt, eventedAt: $eventedAt)';
+    return 'Article(images: $images, artists: $artists, placeId: $placeId, facilityName: $facilityName, text: $text, userId: $userId, userName: $userName, userImage: $userImage, minImageHeight: $minImageHeight, createdAt: $createdAt, eventedAt: $eventedAt)';
   }
 
   @override
@@ -295,6 +312,8 @@ class _$_Article implements _Article {
                 other.userName == userName) &&
             (identical(other.userImage, userImage) ||
                 other.userImage == userImage) &&
+            (identical(other.minImageHeight, minImageHeight) ||
+                other.minImageHeight == minImageHeight) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.eventedAt, eventedAt) ||
@@ -313,6 +332,7 @@ class _$_Article implements _Article {
       userId,
       userName,
       userImage,
+      minImageHeight,
       createdAt,
       eventedAt);
 
@@ -340,6 +360,7 @@ abstract class _Article implements Article {
       final String userId,
       final String userName,
       final String userImage,
+      final double minImageHeight,
       @UpdatedAtField() final DateTime? createdAt,
       @UpdatedAtField() final DateTime? eventedAt}) = _$_Article;
 
@@ -361,6 +382,8 @@ abstract class _Article implements Article {
   String get userName;
   @override
   String get userImage;
+  @override
+  double get minImageHeight;
   @override
   @UpdatedAtField()
   DateTime? get createdAt;

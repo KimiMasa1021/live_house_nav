@@ -76,7 +76,9 @@ class PostArticleNotifier extends Notifier<PostArticle> {
   Future<void> postArticle(
     String text,
     FacilityDetail detail,
+    Function() onConplate,
   ) async {
     await searvice.postArticle(state, text, detail);
+    onConplate();
   }
 }

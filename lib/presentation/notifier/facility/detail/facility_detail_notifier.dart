@@ -17,7 +17,6 @@ Future<FacilityDetail> featchFacilityDetail(
   const baseImageRefApiUrl =
       "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&";
   final apiKey = dotenv.get('GOOGLE_API_KEY');
-  debugPrint("あああああああああああああ${apiKey}");
 
   final Uri detailApiUri = Uri.parse(
       "${basePlaceApiUrl}place_id=$priceId&fields=name,photo,website,international_phone_number,formatted_phone_number,opening_hours,geometry,vicinity&key=$apiKey");
