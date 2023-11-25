@@ -4,20 +4,26 @@ import 'dart:ui' as ui;
 import 'package:async/src/result/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:live_house_nav/domain/article/article_repository_base.dart';
 import 'package:live_house_nav/domain/article/values/article.dart';
+import 'package:live_house_nav/presentation/notifier/article/article_lilst/emoji/emoji_state.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:uuid/uuid.dart';
+
+final articleRepositoryProvider = Provider((ref) => ArticleRepository());
 
 class ArticleRepository extends ArticleRepositoryBase {
   final db = FirebaseFirestore.instance;
   QueryDocumentSnapshot<Article>? lastItem;
-
+  var uuid = const Uuid();
   @override
   Future<void> postArticle(Article article) async {
     try {
       final artists = article.artists;
-      await db.collection("articles").add({
+      var newId = uuid.v4();
+
+      await db.collection("articles").doc(newId).set({
         "images": article.images,
         "minImageHeight": article.minImageHeight,
         "artists": List.generate(
@@ -41,6 +47,7 @@ class ArticleRepository extends ArticleRepositoryBase {
         "userId": article.userId,
         "createdAt": article.createdAt,
         "eventedAt": article.eventedAt,
+        "docId": newId,
       });
     } catch (e) {
       debugPrint(e.toString());
@@ -110,6 +117,82 @@ class ArticleRepository extends ArticleRepositoryBase {
       return minHeight ?? 1;
     } catch (e) {
       return 1;
+    }
+  }
+
+  @override
+  Stream<List<Article>> subscribeMessages({
+    Article? lastItem,
+    required int limit,
+  }) {
+    final query = db
+        .collection("articles")
+        .orderBy('createdAt')
+        .limit(limit)
+        .withConverter<Article>(
+          fromFirestore: (snapshot, _) => Article.fromJson(snapshot.data()!),
+          toFirestore: (data, _) => data.toJson(),
+        );
+
+    return query.snapshots().map((qs) {
+      final result = qs.docs.map((qds) => qds.data()).toList();
+
+      return result;
+    });
+  }
+
+  @override
+  Stream<List<EmojiState>> subscribeArticleEmoji({
+    required String articleId,
+  }) {
+    final query = db
+        .collection("emoji")
+        .where("articleRef", isEqualTo: articleId)
+        .withConverter<EmojiState>(
+          fromFirestore: (snapshot, _) => EmojiState.fromJson(snapshot.data()!),
+          toFirestore: (data, _) => data.toJson(),
+        );
+    ;
+
+    return query.snapshots().map((qs) {
+      final result = qs.docs.map((qds) => qds.data()).toList();
+
+      return result;
+    });
+  }
+
+  @override
+  Future<void> editStampInfo(EmojiState emojiState) async {
+    try {
+      await db
+          .collection("emoji")
+          .doc(emojiState.docId)
+          .set(emojiState.toJson());
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  @override
+  Future<void> removeStamp(EmojiState emojiState) async {
+    try {
+      await db.collection("emoji").doc(emojiState.docId).delete();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  @override
+  Future<void> newStamp(EmojiState emojiState) async {
+    try {
+      var newId = uuid.v4();
+
+      await db
+          .collection("emoji")
+          .doc(newId)
+          .set(emojiState.copyWith(docId: newId).toJson());
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 }

@@ -25,7 +25,7 @@ final _sectionNavigatorKey = GlobalKey<NavigatorState>();
 final routerProvider = Provider(
   (ref) => GoRouter(
     navigatorKey: _rootNavigatorKey,
-    initialLocation: Routes.path().liveHouseMap,
+    initialLocation: Routes.path().searchPage,
     routes: [
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
@@ -34,82 +34,6 @@ final routerProvider = Provider(
           );
         },
         branches: [
-          StatefulShellBranch(
-            navigatorKey: _sectionNavigatorKey,
-            routes: [
-              GoRoute(
-                path: Routes.path().liveHouseMap,
-                name: Routes.name().liveHouseMap,
-                pageBuilder: (context, state) {
-                  return NoTransitionPage(
-                    child: MapPage(
-                      key: state.pageKey,
-                    ),
-                  );
-                },
-                routes: [
-                  GoRoute(
-                    path: Routes.path().liveHouseDetail,
-                    name: Routes.name().liveHouseDetail,
-                    parentNavigatorKey: _rootNavigatorKey,
-                    pageBuilder: (context, state) {
-                      final liveHoue = state.extra.toString();
-                      return NoTransitionPage(
-                        child: FacilityDetailPage(
-                          key: state.pageKey,
-                          liveHouse: liveHoue,
-                        ),
-                      );
-                    },
-                    routes: [
-                      GoRoute(
-                        path: Routes.path().imagePreview,
-                        name: Routes.name().imagePreview,
-                        parentNavigatorKey: _rootNavigatorKey,
-                        pageBuilder: (context, state) {
-                          final imageInfo = state.extra as Map<String, dynamic>;
-                          return NoTransitionPage(
-                            child: ImagePreviewPage(
-                              key: state.pageKey,
-                              imageList: imageInfo["images"],
-                              initialIndex: imageInfo["initialIndex"],
-                            ),
-                          );
-                        },
-                      ),
-                      GoRoute(
-                        path: Routes.path().postArticle,
-                        name: Routes.name().postArticle,
-                        parentNavigatorKey: _rootNavigatorKey,
-                        pageBuilder: (context, state) {
-                          final detail = state.extra as FacilityDetail;
-                          return NoTransitionPage(
-                            child: PostArticlePage(
-                              facilityDetail: detail,
-                            ),
-                          );
-                        },
-                        routes: [
-                          GoRoute(
-                            path: Routes.path().setArtists,
-                            name: Routes.name().setArtists,
-                            parentNavigatorKey: _rootNavigatorKey,
-                            pageBuilder: (context, state) {
-                              return NoTransitionPage(
-                                child: SetArtistsPage(
-                                  key: state.pageKey,
-                                ),
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          ),
           StatefulShellBranch(
             routes: <RouteBase>[
               GoRoute(
@@ -179,6 +103,78 @@ final routerProvider = Provider(
                         ),
                       );
                     },
+                  ),
+                  GoRoute(
+                    path: Routes.path().liveHouseMap,
+                    name: Routes.name().liveHouseMap,
+                    pageBuilder: (context, state) {
+                      return NoTransitionPage(
+                        child: MapPage(
+                          key: state.pageKey,
+                        ),
+                      );
+                    },
+                    routes: [
+                      GoRoute(
+                        path: Routes.path().liveHouseDetail,
+                        name: Routes.name().liveHouseDetail,
+                        parentNavigatorKey: _rootNavigatorKey,
+                        pageBuilder: (context, state) {
+                          final liveHoue = state.extra.toString();
+                          return NoTransitionPage(
+                            child: FacilityDetailPage(
+                              key: state.pageKey,
+                              liveHouse: liveHoue,
+                            ),
+                          );
+                        },
+                        routes: [
+                          GoRoute(
+                            path: Routes.path().imagePreview,
+                            name: Routes.name().imagePreview,
+                            parentNavigatorKey: _rootNavigatorKey,
+                            pageBuilder: (context, state) {
+                              final imageInfo =
+                                  state.extra as Map<String, dynamic>;
+                              return NoTransitionPage(
+                                child: ImagePreviewPage(
+                                  key: state.pageKey,
+                                  imageList: imageInfo["images"],
+                                  initialIndex: imageInfo["initialIndex"],
+                                ),
+                              );
+                            },
+                          ),
+                          GoRoute(
+                            path: Routes.path().postArticle,
+                            name: Routes.name().postArticle,
+                            parentNavigatorKey: _rootNavigatorKey,
+                            pageBuilder: (context, state) {
+                              final detail = state.extra as FacilityDetail;
+                              return NoTransitionPage(
+                                child: PostArticlePage(
+                                  facilityDetail: detail,
+                                ),
+                              );
+                            },
+                            routes: [
+                              GoRoute(
+                                path: Routes.path().setArtists,
+                                name: Routes.name().setArtists,
+                                parentNavigatorKey: _rootNavigatorKey,
+                                pageBuilder: (context, state) {
+                                  return NoTransitionPage(
+                                    child: SetArtistsPage(
+                                      key: state.pageKey,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),

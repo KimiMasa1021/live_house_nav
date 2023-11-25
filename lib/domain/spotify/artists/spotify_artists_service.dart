@@ -5,8 +5,8 @@ import 'package:live_house_nav/presentation/notifier/spotify/search_artists/stat
 
 final spotifyArtistsServiceProvider = Provider(
   (ref) => SpotifyArtistsService(
-    ref.read(spotifiyArtistsRepositoryProvider),
-    ref.read(spotifyTokenServiceProvider),
+    ref.watch(spotifiyArtistsRepositoryProvider),
+    ref.watch(spotifyTokenServiceProvider),
   ),
 );
 

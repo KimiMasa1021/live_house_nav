@@ -26,8 +26,8 @@ mixin _$Article {
   String get facilityName => throw _privateConstructorUsedError;
   String get text => throw _privateConstructorUsedError;
   String get userId => throw _privateConstructorUsedError;
-  String get userName => throw _privateConstructorUsedError;
-  String get userImage => throw _privateConstructorUsedError;
+  String get docId => throw _privateConstructorUsedError;
+  List<String> get emojis => throw _privateConstructorUsedError;
   double get minImageHeight => throw _privateConstructorUsedError;
   @UpdatedAtField()
   DateTime? get createdAt => throw _privateConstructorUsedError;
@@ -51,8 +51,8 @@ abstract class $ArticleCopyWith<$Res> {
       String facilityName,
       String text,
       String userId,
-      String userName,
-      String userImage,
+      String docId,
+      List<String> emojis,
       double minImageHeight,
       @UpdatedAtField() DateTime? createdAt,
       @UpdatedAtField() DateTime? eventedAt});
@@ -77,8 +77,8 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
     Object? facilityName = null,
     Object? text = null,
     Object? userId = null,
-    Object? userName = null,
-    Object? userImage = null,
+    Object? docId = null,
+    Object? emojis = null,
     Object? minImageHeight = null,
     Object? createdAt = freezed,
     Object? eventedAt = freezed,
@@ -108,14 +108,14 @@ class _$ArticleCopyWithImpl<$Res, $Val extends Article>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
               as String,
-      userImage: null == userImage
-          ? _value.userImage
-          : userImage // ignore: cast_nullable_to_non_nullable
-              as String,
+      emojis: null == emojis
+          ? _value.emojis
+          : emojis // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       minImageHeight: null == minImageHeight
           ? _value.minImageHeight
           : minImageHeight // ignore: cast_nullable_to_non_nullable
@@ -146,8 +146,8 @@ abstract class _$$_ArticleCopyWith<$Res> implements $ArticleCopyWith<$Res> {
       String facilityName,
       String text,
       String userId,
-      String userName,
-      String userImage,
+      String docId,
+      List<String> emojis,
       double minImageHeight,
       @UpdatedAtField() DateTime? createdAt,
       @UpdatedAtField() DateTime? eventedAt});
@@ -169,8 +169,8 @@ class __$$_ArticleCopyWithImpl<$Res>
     Object? facilityName = null,
     Object? text = null,
     Object? userId = null,
-    Object? userName = null,
-    Object? userImage = null,
+    Object? docId = null,
+    Object? emojis = null,
     Object? minImageHeight = null,
     Object? createdAt = freezed,
     Object? eventedAt = freezed,
@@ -200,14 +200,14 @@ class __$$_ArticleCopyWithImpl<$Res>
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
               as String,
-      userName: null == userName
-          ? _value.userName
-          : userName // ignore: cast_nullable_to_non_nullable
+      docId: null == docId
+          ? _value.docId
+          : docId // ignore: cast_nullable_to_non_nullable
               as String,
-      userImage: null == userImage
-          ? _value.userImage
-          : userImage // ignore: cast_nullable_to_non_nullable
-              as String,
+      emojis: null == emojis
+          ? _value._emojis
+          : emojis // ignore: cast_nullable_to_non_nullable
+              as List<String>,
       minImageHeight: null == minImageHeight
           ? _value.minImageHeight
           : minImageHeight // ignore: cast_nullable_to_non_nullable
@@ -234,13 +234,14 @@ class _$_Article implements _Article {
       this.facilityName = "",
       this.text = "",
       this.userId = "",
-      this.userName = "",
-      this.userImage = "",
+      this.docId = "",
+      final List<String> emojis = const [],
       this.minImageHeight = 0,
       @UpdatedAtField() this.createdAt,
       @UpdatedAtField() this.eventedAt})
       : _images = images,
-        _artists = artists;
+        _artists = artists,
+        _emojis = emojis;
 
   factory _$_Article.fromJson(Map<String, dynamic> json) =>
       _$$_ArticleFromJson(json);
@@ -277,10 +278,16 @@ class _$_Article implements _Article {
   final String userId;
   @override
   @JsonKey()
-  final String userName;
+  final String docId;
+  final List<String> _emojis;
   @override
   @JsonKey()
-  final String userImage;
+  List<String> get emojis {
+    if (_emojis is EqualUnmodifiableListView) return _emojis;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_emojis);
+  }
+
   @override
   @JsonKey()
   final double minImageHeight;
@@ -293,7 +300,7 @@ class _$_Article implements _Article {
 
   @override
   String toString() {
-    return 'Article(images: $images, artists: $artists, placeId: $placeId, facilityName: $facilityName, text: $text, userId: $userId, userName: $userName, userImage: $userImage, minImageHeight: $minImageHeight, createdAt: $createdAt, eventedAt: $eventedAt)';
+    return 'Article(images: $images, artists: $artists, placeId: $placeId, facilityName: $facilityName, text: $text, userId: $userId, docId: $docId, emojis: $emojis, minImageHeight: $minImageHeight, createdAt: $createdAt, eventedAt: $eventedAt)';
   }
 
   @override
@@ -308,10 +315,8 @@ class _$_Article implements _Article {
                 other.facilityName == facilityName) &&
             (identical(other.text, text) || other.text == text) &&
             (identical(other.userId, userId) || other.userId == userId) &&
-            (identical(other.userName, userName) ||
-                other.userName == userName) &&
-            (identical(other.userImage, userImage) ||
-                other.userImage == userImage) &&
+            (identical(other.docId, docId) || other.docId == docId) &&
+            const DeepCollectionEquality().equals(other._emojis, _emojis) &&
             (identical(other.minImageHeight, minImageHeight) ||
                 other.minImageHeight == minImageHeight) &&
             (identical(other.createdAt, createdAt) ||
@@ -330,8 +335,8 @@ class _$_Article implements _Article {
       facilityName,
       text,
       userId,
-      userName,
-      userImage,
+      docId,
+      const DeepCollectionEquality().hash(_emojis),
       minImageHeight,
       createdAt,
       eventedAt);
@@ -358,8 +363,8 @@ abstract class _Article implements Article {
       final String facilityName,
       final String text,
       final String userId,
-      final String userName,
-      final String userImage,
+      final String docId,
+      final List<String> emojis,
       final double minImageHeight,
       @UpdatedAtField() final DateTime? createdAt,
       @UpdatedAtField() final DateTime? eventedAt}) = _$_Article;
@@ -379,9 +384,9 @@ abstract class _Article implements Article {
   @override
   String get userId;
   @override
-  String get userName;
+  String get docId;
   @override
-  String get userImage;
+  List<String> get emojis;
   @override
   double get minImageHeight;
   @override

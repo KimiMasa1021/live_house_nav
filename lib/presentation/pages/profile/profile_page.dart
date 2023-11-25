@@ -39,11 +39,13 @@ class ProfilePage extends ConsumerWidget {
                         children: [
                           CircleAvatar(
                             backgroundImage: user?.image != ""
-                                ? NetworkImage(user!.image)
+                                ? NetworkImage(user?.image ?? "")
                                 : Image.asset(Assets.common.profile.path).image,
+                            onBackgroundImageError: (exception, stackTrace) =>
+                                Image.asset(Assets.common.profile.path).image,
                             radius: 26,
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 10),
                           Text(
                             user?.name ?? "ゲストユーザー",
                             style: textTheme.fs20.copyWith(
@@ -57,7 +59,7 @@ class ProfilePage extends ConsumerWidget {
                 );
               },
               orElse: () {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               },
@@ -69,13 +71,13 @@ class ProfilePage extends ConsumerWidget {
                 onPressed: () {
                   context.goNamed(Routes.name().signUp);
                 },
-                child: Text("新規"),
+                child: const Text("新規"),
               ),
               ElevatedButton(
                 onPressed: () {
                   context.goNamed(Routes.name().signInPage);
                 },
-                child: Text("ログイン"),
+                child: const Text("ログイン"),
               ),
             ],
           );

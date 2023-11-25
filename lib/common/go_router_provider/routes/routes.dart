@@ -38,7 +38,7 @@ class Routes {
 
   factory Routes.path() {
     return Routes(
-      liveHouseMap: "/live_house_map",
+      liveHouseMap: "live_house_map",
       addArticles: "/add_articles",
       profile: "/profile",
       liveHouseDetail: "live_house_detail",

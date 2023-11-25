@@ -33,18 +33,16 @@ class PageRoot extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentIndex = useState(0);
-
     return Scaffold(
       body: navigationShell,
       bottomNavigationBar: CustomBottomBar(
         backgroundColor: HexColor("111111"),
         currentIndex: navigationShell.currentIndex,
         items: [
-          BottomNavigationBarItem(
-            icon: getDecaratedIcon(Icons.home_outlined),
-            activeIcon: getDecaratedIcon(Icons.home, isDisableEffect: true),
-          ),
+          // BottomNavigationBarItem(
+          //   icon: getDecaratedIcon(Icons.home_outlined),
+          //   activeIcon: getDecaratedIcon(Icons.home, isDisableEffect: true),
+          // ),
           BottomNavigationBarItem(
             icon: getDecaratedIcon(Icons.search_outlined),
             activeIcon: getDecaratedIcon(Icons.search, isDisableEffect: true),

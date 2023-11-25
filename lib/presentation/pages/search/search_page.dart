@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/presentation/notifier/facility/new_facility/new_facility_notifier.dart';
 import 'package:live_house_nav/presentation/pages/search/widgets/genre_panel.dart';
 import '../../../common/go_router_provider/routes/routes.dart';
+import '../../../common/hex_color.dart';
 import '../../../common/text_theme/text_theme.dart';
 import '../../../constant/facility_type.dart';
 import '../../../domain/profile/value/profile/profile.dart';
@@ -60,10 +61,10 @@ class SearchPage extends HookConsumerWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              SearchMethodBar(
-                text: "エリアから検索",
-                onTap: () {},
-              ),
+              // SearchMethodBar(
+              //   text: "エリアから検索",
+              //   onTap: () {},
+              // ),
               SearchMethodBar(
                 text: "マップで検索",
                 onTap: () {
@@ -100,43 +101,79 @@ class SearchPage extends HookConsumerWidget {
                   );
                 },
                 orElse: () {
-                  return const Text("Loading...");
-                },
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 10,
-                  bottom: 10,
-                  top: 10,
-                ),
-                child: Text(
-                  "ブックマーク済みの施設",
-                  style: textTheme.fs20.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              newFacility.maybeWhen(
-                data: (data) {
-                  return SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
+                  return Container(
+                    width: size.width / 3,
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const SizedBox(width: 10),
-                        ...List.generate(
-                          data.length,
-                          (index) => NewFacilityPanel(
-                            liveHouse: data[index],
+                        Container(
+                          width: size.width / 3,
+                          height: size.width / 3,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: HexColor("4B4B4B"),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(),
+                          child: Text(
+                            "Looading...",
+                            style: textTheme.fs16.copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(),
+                          child: Text(
+                            "...",
+                            style: textTheme.fs12.copyWith(
+                              color: HexColor("9F9F9F"),
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                       ],
                     ),
                   );
                 },
-                orElse: () {
-                  return const Text("Loading...");
-                },
               ),
+              // Padding(
+              //   padding: const EdgeInsets.only(
+              //     left: 10,
+              //     bottom: 10,
+              //     top: 10,
+              //   ),
+              //   child: Text(
+              //     "ブックマーク済みの施設",
+              //     style: textTheme.fs20.copyWith(
+              //       fontWeight: FontWeight.bold,
+              //     ),
+              //   ),
+              // ),
+              // newFacility.maybeWhen(
+              //   data: (data) {
+              //     return SingleChildScrollView(
+              //       scrollDirection: Axis.horizontal,
+              //       child: Row(
+              //         children: [
+              //           const SizedBox(width: 10),
+              //           ...List.generate(
+              //             data.length,
+              //             (index) => NewFacilityPanel(
+              //               liveHouse: data[index],
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     );
+              //   },
+              //   orElse: () {
+              //     return const Text("Loading...");
+              //   },
+              // ),
               const SizedBox(height: 100),
             ],
           ),

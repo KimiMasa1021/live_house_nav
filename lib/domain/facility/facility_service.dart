@@ -6,7 +6,7 @@ import 'value/facility/facility.dart';
 
 final facilityServiceProvider = Provider(
   (ref) => FacilityService(
-    ref.read(facilityRepository),
+    ref.watch(facilityRepository),
   ),
 );
 

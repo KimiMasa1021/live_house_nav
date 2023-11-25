@@ -5,7 +5,7 @@ import 'values/opening_hours/opening_hours.dart';
 
 final facilityDetailService = Provider(
   (ref) => FacilityDetailService(
-    ref.read(facilityDetailRepository),
+    ref.watch(facilityDetailRepository),
   ),
 );
 

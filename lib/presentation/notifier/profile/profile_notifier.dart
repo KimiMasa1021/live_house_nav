@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../domain/profile/value/profile/profile.dart';
 
 final usersStreamProvider = StreamProvider<Profile?>((ref) async* {
-  final uid = FirebaseAuth.instance.currentUser?.uid ?? "";
+  final uid = FirebaseAuth.instance.currentUser?.uid ?? "123";
   yield* FirebaseFirestore.instance
       .collection('users')
       .doc(uid)
