@@ -8,6 +8,7 @@ part 'article.g.dart';
 // flutter pub run build_runner build --delete-conflicting-outputs
 @freezed
 class Article with _$Article {
+  @JsonSerializable(explicitToJson: true)
   factory Article({
     @Default([]) List<String> images,
     @Default([]) List<Artist> artists,
@@ -18,25 +19,24 @@ class Article with _$Article {
     @Default("") String docId,
     @Default([]) List<String> emojis,
     @Default(0) double minImageHeight,
-    @UpdatedAtField() DateTime? createdAt,
-    @UpdatedAtField() DateTime? eventedAt,
+    @TimestampConverter() DateTime? createdAt,
+    @TimestampConverter() DateTime? eventedAt,
   }) = _Article;
 
   factory Article.fromJson(Map<String, dynamic> json) =>
       _$ArticleFromJson(json);
 }
 
-class UpdatedAtField implements JsonConverter<DateTime?, dynamic> {
-  const UpdatedAtField();
+class TimestampConverter implements JsonConverter<DateTime?, dynamic> {
+  const TimestampConverter();
 
   @override
-  DateTime? fromJson(dynamic timestamp) {
-    timestamp as Timestamp?;
-    return timestamp?.toDate();
+  DateTime? fromJson(dynamic time) {
+    time as Timestamp;
+    return time.toDate();
   }
 
   @override
-  FieldValue toJson(DateTime? date) {
-    return FieldValue.serverTimestamp();
-  }
+  Timestamp? toJson(DateTime? object) =>
+      object == null ? null : Timestamp.fromDate(object);
 }

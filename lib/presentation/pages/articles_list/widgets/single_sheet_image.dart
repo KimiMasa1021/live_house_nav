@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
@@ -15,36 +16,9 @@ class SingleSheetImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 1枚だけ表示するよ
-    // return Padding(
-    //   padding: const EdgeInsets.symmetric(vertical: 10),
-    //   child: AspectRatio(
-    //     aspectRatio: 1 / aspectRatio,
-    //     child: InkWell(
-    //       onTap: () {
-    //         context.pushNamed(
-    //           Routes.name().imagePreview,
-    //           extra: {
-    //             "images": [image],
-    //             "initialIndex": 0,
-    //           },
-    //         );
-    //       },
-    //       child: Container(
-    //         width: double.infinity,
-    //         decoration: BoxDecoration(
-    //           color: HexColor("1E1E1E"),
-    //           borderRadius: BorderRadius.circular(10),
-    //           image: DecorationImage(
-    //             image: NetworkImage(image),
-    //           ),
-    //         ),
-    //       ),
-    //     ),
-    //   ),
-    // );
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Container(
+      child: SizedBox(
         height: 200,
         child: InkWell(
           onTap: () {
@@ -62,7 +36,9 @@ class SingleSheetImage extends StatelessWidget {
               color: HexColor("1E1E1E"),
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
-                  image: NetworkImage(image), fit: BoxFit.cover),
+                image: CachedNetworkImageProvider(image),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
         ),

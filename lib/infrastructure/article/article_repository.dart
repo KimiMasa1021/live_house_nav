@@ -195,4 +195,13 @@ class ArticleRepository extends ArticleRepositoryBase {
       debugPrint(e.toString());
     }
   }
+
+  @override
+  Future<void> editArticleEmoji(Article article) async {
+    try {
+      await db.collection("articles").doc(article.docId).set(article.toJson());
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

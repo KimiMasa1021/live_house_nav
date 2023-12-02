@@ -6,6 +6,7 @@ part 'artist.g.dart';
 
 @freezed
 class Artist with _$Artist {
+  @JsonSerializable(explicitToJson: true)
   factory Artist({
     @Default("") String id,
     @Default("") String name,

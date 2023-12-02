@@ -18,4 +18,5 @@ abstract class ArticleRepositoryBase {
   Future<void> editStampInfo(EmojiState emojiState);
   Future<void> removeStamp(EmojiState emojiState);
   Future<void> newStamp(EmojiState emojiState);
+  Future<void> editArticleEmoji(Article article);
 }

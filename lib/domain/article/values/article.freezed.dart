@@ -29,9 +29,9 @@ mixin _$Article {
   String get docId => throw _privateConstructorUsedError;
   List<String> get emojis => throw _privateConstructorUsedError;
   double get minImageHeight => throw _privateConstructorUsedError;
-  @UpdatedAtField()
+  @TimestampConverter()
   DateTime? get createdAt => throw _privateConstructorUsedError;
-  @UpdatedAtField()
+  @TimestampConverter()
   DateTime? get eventedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,8 +54,8 @@ abstract class $ArticleCopyWith<$Res> {
       String docId,
       List<String> emojis,
       double minImageHeight,
-      @UpdatedAtField() DateTime? createdAt,
-      @UpdatedAtField() DateTime? eventedAt});
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? eventedAt});
 }
 
 /// @nodoc
@@ -149,8 +149,8 @@ abstract class _$$_ArticleCopyWith<$Res> implements $ArticleCopyWith<$Res> {
       String docId,
       List<String> emojis,
       double minImageHeight,
-      @UpdatedAtField() DateTime? createdAt,
-      @UpdatedAtField() DateTime? eventedAt});
+      @TimestampConverter() DateTime? createdAt,
+      @TimestampConverter() DateTime? eventedAt});
 }
 
 /// @nodoc
@@ -225,7 +225,8 @@ class __$$_ArticleCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Article implements _Article {
   _$_Article(
       {final List<String> images = const [],
@@ -237,8 +238,8 @@ class _$_Article implements _Article {
       this.docId = "",
       final List<String> emojis = const [],
       this.minImageHeight = 0,
-      @UpdatedAtField() this.createdAt,
-      @UpdatedAtField() this.eventedAt})
+      @TimestampConverter() this.createdAt,
+      @TimestampConverter() this.eventedAt})
       : _images = images,
         _artists = artists,
         _emojis = emojis;
@@ -292,10 +293,10 @@ class _$_Article implements _Article {
   @JsonKey()
   final double minImageHeight;
   @override
-  @UpdatedAtField()
+  @TimestampConverter()
   final DateTime? createdAt;
   @override
-  @UpdatedAtField()
+  @TimestampConverter()
   final DateTime? eventedAt;
 
   @override
@@ -366,8 +367,8 @@ abstract class _Article implements Article {
       final String docId,
       final List<String> emojis,
       final double minImageHeight,
-      @UpdatedAtField() final DateTime? createdAt,
-      @UpdatedAtField() final DateTime? eventedAt}) = _$_Article;
+      @TimestampConverter() final DateTime? createdAt,
+      @TimestampConverter() final DateTime? eventedAt}) = _$_Article;
 
   factory _Article.fromJson(Map<String, dynamic> json) = _$_Article.fromJson;
 
@@ -390,10 +391,10 @@ abstract class _Article implements Article {
   @override
   double get minImageHeight;
   @override
-  @UpdatedAtField()
+  @TimestampConverter()
   DateTime? get createdAt;
   @override
-  @UpdatedAtField()
+  @TimestampConverter()
   DateTime? get eventedAt;
   @override
   @JsonKey(ignore: true)

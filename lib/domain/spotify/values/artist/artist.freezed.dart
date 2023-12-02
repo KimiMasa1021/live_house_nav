@@ -112,7 +112,8 @@ class __$$_ArtistCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(explicitToJson: true)
 class _$_Artist implements _Artist {
   _$_Artist({this.id = "", this.name = "", final List<Image> images = const []})
       : _images = images;

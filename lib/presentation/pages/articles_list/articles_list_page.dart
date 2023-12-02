@@ -4,28 +4,25 @@ import 'package:live_house_nav/common/indicator/%20record_indicator.dart';
 import '../../notifier/article/article_lilst/article_list_notifier.dart';
 import 'widgets/article_panel.dart';
 
-class ArticlesListPage extends HookConsumerWidget {
+class ArticlesListPage extends StatelessWidget {
   const ArticlesListPage({super.key});
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final articles = ref.watch(testArticleNotifierProvider);
+  Widget build(BuildContext context) {
     return SafeArea(
-      child: articles.maybeWhen(
-        data: (data) {
-          return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Column(
-                children: List.generate(
-                  data.length,
-                  (index) => ArticlePanel(article: data[index]),
-                ),
-              ),
-            ),
+      child: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          return ref.watch(testArticleNotifierProvider).maybeWhen(
+            data: (data) {
+              return ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (context, index) =>
+                    ArticlePanel(article: data[index]),
+              );
+            },
+            orElse: () {
+              return const RecordIndicator();
+            },
           );
-        },
-        orElse: () {
-          return const RecordIndicator();
         },
       ),
     );

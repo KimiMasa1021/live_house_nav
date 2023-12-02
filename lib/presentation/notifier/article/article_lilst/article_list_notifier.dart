@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -36,11 +38,20 @@ class TestArticleNotifier extends AsyncNotifier<List<Article>> {
     state = AsyncValue.data(pastMessages);
   }
 
-  Future<void> addOrDeleteStamp(EmojiState emojiState, String uid) async {
+  Future<void> addOrDeleteStamp(
+    EmojiState emojiState,
+    String uid,
+    Article article,
+  ) async {
     if (emojiState.userList.contains(uid)) {
       if (emojiState.userList.length == 1) {
         // スタンプ1 → emojiドキュメント削除
+        final List<String> newEmojis = List.from(article.emojis);
+        newEmojis.remove(emojiState.emoji);
         await ref.watch(articleRepositoryProvider).removeStamp(emojiState);
+        await ref
+            .watch(articleRepositoryProvider)
+            .editArticleEmoji(article.copyWith(emojis: newEmojis));
       } else {
         // スタンプ数 1以上　→ userListから消す
         final List<String> newUserList = List.from(emojiState.userList);
@@ -60,13 +71,18 @@ class TestArticleNotifier extends AsyncNotifier<List<Article>> {
     String selectedEmoji,
     List<EmojiState> emojis,
     String uid,
-    String articleRef,
+    Article article,
   ) async {
     for (EmojiState emoji in emojis) {
       if (emoji.emoji == selectedEmoji) {
         if (emoji.userList.contains(uid)) {
           // スタンプ1 → emojiドキュメント削除
+          final List<String> newEmojis = List.from(article.emojis);
+          newEmojis.remove(selectedEmoji);
           await ref.watch(articleRepositoryProvider).removeStamp(emoji);
+          await ref
+              .watch(articleRepositoryProvider)
+              .editArticleEmoji(article.copyWith(emojis: newEmojis));
           return;
         } else {
           // 既存スタンプ + 1
@@ -78,10 +94,12 @@ class TestArticleNotifier extends AsyncNotifier<List<Article>> {
     }
     //新規スタンプ
     final stamp = EmojiState(
-      articleRef: articleRef,
+      articleRef: article.docId,
       emoji: selectedEmoji,
       userList: [uid],
     );
     await ref.watch(articleRepositoryProvider).newStamp(stamp);
+    await ref.watch(articleRepositoryProvider).editArticleEmoji(
+        article.copyWith(emojis: [...article.emojis, selectedEmoji]));
   }
 }

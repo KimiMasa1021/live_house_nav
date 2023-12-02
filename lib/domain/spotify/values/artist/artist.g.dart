@@ -18,5 +18,5 @@ _$_Artist _$$_ArtistFromJson(Map<String, dynamic> json) => _$_Artist(
 Map<String, dynamic> _$$_ArtistToJson(_$_Artist instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'images': instance.images,
+      'images': instance.images.map((e) => e.toJson()).toList(),
     };

@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
-import 'package:emoji_selector/emoji_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +29,6 @@ class ArticlePanel extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final textTheme = ref.watch(myTextThemeProvider);
-    final size = MediaQuery.of(context).size;
     final artistsNameList = article.artists
         .map((e) => e.name)
         .toList()
@@ -51,6 +49,7 @@ class ArticlePanel extends ConsumerWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 0,
+          horizontal: 10,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -151,12 +150,70 @@ class ArticlePanel extends ConsumerWidget {
                   .subscribeArticleEmoji(articleId: article.docId),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SizedBox();
+                  return Wrap(
+                    children: [
+                      ...List.generate(
+                        article.emojis.length,
+                        (index) => Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 1,
+                          ),
+                          margin: const EdgeInsets.only(right: 7, bottom: 7),
+                          decoration: BoxDecoration(
+                              color: HexColor("474747"),
+                              borderRadius: BorderRadius.circular(200)),
+                          child: Text(
+                            parser.emojify('${article.emojis[index]} 0'),
+                            style: textTheme.fs16,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 2),
+                        margin: const EdgeInsets.only(right: 7, bottom: 7),
+                        decoration: BoxDecoration(
+                          color: HexColor("474747"),
+                          borderRadius: BorderRadius.circular(200),
+                        ),
+                        child: const Icon(Icons.tag_faces_outlined),
+                      ),
+                    ],
+                  );
                 } else if (snapshot.hasError) {
                   return const SizedBox();
                 } else {
                   return Wrap(
                     children: [
+                      ...List.generate(
+                        snapshot.data!.length,
+                        (index) => InkWell(
+                          onTap: () async {
+                            await articles.addOrDeleteStamp(
+                              snapshot.data![index],
+                              uid,
+                              article,
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 1),
+                            margin: const EdgeInsets.only(right: 7, bottom: 7),
+                            decoration: BoxDecoration(
+                                color:
+                                    snapshot.data![index].userList.contains(uid)
+                                        ? HexColor("375BD9")
+                                        : HexColor("474747"),
+                                borderRadius: BorderRadius.circular(200)),
+                            child: Text(
+                              parser.emojify(
+                                  '${snapshot.data![index].emoji} ${snapshot.data![index].userList.length}'),
+                              style: textTheme.fs16,
+                            ),
+                          ),
+                        ),
+                      ),
                       InkWell(
                         onTap: () async {
                           return showModalBottomSheet(
@@ -173,7 +230,7 @@ class ArticlePanel extends ConsumerWidget {
                                       emoji.emoji,
                                       snapshot.data!,
                                       uid,
-                                      article.docId,
+                                      article,
                                     );
                                     Navigator.pop(context);
                                   },
@@ -216,51 +273,26 @@ class ArticlePanel extends ConsumerWidget {
                           child: const Icon(Icons.tag_faces_outlined),
                         ),
                       ),
-                      ...List.generate(
-                        snapshot.data!.length,
-                        (index) => InkWell(
-                          onTap: () async {
-                            await articles.addOrDeleteStamp(
-                                snapshot.data![index], uid);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8, vertical: 1),
-                            margin: const EdgeInsets.only(right: 7, bottom: 7),
-                            decoration: BoxDecoration(
-                                color:
-                                    snapshot.data![index].userList.contains(uid)
-                                        ? HexColor("375BD9")
-                                        : HexColor("474747"),
-                                borderRadius: BorderRadius.circular(200)),
-                            child: Text(
-                              parser.emojify(
-                                  '${snapshot.data![index].emoji} ${snapshot.data![index].userList.length}'),
-                              style: textTheme.fs16,
-                            ),
-                          ),
-                        ),
-                      ),
                     ],
                   );
                 }
               },
             ),
-            Row(
-              children: [
-                const Icon(Icons.people_alt_outlined),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    artistsNameList.toString(),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-              ],
-            ),
-            Divider(
-              color: HexColor("505050"),
-            ),
+            article.artists.isNotEmpty
+                ? Row(
+                    children: [
+                      const Icon(Icons.people_alt_outlined),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          artistsNameList.toString(),
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
+            Divider(color: HexColor("505050")),
           ],
         ),
       ),

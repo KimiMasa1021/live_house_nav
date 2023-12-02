@@ -25,14 +25,14 @@ _$_Article _$$_ArticleFromJson(Map<String, dynamic> json) => _$_Article(
               .toList() ??
           const [],
       minImageHeight: (json['minImageHeight'] as num?)?.toDouble() ?? 0,
-      createdAt: const UpdatedAtField().fromJson(json['createdAt']),
-      eventedAt: const UpdatedAtField().fromJson(json['eventedAt']),
+      createdAt: const TimestampConverter().fromJson(json['createdAt']),
+      eventedAt: const TimestampConverter().fromJson(json['eventedAt']),
     );
 
 Map<String, dynamic> _$$_ArticleToJson(_$_Article instance) =>
     <String, dynamic>{
       'images': instance.images,
-      'artists': instance.artists,
+      'artists': instance.artists.map((e) => e.toJson()).toList(),
       'placeId': instance.placeId,
       'facilityName': instance.facilityName,
       'text': instance.text,
@@ -40,6 +40,6 @@ Map<String, dynamic> _$$_ArticleToJson(_$_Article instance) =>
       'docId': instance.docId,
       'emojis': instance.emojis,
       'minImageHeight': instance.minImageHeight,
-      'createdAt': const UpdatedAtField().toJson(instance.createdAt),
-      'eventedAt': const UpdatedAtField().toJson(instance.eventedAt),
+      'createdAt': const TimestampConverter().toJson(instance.createdAt),
+      'eventedAt': const TimestampConverter().toJson(instance.eventedAt),
     };
