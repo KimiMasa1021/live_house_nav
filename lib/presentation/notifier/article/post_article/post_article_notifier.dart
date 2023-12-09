@@ -68,8 +68,10 @@ class PostArticleNotifier extends Notifier<PostArticle> {
   }
 
   void removeArtist(Artist artist) {
+    final List<Artist> newArtistsList = List.from(state.artists.items);
+    newArtistsList.remove(artist);
     state = state.copyWith(
-      artists: Artists(items: [...state.artists.items, artist]),
+      artists: Artists(items: newArtistsList),
     );
   }
 

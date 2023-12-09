@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:live_house_nav/common/go_router_provider/routes/routes.dart';
 
+import '../../../../common/hex_color.dart';
+
 class TwoSheetImage extends StatelessWidget {
   const TwoSheetImage({super.key, required this.images});
   final List<String> images;
@@ -26,16 +28,21 @@ class TwoSheetImage extends StatelessWidget {
                   },
                 );
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      images[0],
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius:
-                      const BorderRadius.horizontal(left: Radius.circular(10)),
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.horizontal(left: Radius.circular(10)),
+                child: CachedNetworkImage(
+                  height: 200,
+                  imageUrl: images[0],
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: HexColor("1E1E1E"),
+                      ),
+                    );
+                  },
+                  fadeInDuration: const Duration(microseconds: 0),
                 ),
               ),
             ),
@@ -52,16 +59,21 @@ class TwoSheetImage extends StatelessWidget {
                   },
                 );
               },
-              child: Container(
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: CachedNetworkImageProvider(
-                      images[1],
-                    ),
-                    fit: BoxFit.cover,
-                  ),
-                  borderRadius:
-                      const BorderRadius.horizontal(right: Radius.circular(10)),
+              child: ClipRRect(
+                borderRadius:
+                    const BorderRadius.horizontal(right: Radius.circular(10)),
+                child: CachedNetworkImage(
+                  height: 200,
+                  imageUrl: images[1],
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: HexColor("1E1E1E"),
+                      ),
+                    );
+                  },
+                  fadeInDuration: const Duration(microseconds: 0),
                 ),
               ),
             ),

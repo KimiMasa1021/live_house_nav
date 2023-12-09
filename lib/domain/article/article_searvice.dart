@@ -32,10 +32,8 @@ class ArticleSearvice {
     await repository.postArticle(article);
   }
 
-  Future<List<Article>> featchArticles() async {
-    final result = await repository.featchArticles();
-
-    if (result.isError) return [];
-    return await result.asFuture;
+  Future<List<Article>> featchArticles(Article lastItem, int limit) async {
+    final result = await repository.featchArticles(lastItem, limit: limit);
+    return result;
   }
 }

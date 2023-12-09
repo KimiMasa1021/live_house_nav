@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:live_house_nav/domain/article/values/article.dart';
 import 'package:live_house_nav/presentation/pages/article_detail/article_detail_page.dart';
 import 'package:live_house_nav/presentation/pages/auth/sign_in/sign_in_page.dart';
 import 'package:live_house_nav/presentation/pages/post_article/post_article_page.dart';
@@ -198,12 +199,14 @@ final routerProvider = Provider(
                     path: Routes.path().articleDetail,
                     name: Routes.name().articleDetail,
                     pageBuilder: (context, state) {
+                      final article = state.extra as Article;
                       return CustomTransitionPage(
                         transitionDuration: const Duration(milliseconds: 200),
                         reverseTransitionDuration:
                             const Duration(milliseconds: 200),
                         child: ArticleDetailPage(
                           key: state.pageKey,
+                          article: article,
                         ),
                         transitionsBuilder: (
                           BuildContext context,

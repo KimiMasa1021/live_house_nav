@@ -2,16 +2,16 @@ import 'dart:io';
 
 import '../../presentation/notifier/article/article_lilst/emoji/emoji_state.dart';
 import 'values/article.dart';
-import 'package:async/async.dart';
 
 abstract class ArticleRepositoryBase {
   Future<List<String>> postArticleImage(List<File> files);
   Future<void> postArticle(Article article);
-  Future<Result<List<Article>>> featchArticles();
-  Stream<List<Article>> subscribeMessages({
-    required Article lastItem,
+  Future<List<Article>> featchArticles(
+    Article? lastItem, {
     required int limit,
   });
+  Future<List<Article>> featchNewArticles(Article fastItem);
+  Stream<List<Article>> subscribeNewArticleNotification({Article? lastItem});
   Stream<List<EmojiState>> subscribeArticleEmoji({
     required String articleId,
   });

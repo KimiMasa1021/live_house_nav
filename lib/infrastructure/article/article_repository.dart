@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'dart:ui' as ui;
-import 'package:async/src/result/result.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -55,7 +54,10 @@ class ArticleRepository extends ArticleRepositoryBase {
   }
 
   @override
-  Future<Result<List<Article>>> featchArticles() async {
+  Future<List<Article>> featchArticles(
+    Article? lastItem, {
+    required int limit,
+  }) async {
     try {
       final CollectionReference<Article> collectionReference = db
           .collection('articles')
@@ -64,13 +66,42 @@ class ArticleRepository extends ArticleRepositoryBase {
             toFirestore: (data, _) => data.toJson(),
           );
 
-      final querySnapshot =
-          await collectionReference.orderBy("createdAt").limit(20).get();
-      if (querySnapshot.docs.isNotEmpty) lastItem = querySnapshot.docs.last;
+      final querySnapshot = lastItem == null
+          ? await collectionReference
+              .orderBy("createdAt", descending: true)
+              .limit(limit)
+              .get()
+          : await collectionReference
+              .orderBy("createdAt", descending: true)
+              .startAt([lastItem.createdAt])
+              .limit(limit)
+              .get();
 
-      return Result.value(querySnapshot.docs.map((e) => e.data()).toList());
+      return querySnapshot.docs.map((e) => e.data()).toList();
     } catch (e) {
-      return Result.error(e);
+      debugPrint(e.toString());
+      return [];
+    }
+  }
+
+  @override
+  Future<List<Article>> featchNewArticles(Article fastItem) async {
+    try {
+      final CollectionReference<Article> collectionReference = db
+          .collection('articles')
+          .withConverter<Article>(
+            fromFirestore: (snapshot, _) => Article.fromJson(snapshot.data()!),
+            toFirestore: (data, _) => data.toJson(),
+          );
+
+      final querySnapshot = await collectionReference
+          .orderBy("createdAt", descending: true)
+          .endBefore([fastItem.createdAt]).get();
+
+      return querySnapshot.docs.map((e) => e.data()).toList();
+    } catch (e) {
+      debugPrint(e.toString());
+      return [];
     }
   }
 
@@ -121,23 +152,19 @@ class ArticleRepository extends ArticleRepositoryBase {
   }
 
   @override
-  Stream<List<Article>> subscribeMessages({
+  Stream<List<Article>> subscribeNewArticleNotification({
     Article? lastItem,
-    required int limit,
   }) {
-    final query = db
-        .collection("articles")
-        .orderBy('createdAt')
-        .limit(limit)
-        .withConverter<Article>(
+    final query = db.collection('articles').withConverter<Article>(
           fromFirestore: (snapshot, _) => Article.fromJson(snapshot.data()!),
           toFirestore: (data, _) => data.toJson(),
         );
+    final querySnapshot = query
+        .orderBy("createdAt", descending: true)
+        .endBefore([lastItem!.createdAt]);
 
-    return query.snapshots().map((qs) {
-      final result = qs.docs.map((qds) => qds.data()).toList();
-
-      return result;
+    return querySnapshot.snapshots().map((event) {
+      return event.docs.map((e) => e.data()).toList();
     });
   }
 
@@ -152,7 +179,6 @@ class ArticleRepository extends ArticleRepositoryBase {
           fromFirestore: (snapshot, _) => EmojiState.fromJson(snapshot.data()!),
           toFirestore: (data, _) => data.toJson(),
         );
-    ;
 
     return query.snapshots().map((qs) {
       final result = qs.docs.map((qds) => qds.data()).toList();

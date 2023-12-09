@@ -16,7 +16,7 @@ class SetArtistsPage extends HookConsumerWidget {
         ref.watch(searchArtistsNotifierProvider.notifier);
     final size = MediaQuery.of(context).size;
     final textController = useTextEditingController(text: "");
-    final isSearch = useState(true);
+    final isSearch = useState(false);
     final postArticleNotifier = ref.watch(postArticleNotifierProvider.notifier);
     final postArticle = ref.watch(postArticleNotifierProvider);
 
@@ -29,10 +29,10 @@ class SetArtistsPage extends HookConsumerWidget {
               child: isSearch.value
                   ? searchArtists.when(
                       data: (artists) {
-                        return Column(
-                          children: List.generate(
-                            artists.items.length,
-                            (index) => InkWell(
+                        return ListView.builder(
+                          itemCount: artists.items.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
                               onTap: () {
                                 postArticleNotifier
                                     .addArtist(artists.items[index]);
@@ -67,8 +67,8 @@ class SetArtistsPage extends HookConsumerWidget {
                                   ],
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
                         );
                       },
                       error: (e, s) {
@@ -83,30 +83,36 @@ class SetArtistsPage extends HookConsumerWidget {
                   : Column(
                       children: List.generate(
                         postArticle.artists.items.length,
-                        (index) => InkWell(
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15,
-                              vertical: 5,
-                            ),
-                            child: Row(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: postArticle.artists
-                                          .items[index].images.isNotEmpty
-                                      ? NetworkImage(postArticle
-                                          .artists.items[index].images[0].url)
-                                      : null,
+                        (index) => Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
+                            vertical: 5,
+                          ),
+                          child: Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage: postArticle
+                                        .artists.items[index].images.isNotEmpty
+                                    ? NetworkImage(postArticle
+                                        .artists.items[index].images[0].url)
+                                    : null,
+                              ),
+                              const SizedBox(width: 10),
+                              Text(postArticle.artists.items[index].name),
+                              const Spacer(),
+                              InkWell(
+                                onTap: () {
+                                  postArticleNotifier.removeArtist(
+                                      postArticle.artists.items[index]);
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    Icons.close,
+                                  ),
                                 ),
-                                const SizedBox(width: 10),
-                                Text(postArticle.artists.items[index].name),
-                                const Spacer(),
-                                const Icon(
-                                  Icons.close,
-                                )
-                              ],
-                            ),
+                              )
+                            ],
                           ),
                         ),
                       ),

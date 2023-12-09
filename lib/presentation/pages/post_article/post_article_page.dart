@@ -34,6 +34,7 @@ class PostArticlePage extends HookConsumerWidget {
               IconButton(
                 onPressed: () async {
                   isLoading.value = true;
+                  primaryFocus?.unfocus();
                   await postArticleNotifier.postArticle(
                     textController.text,
                     facilityDetail,

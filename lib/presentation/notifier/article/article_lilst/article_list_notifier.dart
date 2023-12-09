@@ -1,41 +1,50 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/domain/article/values/article.dart';
 import 'package:live_house_nav/presentation/notifier/article/article_lilst/emoji/emoji_state.dart';
 
 import '../../../../infrastructure/article/article_repository.dart';
 
-final articleStreamProvider =
-    StreamProvider.family<Stream<List<Article>>, Article?>(
-        (ref, lastItem) async* {
-  const limit = 10;
-
-  yield ref
-      .watch(articleRepositoryProvider)
-      .subscribeMessages(lastItem: lastItem, limit: limit);
-});
-
 final testArticleNotifierProvider =
     AsyncNotifierProvider<TestArticleNotifier, List<Article>>(
         () => TestArticleNotifier());
 
 class TestArticleNotifier extends AsyncNotifier<List<Article>> {
+  Article? lastArticle;
+  final int articleLimit = 10;
+  bool isLast = false;
   @override
   build() async {
-    final aaa = ref.watch(articleStreamProvider(null));
-    if (aaa.isLoading) {
-      return [];
-    } else {
-      aaa.requireValue.listen(updatePastMessages);
-    }
-    return [];
+    final articleList = await ref
+        .watch(articleRepositoryProvider)
+        .featchArticles(lastArticle, limit: articleLimit);
+
+    lastArticle = articleList.last;
+    return articleList;
   }
 
-  void updatePastMessages(List<Article> pastMessages) {
-    state = AsyncValue.data(pastMessages);
+  Future<void> fetchNextArticles() async {
+    if (isLast) return;
+    final articleList = await ref
+        .watch(articleRepositoryProvider)
+        .featchArticles(lastArticle, limit: articleLimit);
+
+    if (articleList.length < articleLimit) {
+      isLast = true;
+    }
+
+    state = AsyncValue.data([...state.value!, ...articleList]);
+  }
+
+  Future<void> fetchNewArticles() async {
+    final articleList = await ref
+        .watch(articleRepositoryProvider)
+        .featchNewArticles(state.value!.first);
+
+    state = AsyncValue.data([
+      ...articleList,
+      ...state.value!,
+    ]);
   }
 
   Future<void> addOrDeleteStamp(
@@ -49,9 +58,6 @@ class TestArticleNotifier extends AsyncNotifier<List<Article>> {
         final List<String> newEmojis = List.from(article.emojis);
         newEmojis.remove(emojiState.emoji);
         await ref.watch(articleRepositoryProvider).removeStamp(emojiState);
-        await ref
-            .watch(articleRepositoryProvider)
-            .editArticleEmoji(article.copyWith(emojis: newEmojis));
       } else {
         // スタンプ数 1以上　→ userListから消す
         final List<String> newUserList = List.from(emojiState.userList);
@@ -80,9 +86,6 @@ class TestArticleNotifier extends AsyncNotifier<List<Article>> {
           final List<String> newEmojis = List.from(article.emojis);
           newEmojis.remove(selectedEmoji);
           await ref.watch(articleRepositoryProvider).removeStamp(emoji);
-          await ref
-              .watch(articleRepositoryProvider)
-              .editArticleEmoji(article.copyWith(emojis: newEmojis));
           return;
         } else {
           // 既存スタンプ + 1
@@ -99,7 +102,5 @@ class TestArticleNotifier extends AsyncNotifier<List<Article>> {
       userList: [uid],
     );
     await ref.watch(articleRepositoryProvider).newStamp(stamp);
-    await ref.watch(articleRepositoryProvider).editArticleEmoji(
-        article.copyWith(emojis: [...article.emojis, selectedEmoji]));
   }
 }

@@ -37,6 +37,8 @@ class TimestampConverter implements JsonConverter<DateTime?, dynamic> {
   }
 
   @override
-  Timestamp? toJson(DateTime? object) =>
-      object == null ? null : Timestamp.fromDate(object);
+  String toJson(DateTime? dateTime) {
+    dateTime ??= DateTime.now();
+    return dateTime.toLocal().toString();
+  }
 }

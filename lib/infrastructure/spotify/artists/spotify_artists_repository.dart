@@ -27,10 +27,12 @@ class SpotifiyArtistsRepository implements SpotifiyArtistsRepositoryBase {
     try {
       final prefs = await SharedPreferences.getInstance();
       final uri = Uri.parse(
-          "https://api.spotify.com/v1/search?q=$query&type=artist&limit=5");
+          "https://api.spotify.com/v1/search?q=$query&type=artist&locale=ja-JP");
       final accsesToken = prefs.getString('accsesToken');
       final headers = {
         'Authorization': 'Bearer $accsesToken',
+        "Accept-Language": "jp",
+        "q": "1",
       };
       final response = await http.get(uri, headers: headers);
       if (response.statusCode != 200) {

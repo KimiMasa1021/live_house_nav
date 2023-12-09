@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_emoji/flutter_emoji.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:live_house_nav/domain/article/values/article.dart';
 import 'package:live_house_nav/presentation/notifier/article/article/article_notifier.dart';
@@ -6,36 +10,44 @@ import 'package:live_house_nav/presentation/notifier/article/article/article_not
 import '../../../common/hex_color.dart';
 import '../../../common/text_theme/text_theme.dart';
 import '../../../gen/assets.gen.dart';
+import '../../notifier/article/article_lilst/article_list_notifier.dart';
+import '../../notifier/article/emoji/emoji_notifier.dart';
 import '../../notifier/profile/profile_list_notifier.dart';
+import '../../notifier/profile/profile_notifier.dart';
 import '../articles_list/widgets/single_sheet_image.dart';
 import '../articles_list/widgets/two_sheet_image.dart';
 
-final articleDetailNotifierProvider =
-    NotifierProvider<ArticleDetailNotifier, Article>(
-  () => ArticleDetailNotifier(),
-);
+// final articleDetailNotifierProvider =
+//     NotifierProvider<ArticleDetailNotifier, Article>(
+//   () => ArticleDetailNotifier(),
+// );
 
-class ArticleDetailNotifier extends Notifier<Article> {
-  @override
-  build() {
-    return Article();
-  }
+// class ArticleDetailNotifier extends Notifier<Article> {
+//   @override
+//   build() {
+//     return Article();
+//   }
 
-  void updateState(Article article) {
-    state = article;
-  }
-}
+//   void updateState(Article article) {
+//     state = article;
+//   }
+// }
 
 class ArticleDetailPage extends ConsumerWidget {
   const ArticleDetailPage({
     super.key,
+    required this.article,
   });
+  final Article article;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final detail = ref.watch(articleDetailNotifierProvider);
+    final uid = ref.watch(usersStreamProvider).value?.userId ?? "";
     final textTheme = ref.watch(myTextThemeProvider);
-    final userProfile = ref.watch(profileListProvider(detail.userId));
+    final userProfile = ref.watch(profileListProvider(article.userId));
+    final emojis = ref.watch(emojiStreamProvider(article.docId));
+    final articles = ref.watch(testArticleNotifierProvider.notifier);
+    var parser = EmojiParser();
 
     return Scaffold(
       appBar: AppBar(
@@ -75,7 +87,7 @@ class ArticleDetailPage extends ConsumerWidget {
                                 const Icon(Icons.location_on_outlined),
                                 Expanded(
                                   child: Text(
-                                    detail.facilityName,
+                                    article.facilityName,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -100,21 +112,21 @@ class ArticleDetailPage extends ConsumerWidget {
               ),
               const SizedBox(height: 7),
               Text(
-                detail.text,
+                article.text,
                 style: textTheme.fs16,
               ),
               const SizedBox(height: 7),
-              detail.images.isEmpty
+              article.images.isEmpty
                   ? const SizedBox()
-                  : detail.images.length == 1
+                  : article.images.length == 1
                       ? SingleSheetImage(
-                          image: detail.images[0],
-                          aspectRatio: detail.minImageHeight,
+                          image: article.images[0],
+                          aspectRatio: article.minImageHeight,
                         )
-                      : TwoSheetImage(images: detail.images),
+                      : TwoSheetImage(images: article.images),
               const SizedBox(height: 7),
               ...List.generate(
-                detail.artists.length,
+                article.artists.length,
                 (index) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 3),
                   child: Row(
@@ -123,11 +135,11 @@ class ArticleDetailPage extends ConsumerWidget {
                       CircleAvatar(
                         radius: 15,
                         backgroundImage:
-                            NetworkImage(detail.artists[index].images[0].url),
+                            NetworkImage(article.artists[index].images[0].url),
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        detail.artists[index].name,
+                        article.artists[index].name,
                         style: textTheme.fs15.copyWith(
                           fontWeight: FontWeight.bold,
                           overflow: TextOverflow.ellipsis,
@@ -136,6 +148,107 @@ class ArticleDetailPage extends ConsumerWidget {
                     ],
                   ),
                 ),
+              ),
+              const SizedBox(height: 10),
+              emojis.when(
+                data: (emojis) {
+                  return Wrap(
+                    children: [
+                      ...List.generate(
+                        emojis.length,
+                        (index) => InkWell(
+                          onTap: () async {
+                            await articles.addOrDeleteStamp(
+                              emojis[index],
+                              uid,
+                              article,
+                            );
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8, vertical: 1),
+                            margin: const EdgeInsets.only(right: 7, bottom: 7),
+                            decoration: BoxDecoration(
+                                color: emojis[index].userList.contains(uid)
+                                    ? HexColor("375BD9")
+                                    : HexColor("474747"),
+                                borderRadius: BorderRadius.circular(200)),
+                            child: Text(
+                              parser.emojify(
+                                  '${emojis[index].emoji} ${emojis[index].userList.length}'),
+                              style: textTheme.fs16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () async {
+                          return showModalBottomSheet(
+                            context: context,
+                            isScrollControlled: false,
+                            enableDrag: false,
+                            builder: (BuildContext context) {
+                              return SizedBox(
+                                height: 400,
+                                child: EmojiPicker(
+                                  onEmojiSelected:
+                                      (Category? category, emoji) async {
+                                    await articles.onTapEmojiSlecter(
+                                      emoji.emoji,
+                                      emojis,
+                                      uid,
+                                      article,
+                                    );
+                                    Navigator.pop(context);
+                                  },
+                                  onBackspacePressed: () {},
+                                  config: Config(
+                                    columns: 7,
+                                    emojiSizeMax:
+                                        32 * (Platform.isIOS ? 1.30 : 1.0),
+                                    verticalSpacing: 0,
+                                    horizontalSpacing: 0,
+                                    initCategory: Category.RECENT,
+                                    bgColor: const Color(0xFFF2F2F2),
+                                    indicatorColor: Colors.blue,
+                                    iconColor: Colors.grey,
+                                    iconColorSelected: Colors.blue,
+                                    backspaceColor: Colors.blue,
+                                    skinToneDialogBgColor: Colors.white,
+                                    skinToneIndicatorColor: Colors.grey,
+                                    enableSkinTones: true,
+                                    recentsLimit: 28,
+                                    tabIndicatorAnimDuration:
+                                        kTabScrollDuration,
+                                    categoryIcons: const CategoryIcons(),
+                                    buttonMode: ButtonMode.MATERIAL,
+                                  ),
+                                ),
+                              );
+                            },
+                            backgroundColor: const Color(0x00000000),
+                          );
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 2),
+                          margin: const EdgeInsets.only(right: 7, bottom: 7),
+                          decoration: BoxDecoration(
+                            color: HexColor("474747"),
+                            borderRadius: BorderRadius.circular(200),
+                          ),
+                          child: const Icon(Icons.tag_faces_outlined),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+                error: (e, s) {
+                  return const SizedBox();
+                },
+                loading: () {
+                  return const SizedBox();
+                },
               ),
             ],
           ),
